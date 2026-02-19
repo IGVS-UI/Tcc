@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - TCC VR</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Cadastrar • Projeto VR</h2>
+
+    <form id="signupForm">
+      <div class="input-group">
+        <label>Email</label>
+        <input id="email" type="email" placeholder="Digite seu email" required>
+      </div>
+
+      <div class="input-group">
+        <label>Senha</label>
+        <input id="password" type="password" placeholder="Crie uma senha (mín. 6)" minlength="6" required>
+      </div>
+
+      <button type="submit" class="login-btn">Criar conta</button>
+    </form>
+
+    <div class="divider">
+      <a href="index.html">Já tenho conta • Entrar</a>
+    </div>
+
+    <button type="button" id="btnGoogle" class="social-btn google">🔵 Google</button>
+    <button type="button" id="btnMicrosoft" class="social-btn microsoft">🟦 Microsoft</button>
+    <button type="button" id="btnGithub" class="social-btn github">⚫ GitHub</button>
+
+    <p id="status" class="footer-text"></p>
+  </div>
+
+  <!-- Se seu auth.js tem import, tem que ser module -->
+  <script type="module" src="auth.js"></script>
+</body>
+</html>
