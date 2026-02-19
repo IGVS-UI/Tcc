@@ -10,12 +10,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #a00a99, #7a0965, #8e3072);
       color: white;
     }
 
     .login-container {
-      width: 360px;
+      max-height: max-content;
+      max-width: 400px;
       padding: 30px;
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(12px);
@@ -49,7 +50,7 @@
     }
 
     input:focus {
-      border: 2px solid cyan;
+      border: 2px solid rgb(207, 52, 212);
     }
 
     .login-btn {
