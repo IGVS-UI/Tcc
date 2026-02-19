@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tcc Vr</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Acesso • Projeto VR</h2>
+
+    <form id="authForm">
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Digite seu email" required>
+      </div>
+
+      <div class="input-group">
+        <label>Senha</label>
+        <input type="password" id="password" placeholder="Digite sua senha" required>
+      </div>
+
+      <button type="submit" class="login-btn">Entrar</button>
+    </form>
+
+    <div class="divider">
+      <a href="cadastro.html">Clique aqui para se cadastrar</a>
+    </div>
+
+    <button type="button" id="btnGoogle" class="social-btn google">🔵 Google</button>
+    <button type="button" id="btnMicrosoft" class="social-btn microsoft">🟦 Microsoft</button>
+    <button type="button" id="btnGithub" class="social-btn github">⚫ GitHub</button>
+
+    <div class="footer-text">
+      TCC • Realidade Virtual
+    </div>
+</div>
+
+<script type="module" src="auth.js"></script>
+
+</body>
+</html>
