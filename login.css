@@ -5,24 +5,40 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #a00a99, #7a0965, #8e3072);
-      color: white;
-    }
+ body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+}
 
-    .login-container {
-      max-height: max-content;
-      max-width: 400px;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
-    }
+/* camada do fundo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 20% 30%, #ff4ecd, transparent 50%),
+    radial-gradient(circle at 80% 70%, #6a00ff, transparent 50%),
+    radial-gradient(circle at 50% 50%, #ff0066, transparent 60%),
+    linear-gradient(135deg, #ffbefc, #7a0965, #8e3072);
+
+  filter: blur(120px);
+  z-index: -1;
+}
+
+.login-container{
+  width: 420px;        /* força uma largura */
+  max-width: 90vw;     /* evita estourar no celular */
+  padding: 30px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+}
 
     h2 {
       text-align: center;
@@ -58,7 +74,7 @@
       padding: 10px;
       border: none;
       border-radius: 8px;
-      background: cyan;
+      background: rgb(174, 0, 255);
       color: black;
       font-weight: bold;
       cursor: pointer;
@@ -67,14 +83,21 @@
     }
 
     .login-btn:hover {
-      background: #00cccc;
+      background: #4a004a;
     }
 
     .divider {
+      text-decoration: none;
       text-align: center;
       margin: 20px 0;
       font-size: 13px;
       opacity: 0.7;
+      & .a{
+        color: white;
+        text-decoration: none;
+
+      }
+      
     }
 
     .social-container-btn {
@@ -89,9 +112,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 20%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   border: none;
   cursor: pointer;
   background: #ffffff10;
@@ -100,6 +123,8 @@
 }
 
 .social-btn img {
+  position: relative;
+  top: 3px;
   width: 28px;
   height: 28px;
   margin-bottom: 5px;
@@ -125,12 +150,12 @@
     }
 
     .microsoft {
-      background: #0171cc;
+      background: #37a5ff;
       color: white;
     }
 
     .microsoft:hover {
-      background: #034b86;
+      background: #1c76bf;
     }
 
     .github {
