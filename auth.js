@@ -90,7 +90,7 @@ if (formEl) {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.pass);
       setStatus("Logado ✅");
-      window.location.href = "home.html";
+      window.location.href = "index.html";
     } catch (err) {
       setStatus(friendlyError(err.code));
     }
