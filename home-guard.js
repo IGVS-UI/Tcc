@@ -15,7 +15,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 onAuthStateChanged(auth, (user) => {
-  if (!user) window.location.href = "index.html";
+  if (!user) window.location.href = "login.html";
 });
 
 // logout (se existir botão)
@@ -23,6 +23,6 @@ const btnLogout = document.querySelector("#btnLogout");
 if (btnLogout) {
   btnLogout.addEventListener("click", async () => {
     await signOut(auth);
-    window.location.href = "index.html";
+    window.location.href = "login.html";
   });
 }
