@@ -28,11 +28,13 @@ body::before {
 }
 
 /* ==================== CONTAINERS LAYOUT ==================== */
+
+
 .containers-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 20px;
   width: 100%;
   height: 100%;
   padding: 20px;
@@ -41,6 +43,7 @@ body::before {
 
 .login-container {
   width: 420px;
+  height: 550px;
   padding: 30px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
@@ -49,8 +52,19 @@ body::before {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 80px;
+  height: 80px;
+}
+
+
 .info-container {
   width: 400px;
+  height: 550px;
+  max-width: 400px;
+  max-height: 700px;
   padding: 40px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
@@ -71,6 +85,8 @@ body::before {
   line-height: 1.6;
   opacity: 0.9;
 }
+
+
 
 /* ==================== FORM STYLES ==================== */
 
@@ -158,6 +174,30 @@ h2 {
       text-decoration: underline;
     }
 
+    /* separator between divider and social buttons */
+    .separator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .sep-line {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      border: none;
+    }
+
+    .sep-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+      margin-top: -8px;
+      background: transparent;
+      padding: 0 6px;
+    }
+
     .social-container-btn {
       display: flex;
       justify-content: center;
@@ -192,27 +232,34 @@ h2 {
     }
 
     .google {
-      background: white;
+      background: #37a5ff00;
+      border: 1px solid rgb(255, 255, 255);
     }
 
     .google:hover {
-      background: #f1f1f1;
+      background: #a3b0bd00;
+      transform: translateY(-5px);
     }
 
     .microsoft {
-      background: #37a5ff;
+      background: #37a5ff00;
+      border: 1px solid rgb(255, 255, 255);
     }
 
     .microsoft:hover {
-      background: #1c76bf;
+      background: #a3b0bd00;
+      transform: translateY(-5px);
     }
 
     .github {
-      background: #fbfdff;
+      background: #37a5ff00;
+      border: 1px solid rgb(255, 255, 255);
+      transition: all 0.3s ease ;
     }
 
     .github:hover {
-      background: #a3b0bd;
+      background: #a3b0bd00;    
+      transform: translateY(-5px);
     }
 
     .footer-text {
