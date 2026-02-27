@@ -37,6 +37,9 @@ body::before {
   height: 100%;
   padding: 20px;
   flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(18px) scale(0.995);
+  animation: enter-up 620ms cubic-bezier(.2,.9,.25,1) 160ms both;
 }
 
 .login-container {
@@ -320,4 +323,9 @@ h2 {
 
 @keyframes tw-blink {
   50% { opacity: 0; }
+}
+
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(18px) scale(0.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
