@@ -1,58 +1,42 @@
-/* ==================== RESET E BASE ==================== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-body {
+ body {
   margin: 0;
   height: 100vh;
-  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(0, 0, 0);
   overflow: hidden;
 }
 
-/* ==================== BACKGROUND ==================== */
+/* camada do fundo */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
+
   background:
-<<<<<<< HEAD
-    radial-gradient(circle at 20% 30%, #2e00d3, transparent 50%),
-    radial-gradient(circle at 80% 70%, #c3a3f0, transparent 50%),
-    radial-gradient(circle at 50% 50%, #ff0066, transparent 60%),
-    linear-gradient(135deg, #ffbefc, #7a0965, #8e3072);
-
-  filter: blur(120px);
-  z-index: -1;
-}
-
-.login-container{
-  position: absolute;
-  left: 50%;
-  width: 420px;        /* força uma largura */
-  max-width: 90vw;     /* evita estourar no celular */
-  padding: 30px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 15px;
-=======
     radial-gradient(circle at 20% 30%, #000000, transparent 50%),
     radial-gradient(circle at 80% 70%, #6a00ff, transparent 50%),
     radial-gradient(circle at 50% 50%, #0b0c55, transparent 60%),
     linear-gradient(135deg, #000000, #6a00ff, #0b0c55);
-  filter: blur(0px);
+
+  
   z-index: -1;
 }
 
-/* ==================== CONTAINERS LAYOUT ==================== */
-.containers-wrapper {
+/* corrected container class name to match HTML */
+.containers-wrapper{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   width: 100%;
   height: 100%;
   padding: 20px;
@@ -60,29 +44,22 @@ body::before {
   opacity: 0;
   transform: translateY(18px) scale(0.995);
   animation: enter-up 620ms cubic-bezier(.2,.9,.25,1) 160ms both;
->>>>>>> 4cc4373e4b17b90f3717c80e04af79517c21e844
 }
 
-.login-container {
-  width: 420px;
+.login-container{
+ width: 420px;
+  height: 550px;
   padding: 30px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   border-radius: 15px;
   flex-shrink: 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 20px;
-  width: 80px;
-  height: 80px;
-}
-
+/* add matching info-container to align with login panel */
 .info-container {
   width: 400px;
-  height: 450px;
+  height: 550px;
   max-width: 400px;
   max-height: 700px;
   padding: 40px;
@@ -106,14 +83,11 @@ body::before {
   opacity: 0.9;
 }
 
-/* ==================== FORM STYLES ==================== */
-
-/* ==================== FORM STYLES ==================== */
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
-}
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
 
     .input-group {
       margin-bottom: 18px;
@@ -124,7 +98,6 @@ h2 {
     label {
       margin-bottom: 5px;
       font-size: 14px;
-      font-weight: 500;
     }
 
     input {
@@ -143,37 +116,38 @@ h2 {
     }
 
     input:focus {
-      border: 2px solid rgb(255, 255, 255);
+      border: 2px solid rgb(207, 52, 212);
       background: rgba(255, 255, 255, 0.15);
       box-shadow: 0 0 10px rgba(207, 52, 212, 0.3);
     }
 
+
+
     .login-btn {
       width: 100%;
       padding: 12px;
-      border: white solid 1px;
+      border: none;
       border-radius: 8px;
-      background: rgba(125, 80, 155, 0.1);
-      color: rgb(255, 255, 255);
+      background: rgb(174, 0, 255);
+      color: white;
       font-weight: bold;
       font-size: 15px;
       cursor: pointer;
       transition: all 0.3s ease;
       margin-top: 10px;
-      
+      box-shadow: 0 4px 15px rgba(174, 0, 255, 0.4);
     }
-
-    .login-btn:hover {
-      background: rgb(121, 88, 158);
+   .login-btn:hover {
+      background: rgb(150, 0, 220);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(110, 30, 156, 0.6);
+      box-shadow: 0 6px 20px rgba(174, 0, 255, 0.6);
     }
 
     .login-btn:active {
       transform: translateY(0);
     }
 
-    .divider {
+   .divider {
       text-align: center;
       margin: 25px 0 20px;
       font-size: 13px;
@@ -288,64 +262,7 @@ h2 {
       letter-spacing: 0.5px;
     }
 
-/* ==================== RESPONSIVIDADE ==================== */
-@media (max-width: 1024px) {
-  .containers-wrapper {
-    gap: 40px;
-    flex-direction: column;
-  }
-
-  .login-container,
-  .info-container {
-    width: 90%;
-    max-width: 420px;
-  }
-}
-
-@media (max-width: 480px) {
-  .containers-wrapper {
-    padding: 10px;
-    gap: 20px;
-  }
-
-  .login-container,
-  .info-container {
-    width: 100%;
-    padding: 20px;
-  }
-
-  .info-container h2 {
-    font-size: 24px;
-  }
-
-  .info-container p {
-    font-size: 14px;
-  }
-}
-
-/* ==================== TYPEWRITER STYLES ==================== */
-.typewriter {
-  display: inline-block;
-  overflow: hidden;
-  white-space: pre-wrap;
-  vertical-align: bottom;
-  max-width: 100%;
-}
-
-.typewriter::after {
-  content: '';
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  background: rgba(255,255,255,0.95);
-  margin-left: 6px;
-  animation: tw-blink 0.8s steps(1) infinite;
-}
-
-@keyframes tw-blink {
-  50% { opacity: 0; }
-}
-
+/* animation keyframes used by containers-wrapper */
 @keyframes enter-up {
   from { opacity: 0; transform: translateY(18px) scale(0.995); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
