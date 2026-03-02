@@ -1,0 +1,314 @@
+/* ==================== RESET E BASE ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  color: white;
+  overflow: hidden;
+}
+
+/* ==================== BACKGROUND ==================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, #000000, transparent 50%),
+    radial-gradient(circle at 80% 70%, #6a00ff, transparent 50%),
+    radial-gradient(circle at 50% 50%, #0b0c55, transparent 60%),
+    linear-gradient(135deg, #000000, #6a00ff, #0b0c55);
+  filter: blur(0px);
+  z-index: -1;
+}
+
+/* ==================== CONTAINERS LAYOUT ==================== */
+
+
+.containers-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(18px) scale(0.995);
+  animation: enter-up 620ms cubic-bezier(.2,.9,.25,1) 160ms both;
+}
+
+.login-container {
+  width: 420px;
+  height: 550px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 80px;
+  height: 80px;
+}
+
+
+.info-container {
+  width: 400px;
+  height: 550px;
+  max-width: 400px;
+  max-height: 700px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.info-container h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.info-container p {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+
+
+/* ==================== FORM STYLES ==================== */
+
+/* ==================== FORM STYLES ==================== */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+    .input-group {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    input {
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    input:focus {
+      border: 2px solid rgb(207, 52, 212);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 10px rgba(207, 52, 212, 0.3);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: rgb(174, 0, 255);
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(174, 0, 255, 0.4);
+    }
+
+    .login-btn:hover {
+      background: rgb(150, 0, 220);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(174, 0, 255, 0.6);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .divider {
+      text-align: center;
+      margin: 25px 0 20px;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .divider .a {
+      color: #ff9ff3;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: 500;
+    }
+
+    .divider .a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    /* separator between divider and social buttons */
+    .separator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .sep-line {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      border: none;
+    }
+
+    .sep-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+      margin-top: -8px;
+      background: transparent;
+      padding: 0 6px;
+    }
+
+    .social-container-btn {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .social-btn img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .social-btn:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .google {
+      background: #37a5ff00;
+      border: 1px solid rgb(255, 255, 255);
+    }
+
+    .google:hover {
+      background: #a3b0bd00;
+      transform: translateY(-5px);
+    }
+
+    .microsoft {
+      background: #37a5ff00;
+      border: 1px solid rgb(255, 255, 255);
+    }
+
+    .microsoft:hover {
+      background: #a3b0bd00;
+      transform: translateY(-5px);
+    }
+
+    .github {
+      background: #37a5ff00;
+      border: 1px solid rgb(255, 255, 255);
+      transition: all 0.3s ease ;
+    }
+
+    .github:hover {
+      background: #a3b0bd00;    
+      transform: translateY(-5px);
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: 0.5;
+      letter-spacing: 0.5px;
+    }
+
+/* ==================== RESPONSIVIDADE ==================== */
+@media (max-width: 1024px) {
+  .containers-wrapper {
+    gap: 40px;
+    flex-direction: column;
+  }
+
+  .login-container,
+  .info-container {
+    width: 90%;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .containers-wrapper {
+    padding: 10px;
+    gap: 20px;
+  }
+
+  .login-container,
+  .info-container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .info-container h2 {
+    font-size: 24px;
+  }
+
+  .info-container p {
+    font-size: 14px;
+  }
+}
+
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(18px) scale(0.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
