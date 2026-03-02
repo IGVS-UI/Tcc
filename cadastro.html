@@ -4,11 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro - TCC VR</title>
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="cadastro.css">
 </head>
 <body>
+        <div class="containers-wrapper">
 
-  <div class="login-container">
+    <div class="info-container">
+    <h2>Bem-vindo</h2>
+    <img class="logo" src="" alt="logo">
+    <p class="typewriter" data-text="Realize o login para acessar a plataforma de realidade virtual."></p>
+   </div>
+
+          <div class="login-container">
     <h2>Cadastrar • Projeto VR</h2>
 
     <form id="signupForm">
@@ -26,17 +33,49 @@
     </form>
 
     <div class="divider">
-      <a href="index.html">Já tenho conta • Entrar</a>
+      <a href="login.html">Já tenho conta • Entrar</a>
     </div>
 
-    <button type="button" id="btnGoogle" class="social-btn google">🔵 Google</button>
-    <button type="button" id="btnMicrosoft" class="social-btn microsoft">🟦 Microsoft</button>
-    <button type="button" id="btnGithub" class="social-btn github">⚫ GitHub</button>
+       <div class="separator">
+      <hr class="sep-line">
+      <div class="sep-text">ou continue com</div>
+    </div>
+
+<div class="social-container-btn">
+
+  <button type="button" id="btnGoogle" class="social-btn google">
+    <img src="img/icons8-google.svg" alt="Google">
+    <span></span>
+  </button>
+
+  <button type="button" id="btnMicrosoft" class="social-btn microsoft">
+    <img src="img/microsoft_icon (1).svg" alt="Microsoft">
+    <span></span>
+  </button>
+
+  <button type="button" id="btnGithub" class="social-btn github">
+    <img src="img/github_icon.svg" alt="GitHub">
+    <span></span>
+  </button>
+
+</div>
+
+    <div class="footer-text">
+      TCC • Realidade Virtual
+    </div>
+
+
+        </div>
+
+  
+
+
 
     <p id="status" class="footer-text"></p>
   </div>
 
   <!-- Se seu auth.js tem import, tem que ser module -->
+  <script src="typewriter.js"></script>
   <script type="module" src="auth.js"></script>
 </body>
 </html>
