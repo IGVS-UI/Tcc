@@ -22,8 +22,8 @@ body::before {
   inset: 0;
 
   background:
-    radial-gradient(circle at 20% 30%, #ff4ecd, transparent 50%),
-    radial-gradient(circle at 80% 70%, #6a00ff, transparent 50%),
+    radial-gradient(circle at 20% 30%, #2e00d3, transparent 50%),
+    radial-gradient(circle at 80% 70%, #c3a3f0, transparent 50%),
     radial-gradient(circle at 50% 50%, #ff0066, transparent 60%),
     linear-gradient(135deg, #ffbefc, #7a0965, #8e3072);
 
@@ -32,6 +32,8 @@ body::before {
 }
 
 .login-container{
+  position: absolute;
+  left: 50%;
   width: 420px;        /* força uma largura */
   max-width: 90vw;     /* evita estourar no celular */
   padding: 30px;
