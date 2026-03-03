@@ -23,9 +23,9 @@ body::before {
 
   background:
     radial-gradient(circle at 20% 30%, #000000, transparent 50%),
-    radial-gradient(circle at 80% 70%, #6a00ff, transparent 50%),
-    radial-gradient(circle at 50% 50%, #0b0c55, transparent 60%),
-    linear-gradient(135deg, #000000, #6a00ff, #0b0c55);
+    radial-gradient(circle at 80% 70%, #110127, transparent 50%),
+    radial-gradient(circle at 50% 50%, #4b1886, transparent 60%),
+    linear-gradient(135deg, #000000, #6a00ff, #381083);
 
   
   z-index: -1;
@@ -37,7 +37,7 @@ body::before {
   justify-content: center;
   align-items: center;
   position: relative;
-  left: -80px;
+  left: 0;
   gap: 40px;
   width: 100%;
   height: 100%;
@@ -49,21 +49,38 @@ body::before {
 }
 
 .login-container{
-  width: 420px;
+  position: relative;
+  top:5vh;
   max-width: 90vw;
+  width: 500px;
+  height: auto;
   padding: 30px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   border-radius: 15px;
   flex-shrink: 0;
 }
+.container-2 p,
+.container-2 .typewriter {
+  color: white;
+  font-family: "Orbitron", sans-serif;
+  font-size: 48px;
+  letter-spacing: 6px;
+  font-weight: 600;
+  background: linear-gradient(180deg, #ffffff, #d8d8d8 50%, #a8a8a8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  text-align: center;
+}
 
 .logo {
   display: block;
   gap: 20px;
   position: relative;
-  top: 0px;
-  width: 800px;
+  top: -30px;
+  width: 700px;
   max-width: 100%;
   height: auto;                      
   border-radius: 12px;
