@@ -12,7 +12,22 @@
   justify-content: center;
   align-items: center;
   color: rgb(0, 0, 0);
-  overflow: hidden;
+  overflow-x: hidden; /* prevent horizontal overflow */
+}
+
+html, body { height: 100%; }
+
+/* CSS variables for easier tuning and performance */
+:root{
+  --bg-grad-1: #000000;
+  --bg-grad-2: #6a00ff;
+  --panel-bg: rgba(255,255,255,0.05);
+  --panel-bg-strong: rgba(255,255,255,0.08);
+  --accent: rgb(174,0,255);
+  --accent-dark: rgb(150,0,220);
+  --text-muted: rgba(255,255,255,0.6);
+  --max-content-width: 1400px;
+  --gap-base: 40px;
 }
 
 /* camada do fundo */
@@ -38,14 +53,16 @@ body::before {
   align-items: center;
   position: relative;
   left: 0;
-  gap: 40px;
+  gap: var(--gap-base);
   width: 100%;
   height: 100%;
   padding: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* keep side-by-side by default */
   opacity: 0;
   transform: translateY(18px) scale(0.995);
   animation: enter-up 620ms cubic-bezier(.2,.9,.25,1) 160ms both;
+  max-width: var(--max-content-width);
+  margin-inline: auto;
 }
 
 .login-container{
@@ -327,3 +344,94 @@ body::before {
   from { opacity: 0; transform: translateY(18px) scale(0.995); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* Left panel sizing */
+.container-2 {
+  width: 48%;
+  max-width: 720px;
+  min-width: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure login card stays to the right with adaptive size */
+.login-container{
+  width: 420px;
+  max-width: 48%;
+  min-width: 260px;
+  padding: 30px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  flex-shrink: 0;
+}
+
+/* Typographic scaling */
+.container-2 p,
+.container-2 .typewriter { font-size: 48px; }
+.left-panel .typewriter { font-size: 40px; }
+
+/* Make images and videos responsive */
+img, video { max-width: 100%; height: auto; display: block; }
+
+/* Responsive breakpoints: 320 / 480 / 768 / 1024 / 1440+ */
+@media (max-width: 320px) {
+  :root { --gap-base: 12px; }
+  .container-2, .login-container { min-width: 160px; }
+  .left-panel .typewriter { font-size: 18px; letter-spacing: 0.6px; }
+  .logo { width: 180px; top: -4px; }
+  .login-btn { min-height: 44px; padding: 10px; font-size: 14px; }
+}
+
+@media (min-width: 321px) and (max-width: 480px) {
+  :root { --gap-base: 14px; }
+  .containers-wrapper{ gap: 14px; padding: 12px; }
+  .container-2, .login-container { width: 48%; min-width: 170px; }
+  .left-panel .typewriter { font-size: 20px; }
+  .logo { width: 220px; top: -6px; }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  :root { --gap-base: 20px; }
+  .containers-wrapper{ gap: 20px; padding: 16px; }
+  .container-2 { width: 50%; }
+  .login-container{ width: 42%; }
+  .left-panel .typewriter { font-size: 28px; }
+  .logo { width: 300px; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root { --gap-base: 28px; }
+  .containers-wrapper{ gap: 28px; }
+  .container-2 { width: 48%; }
+  .login-container { width: 44%; }
+  .left-panel .typewriter { font-size: 34px; }
+  .logo { width: 420px; }
+}
+
+@media (min-width: 1025px) and (max-width: 1439px) {
+  :root { --gap-base: 36px; }
+  .containers-wrapper{ gap: 36px; }
+  .container-2 { width: 48%; }
+  .login-container { width: 42%; }
+  .left-panel .typewriter { font-size: 40px; }
+  .logo { width: 520px; }
+}
+
+@media (min-width: 1440px) {
+  :root { --gap-base: 48px; }
+  .containers-wrapper{ display: grid; grid-template-columns: 1fr 520px; align-items: center; justify-content: center; gap: var(--gap-base); }
+  .container-2 { justify-self: end; width: 60%; max-width: 900px; }
+  .login-container { justify-self: start; width: 420px; }
+  .left-panel .typewriter { font-size: 48px; }
+  .logo { width: 700px; }
+}
+
+/* Mobile menu (CSS hooks) */
+.nav { display: flex; gap: 12px; align-items: center; }
+.hamburger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; }
+@media (max-width: 768px) { .hamburger { display: inline-flex; } }
+
+/* safety: prevent children creating horizontal overflow */
+html, body, .containers-wrapper, .container-2, .login-container { overflow-x: hidden; }
