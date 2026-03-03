@@ -1,79 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Tcc Vr</title>
-    <link rel="stylesheet" href="login.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TCC VR - Login</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
 <body>
+  <main class="containers-wrapper">
+    <section class="container-2" aria-hidden="true">
+      <div class="left-panel">
+        <p class="typewriter" data-text="VR Explore"></p>
+        <img class="logo" src="img/mulhervr.png" alt="Pessoa usando realidade virtual">
+      </div>
+    </section>
 
-<div class="containers-wrapper">
+    <section class="login-container" aria-label="Formulario de login">
+      <h2>VR Explore - Login</h2>
 
-  <section class="container-2">
-    <div class="left-panel">
-      <p class="typewriter" data-text="Vr Explor"></p>
-      <img class="logo" src="img/mulhervr.png" alt="logo">
-    </div>
-  </section>                                  
+      <form id="authForm">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="email" placeholder="Digite seu email" required>
+        </div>
 
-<div class="login-container">
-    <h2>Vr Explore • Login</h2>                                  
+        <div class="input-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" autocomplete="current-password" placeholder="Digite sua senha" required>
+        </div>
 
-    <form id="authForm">
-      <div class="input-group">
-        <label>Email</label>
-        <input type="email" id="email" placeholder="Digite seu email" required>
+        <button type="submit" class="login-btn">Entrar</button>
+      </form>
+
+      <div class="divider">
+        <a class="a" href="cadastro.html">Clique aqui para se cadastrar</a>
       </div>
 
-      <div class="input-group">
-        <label>Senha</label>
-        <input type="password" id="password" placeholder="Digite sua senha" required>
+      <div class="separator">
+        <hr class="sep-line">
+        <div class="sep-text">ou continue com</div>
       </div>
 
-      <button type="submit" class="login-btn">Entrar</button>
-    </form>
+      <div class="social-container-btn">
+        <button type="button" id="btnGoogle" class="social-btn google" aria-label="Entrar com Google">
+          <img src="img/icons8-google.svg" alt="Google">
+          <span></span>
+        </button>
 
-    <div class="divider">
-      <a class="a" href="cadastro.html">Clique aqui para se cadastrar</a>
-    </div>
+        <button type="button" id="btnMicrosoft" class="social-btn microsoft" aria-label="Entrar com Microsoft">
+          <img src="img/microsoft_icon (1).svg" alt="Microsoft">
+          <span></span>
+        </button>
 
-    <div class="separator">
-      <hr class="sep-line">
-      <div class="sep-text">ou continue com</div>
-    </div>
+        <button type="button" id="btnGithub" class="social-btn github" aria-label="Entrar com GitHub">
+          <img src="img/github_icon.svg" alt="GitHub">
+          <span></span>
+        </button>
+      </div>
 
-<div class="social-container-btn">
+      <div class="footer-text">
+        TCC - Realidade Virtual
+      </div>
+    </section>
+  </main>
 
-  <button type="button" id="btnGoogle" class="social-btn google">
-    <img src="img/icons8-google.svg" alt="Google">
-    <span></span>
-  </button>
-
-  <button type="button" id="btnMicrosoft" class="social-btn microsoft">
-    <img src="img/microsoft_icon (1).svg" alt="Microsoft">
-    <span></span>
-  </button>
-
-  <button type="button" id="btnGithub" class="social-btn github">
-    <img src="img/github_icon.svg" alt="GitHub">
-    <span></span>
-  </button>
-
-</div>
-
-    <div class="footer-text">
-      TCC • Realidade Virtual
-    </div>
-</div>
-
-
-</div>
-
-<script src="typewriter.js"></script>
-<script type="module" src="auth.js"></script>
-
+  <script src="typewriter.js"></script>
+  <script type="module" src="auth.js"></script>
 </body>
 </html>
