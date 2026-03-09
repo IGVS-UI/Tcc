@@ -60,28 +60,24 @@ body {
   z-index: 1;
 }
 .containers-wrapper {
+  display: flex;
+  justify-items: center;
+  align-items: center;
   width: min(1120px, 100%);
-  display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
   gap: clamp(18px, 4vw, 52px);
-  align-items: center;
   animation: fade-up 500ms ease-out both;
 }
 
-.container-2 {
-  display: flex;
-  justify-content: center;
-  min-width: 0;
-}
-
 .left-panel {
-  display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(8px, 2vw, 16px);
+  padding: 10px;
+  gap: clamp(10px, 2vw, 16px);
 }
 
 .container-2 .typewriter {
+  margin-bottom: 40px ;
   font-family: "Orbitron", sans-serif;
   font-size: clamp(1.9rem, 4.6vw, 3.4rem);
   font-weight: 700;
@@ -95,14 +91,18 @@ body {
 }
 
 .logo {
-  width: min(100%, 660px);
+  width: min(100%, 2000px);
   height: auto;
   display: block;
+  position: relative;
+  top: -50px;
 }
 
 .login-container {
   width: 100%;
-  padding: clamp(18px, 2.6vw, 32px);
+  height: auto;
+  margin: 10px;
+  padding: clamp(15px, 2.6vw, 32px);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.14);
