@@ -97,6 +97,8 @@ body {
 .logo {
   width: 100%;
   height: 100%;
+  width:500px;
+  height: auto;
   display: block;
   position: relative;
   object-fit: cover;
@@ -104,7 +106,7 @@ body {
 }
 
 .login-container {
-  width: 100%;
+  width: 900px;
   height: auto;
   margin: 10px;
   padding: clamp(15px, 2.6vw, 32px);
