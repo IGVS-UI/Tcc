@@ -72,8 +72,12 @@ body {
 .left-panel {
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
   padding: 10px;
   gap: clamp(10px, 2vw, 16px);
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .container-2 .typewriter {
@@ -91,11 +95,12 @@ body {
 }
 
 .logo {
-  width: min(100%, 2000px);
-  height: auto;
+  width: 100%;
+  height: 100%;
   display: block;
   position: relative;
-  top: -50px;
+  object-fit: cover;
+  object-position: top;
 }
 
 .login-container {

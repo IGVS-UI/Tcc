@@ -2,81 +2,74 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cadastro - TCC VR</title>
-  <link rel="stylesheet" href="cadastro.css">
+  <link rel="stylesheet" href="login.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
 <body>
   <canvas id="bg-animation"></canvas>
-        <div class="containers-wrapper">
-
-    <div class="info-container">
-    <h2>Bem-vindo</h2>
-    <img class="logo" src="img/mulhervr.png" alt="logo">
-    <p class="typewriter" data-text="Realize o login para acessar a plataforma de realidade virtual."></p>
-   </div>
-
-          <div class="login-container">
-    <h2>Cadastrar • Projeto VR</h2>
-
-    <form id="signupForm">
-      <div class="input-group">
-        <label>Email</label>
-        <input id="email" type="email" placeholder="Digite seu email" required>
+  <main class="containers-wrapper">
+    <section class="container-2" aria-hidden="true">
+      <div class="left-panel">
+        <p class="typewriter" data-text="VR Explore"></p>
+        <img class="logo" src="img/mulhervr.png" alt="Pessoa usando realidade virtual">
       </div>
+    </section>
 
-      <div class="input-group">
-        <label>Senha</label>
-        <input id="password" type="password" placeholder="Crie uma senha (mín. 6)" minlength="6" required>
-      </div>
+    <section class="login-container" aria-label="Formulario de cadastro">
+      <h2>VR Explore - Cadastro</h2>
 
-      <button type="submit" class="login-btn">Criar conta</button>
-    </form>
-
-    <div class="divider">
-      <a href="login.html">Já tenho conta • Entrar</a>
-    </div>
-
-       <div class="separator">
-      <hr class="sep-line">
-      <div class="sep-text">ou continue com</div>
-    </div>
-
-<div class="social-container-btn">
-
-  <button type="button" id="btnGoogle" class="social-btn google">
-    <img src="img/icons8-google.svg" alt="Google">
-    <span></span>
-  </button>
-
-  <button type="button" id="btnMicrosoft" class="social-btn microsoft">
-    <img src="img/microsoft_icon (1).svg" alt="Microsoft">
-    <span></span>
-  </button>
-
-  <button type="button" id="btnGithub" class="social-btn github">
-    <img src="img/github_icon.svg" alt="GitHub">
-    <span></span>
-  </button>
-
-</div>
-
-    <div class="footer-text">
-      TCC • Realidade Virtual
-    </div>
-
-
+      <form id="signupForm">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="email" placeholder="Digite seu email" required>
         </div>
 
-  
+        <div class="input-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" autocomplete="new-password" placeholder="Crie uma senha (mín. 6)" minlength="6" required>
+        </div>
 
+        <button type="submit" class="login-btn">Criar conta</button>
+      </form>
 
+      <div class="divider">
+        <a class="a" href="login.html">Clique aqui para fazer login</a>
+      </div>
 
-    <p id="status" class="footer-text"></p>
-  </div>
+      <div class="separator">
+        <hr class="sep-line">
+        <div class="sep-text">ou continue com</div>
+      </div>
 
-  <!-- Se seu auth.js tem import, tem que ser module -->
+      <div class="social-container-btn">
+        <button type="button" id="btnGoogle" class="social-btn google" aria-label="Cadastrar com Google">
+          <img src="img/icons8-google.svg" alt="Google">
+          <span></span>
+        </button>
+
+        <button type="button" id="btnMicrosoft" class="social-btn microsoft" aria-label="Cadastrar com Microsoft">
+          <img src="img/microsoft_icon (1).svg" alt="Microsoft">
+          <span></span>
+        </button>
+
+        <button type="button" id="btnGithub" class="social-btn github" aria-label="Cadastrar com GitHub">
+          <img src="img/github_icon.svg" alt="GitHub">
+          <span></span>
+        </button>
+      </div>
+
+      <div class="footer-text">
+        TCC - Realidade Virtual
+      </div>
+    </section>
+  </main>
+
   <script src="typewriter.js"></script>
+  <script src="background.js"></script>
   <script type="module" src="auth.js"></script>
 </body>
 </html>
