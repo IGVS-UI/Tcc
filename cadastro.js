@@ -1,10 +1,8 @@
-// auth.js - Login + Social + Proteção Home + Logout
+// cadastro.js - Cadastro de Novos Usuários + Social
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import {
   getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   GithubAuthProvider,
   OAuthProvider,
@@ -25,16 +23,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ====== Elementos da Página de Login ======
+// ====== Elementos da Página de Cadastro ======
 const emailEl = document.querySelector("#email");
 const passEl = document.querySelector("#password");
-const formEl = document.querySelector("#authForm"); // login.html
+const signupForm = document.querySelector("#signupForm"); // cadastro.html
 
 const btnGoogle = document.querySelector("#btnGoogle");
 const btnGithub = document.querySelector("#btnGithub");
 const btnMicrosoft = document.querySelector("#btnMicrosoft");
 
-const btnLogout = document.querySelector("#btnLogout"); // home.html
 const statusEl = document.querySelector("#status");
 
 // ====== Funções Auxiliares ======
@@ -87,12 +84,11 @@ function friendlyError(code) {
   const map = {
     "auth/invalid-email": "Email inválido.",
     "auth/missing-password": "Digite a senha.",
-    "auth/wrong-password": "Senha incorreta.",
-    "auth/user-not-found": "Usuário não encontrado.",
+    "auth/email-already-in-use": "Esse email já está em uso.",
     "auth/weak-password": "Senha fraca (mínimo 6 caracteres).",
-    "auth/popup-closed-by-user": "Você fechou a janela de login.",
+    "auth/popup-closed-by-user": "Você fechou a janela de cadastro.",
     "auth/account-exists-with-different-credential":
-      "Esse email já existe com outro provedor. Tente entrar com o método correto.",
+      "Esse email já existe com outro provedor. Tente outro método.",
     "auth/operation-not-allowed":
       "Esse provedor não está ativo no Firebase Authentication.",
   };
@@ -112,22 +108,27 @@ function getEmailPass() {
     return null;
   }
 
+  if (pass.length < 6) {
+    setStatus("A senha deve ter no mínimo 6 caracteres.");
+    return null;
+  }
+
   return { email, pass };
 }
 
-// ====== LOGIN Email/Senha (login.html) ======
-if (formEl) {
-  formEl.addEventListener("submit", async (e) => {
+// ====== CADASTRO Email/Senha (cadastro.html) ======
+if (signupForm) {
+  signupForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    setStatus("Entrando...");
+    setStatus("Criando conta...");
 
     const data = getEmailPass();
     if (!data) return;
 
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.pass);
-      showSuccessModal("Login Concluído ✅");
-      // Redireciona para index após login bem-sucedido
+      await createUserWithEmailAndPassword(auth, data.email, data.pass);
+      showSuccessModal("Cadastro Concluído ✅");
+      // Redireciona para index após cadastro bem-sucedido
       setTimeout(() => {
         window.location.href = "index.html";
       }, 2000);
@@ -137,13 +138,13 @@ if (formEl) {
   });
 }
 
-// ====== LOGIN com Google ======
+// ====== CADASTRO com Google ======
 if (btnGoogle) {
   btnGoogle.addEventListener("click", async () => {
     setStatus("Abrindo Google...");
     try {
       await signInWithPopup(auth, new GoogleAuthProvider());
-      showSuccessModal("Login Concluído ✅");
+      showSuccessModal("Cadastro Concluído ✅");
       setTimeout(() => {
         window.location.href = "index.html";
       }, 2000);
@@ -153,13 +154,13 @@ if (btnGoogle) {
   });
 }
 
-// ====== LOGIN com GitHub ======
+// ====== CADASTRO com GitHub ======
 if (btnGithub) {
   btnGithub.addEventListener("click", async () => {
     setStatus("Abrindo GitHub...");
     try {
       await signInWithPopup(auth, new GithubAuthProvider());
-      showSuccessModal("Login Concluído ✅");
+      showSuccessModal("Cadastro Concluído ✅");
       setTimeout(() => {
         window.location.href = "index.html";
       }, 2000);
@@ -169,13 +170,13 @@ if (btnGithub) {
   });
 }
 
-// ====== LOGIN com Microsoft ======
+// ====== CADASTRO com Microsoft ======
 if (btnMicrosoft) {
   btnMicrosoft.addEventListener("click", async () => {
     setStatus("Abrindo Microsoft...");
     try {
       await signInWithPopup(auth, new OAuthProvider("microsoft.com"));
-      showSuccessModal("Login Concluído ✅");
+      showSuccessModal("Cadastro Concluído ✅");
       setTimeout(() => {
         window.location.href = "index.html";
       }, 2000);
@@ -184,23 +185,3 @@ if (btnMicrosoft) {
     }
   });
 }
-
-// ====== LOGOUT (home.html) ======
-if (btnLogout) {
-  btnLogout.addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-      window.location.href = "login.html";
-    } catch (err) {
-      setStatus(friendlyError(err.code));
-    }
-  });
-}
-
-// ====== Proteção da home.html - Redirecionar não autenticados ======
-onAuthStateChanged(auth, (user) => {
-  const isHome = window.location.pathname.includes("home.html");
-  if (isHome && !user) {
-    window.location.href = "login.html";
-  }
-});
