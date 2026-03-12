@@ -138,20 +138,13 @@ if (formEl) {
 }
 
 // ====== LOGIN com Google ======
-if (btnGoogle) {
-  btnGoogle.addEventListener("click", async () => {
-    setStatus("Abrindo Google...");
-    try {
-      await signInWithPopup(auth, new GoogleAuthProvider());
-      showSuccessModal("Login Concluído ✅");
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 2000);
-    } catch (err) {
-      setStatus(friendlyError(err.code));
-    }
-  });
+
+const googleLoginPopupButton = document.getElementById('google-login-popup-button');
+if (googleLoginPopupButton) {
+  googleLoginPopupButton.addEventListener('click', handleGoogleLoginPopup);
 }
+
+
 
 // ====== LOGIN com GitHub ======
 if (btnGithub) {

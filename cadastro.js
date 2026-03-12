@@ -133,7 +133,9 @@ if (signupForm) {
         window.location.href = "index.html";
       }, 2000);
     } catch (err) {
-      setStatus(friendlyError(err.code));
+      console.error("Erro no cadastro:", err.code, err.message);
+      const errorMsg = friendlyError(err.code);
+      setStatus(errorMsg);
     }
   });
 }
@@ -143,12 +145,14 @@ if (btnGoogle) {
   btnGoogle.addEventListener("click", async () => {
     setStatus("Abrindo Google...");
     try {
-      await signInWithPopup(auth, new GoogleAuthProvider());
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
+      console.log("Cadastro Google bem-sucedido:", result.user);
       showSuccessModal("Cadastro Concluído ✅");
       setTimeout(() => {
         window.location.href = "index.html";
       }, 2000);
     } catch (err) {
+      console.error("Erro no cadastro Google:", err.code, err.message);
       setStatus(friendlyError(err.code));
     }
   });
@@ -159,12 +163,14 @@ if (btnGithub) {
   btnGithub.addEventListener("click", async () => {
     setStatus("Abrindo GitHub...");
     try {
-      await signInWithPopup(auth, new GithubAuthProvider());
+      const result = await signInWithPopup(auth, new GithubAuthProvider());
+      console.log("Cadastro GitHub bem-sucedido:", result.user);
       showSuccessModal("Cadastro Concluído ✅");
       setTimeout(() => {
         window.location.href = "index.html";
       }, 2000);
     } catch (err) {
+      console.error("Erro no cadastro GitHub:", err.code, err.message);
       setStatus(friendlyError(err.code));
     }
   });
@@ -175,12 +181,14 @@ if (btnMicrosoft) {
   btnMicrosoft.addEventListener("click", async () => {
     setStatus("Abrindo Microsoft...");
     try {
-      await signInWithPopup(auth, new OAuthProvider("microsoft.com"));
+      const result = await signInWithPopup(auth, new OAuthProvider("microsoft.com"));
+      console.log("Cadastro Microsoft bem-sucedido:", result.user);
       showSuccessModal("Cadastro Concluído ✅");
       setTimeout(() => {
         window.location.href = "index.html";
       }, 2000);
     } catch (err) {
+      console.error("Erro no cadastro Microsoft:", err.code, err.message);
       setStatus(friendlyError(err.code));
     }
   });
