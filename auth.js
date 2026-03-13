@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  GoogleAuthProvider,
+   GoogleAuthProvider,
   GithubAuthProvider,
   OAuthProvider,
   signInWithPopup
@@ -139,11 +139,22 @@ if (formEl) {
 
 // ====== LOGIN com Google ======
 
-const googleLoginPopupButton = document.getElementById('google-login-popup-button');
-if (googleLoginPopupButton) {
-  googleLoginPopupButton.addEventListener('click', handleGoogleLoginPopup);
+if (btnGoogle) {
+  btnGoogle.addEventListener("click", async () => {
+    setStatus("Abrindo Google...");
+    try {
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
+      console.log("Cadastro Google bem-sucedido:", result.user);
+      showSuccessModal("Cadastro Concluído ✅");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 2000);
+    } catch (err) {
+      console.error("Erro no cadastro Google:", err.code, err.message);
+      setStatus(friendlyError(err.code));
+    }
+  });
 }
-
 
 
 // ====== LOGIN com GitHub ======
