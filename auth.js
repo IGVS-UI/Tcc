@@ -141,31 +141,52 @@ if (formEl) {
 }
 
 // ====== LOGIN com Google ======
+c// ... (seus imports e configurações existentes)
+
+// ====== Elementos da Página de Login ======
+// ... (seus elementos existentes)
+
+const google = document.querySelector("#btnGoogle"); // login.html
+console.log("btnGoogle encontrado:", google); // Adicione esta linha para verificar se o botão foi encontrado
+
+// ... (suas funções auxiliares)
+
+// ====== LOGIN Email/Senha (login.html) ======
+// ... (seu código existente para login com email/senha)
+
+// ====== LOGIN com Google ======
 const googleProvider = new GoogleAuthProvider();
+console.log("GoogleAuthProvider inicializado."); // Adicione esta linha
 
 async function signInWithGoogle() {
+  console.log("Função signInWithGoogle chamada."); // Adicione esta linha no início da função
   try {
     const result = await signInWithPopup(auth, googleProvider);
+    console.log("signInWithPopup do Google retornou um resultado."); // Adicione esta linha
     const user = result.user;
-    // const credential = GoogleAuthProvider.credentialFromResult(result); // Não necessário se não for usar o token de acesso do Google diretamente
-
     console.log("Usuário logado com Google:", user.displayName || user.email);
     showSuccessModal("Login Concluído ✅");
     setTimeout(() => {
       window.location.href = "index.html";
     }, 2000);
   } catch (error) {
+    console.error("Erro DENTRO do signInWithGoogle (Google):", error); // Modifique esta linha para ser mais específico
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.error("Erro no login com Google:", errorCode, errorMessage);
     setStatus(friendlyError(errorCode));
   }
 }
 
-// *** IMPORTANTE: Adicione este bloco para associar a função ao botão ***
 if (btnGoogle) {
+  console.log("Adicionando event listener ao btnGoogle."); // Adicione esta linha
   btnGoogle.addEventListener("click", signInWithGoogle);
+} else {
+  console.warn("Botão Google (id='google-signin-button') não encontrado para adicionar o event listener."); // Adicione esta linha
 }
+
+
+// ... (o resto do seu código, incluindo GitHub, Microsoft, Logout e onAuthStateChanged)
+
 
 // *******************************************************************
 
