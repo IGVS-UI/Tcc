@@ -30,7 +30,7 @@ const emailEl = document.querySelector("#email");
 const passEl = document.querySelector("#password");
 const formEl = document.querySelector("#authForm"); // login.html
 
-const btnGoogle = document.querySelector("#btnGoogle");
+const btnGoogle = document.querySelector("#google-signin-button"); // login.html
 const btnGithub = document.querySelector("#btnGithub");
 const btnMicrosoft = document.querySelector("#btnMicrosoft");
 
@@ -95,6 +95,9 @@ function friendlyError(code) {
       "Esse email já existe com outro provedor. Tente entrar com o método correto.",
     "auth/operation-not-allowed":
       "Esse provedor não está ativo no Firebase Authentication.",
+    // Adicione tratamento para erros comuns do Google Sign-In se necessário
+    "auth/cancelled-popup-request": "A requisição do popup foi cancelada. Certifique-se de não bloquear popups.",
+    "auth/unauthorized-domain": "Domínio não autorizado para operações OAuth. Verifique as configurações do Firebase."
   };
   return map[code] || `Erro: ${code}`;
 }
@@ -138,13 +141,33 @@ if (formEl) {
 }
 
 // ====== LOGIN com Google ======
+const googleProvider = new GoogleAuthProvider();
 
-const googleLoginPopupButton = document.getElementById('google-login-popup-button');
-if (googleLoginPopupButton) {
-  googleLoginPopupButton.addEventListener('click', handleGoogleLoginPopup);
+async function signInWithGoogle() {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+    // const credential = GoogleAuthProvider.credentialFromResult(result); // Não necessário se não for usar o token de acesso do Google diretamente
+
+    console.log("Usuário logado com Google:", user.displayName || user.email);
+    showSuccessModal("Login Concluído ✅");
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 2000);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error("Erro no login com Google:", errorCode, errorMessage);
+    setStatus(friendlyError(errorCode));
+  }
 }
 
+// *** IMPORTANTE: Adicione este bloco para associar a função ao botão ***
+if (btnGoogle) {
+  btnGoogle.addEventListener("click", signInWithGoogle);
+}
 
+// *******************************************************************
 
 // ====== LOGIN com GitHub ======
 if (btnGithub) {
@@ -192,8 +215,21 @@ if (btnLogout) {
 
 // ====== Proteção da home.html - Redirecionar não autenticados ======
 onAuthStateChanged(auth, (user) => {
-  const isHome = window.location.pathname.includes("home.html");
-  if (isHome && !user) {
-    window.location.href = "login.html";
+  // Ajuste aqui se a página de "home" for na verdade a "index.html"
+  const isHome = window.location.pathname.includes("index.html"); // Verifique se o nome do arquivo da home é 'index.html'
+  const isLoginPage = window.location.pathname.includes("login.html");
+
+  if (user) {
+    // Se o usuário está logado e está na página de login, redirecione para a home
+    if (isLoginPage) {
+      window.location.href = "index.html";
+    }
+    // Caso contrário, se estiver na home (index.html) e logado, não faz nada (mantém na home)
+  } else {
+    // Se o usuário NÃO está logado e está na home, redirecione para a página de login
+    if (isHome) {
+      window.location.href = "login.html";
+    }
+    // Caso contrário, se estiver na página de login e não logado, não faz nada (mantém na página de login)
   }
 });
