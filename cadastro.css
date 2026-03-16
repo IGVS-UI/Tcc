@@ -317,6 +317,87 @@ h2 {
   }
 }
 
+/* Resolução 428x906 (mobile pequeno) */
+@media (max-width: 428px) {
+  .containers-wrapper {
+    padding: 5px;
+    gap: 15px;
+  }
+
+  .login-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Resolução 1280x800 (desktop médio) */
+@media (min-width: 1280px) and (max-width: 1280px) {
+  .containers-wrapper {
+    gap: 30px;
+  }
+
+  .login-container {
+    width: 450px;
+  }
+
+  .info-container {
+    width: 430px;
+  }
+}
+
+/* Resolução 1728x1085 (monitor grande) */
+@media (min-width: 1728px) {
+  .containers-wrapper {
+    gap: 50px;
+  }
+
+  .login-container {
+    width: 500px;
+    padding: 40px;
+  }
+
+  .info-container {
+    width: 480px;
+    padding: 50px;
+  }
+
+  .info-container h2 {
+    font-size: 36px;
+  }
+
+  .info-container p {
+    font-size: 18px;
+  }
+}
+
+/* Resolução 2048x1152 (2K) */
+@media (min-width: 2048px) {
+  .containers-wrapper {
+    gap: 60px;
+  }
+
+  .login-container {
+    width: 550px;
+  }
+
+  .info-container {
+    width: 520px;
+  }
+
+  .info-container h2 {
+    font-size: 40px;
+  }
+
+  .info-container p {
+    font-size: 20px;
+  }
+}
+
 @keyframes enter-up {
   from { opacity: 0; transform: translateY(18px) scale(0.995); }
   to   { opacity: 1; transform: translateY(0) scale(1); }

@@ -312,6 +312,85 @@ input:focus {
   }
 }
 
+/* Resolução 428x906 (mobile pequeno) */
+@media (max-width: 428px) {
+  .containers-wrapper {
+    width: 95vw;
+    height: 90vh;
+    padding: 10px;
+  }
+
+  .login-container {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .logo {
+    width: min(80vw, 300px);
+  }
+
+  .container-2 .typewriter {
+    font-size: clamp(1.2rem, 6vw, 1.8rem);
+  }
+}
+
+/* Resolução 1280x800 (desktop médio) */
+@media (min-width: 1280px) and (max-width: 1280px) {
+  .containers-wrapper {
+    width: 75vw;
+    height: 85vh;
+  }
+
+  .login-container {
+    width: 850px;
+  }
+
+  .logo {
+    width: 700px;
+  }
+}
+
+/* Resolução 1728x1085 (monitor grande) */
+@media (min-width: 1728px) {
+  .containers-wrapper {
+    width: 80vw;
+    height: 90vh;
+  }
+
+  .login-container {
+    width: 900px;
+    padding: clamp(20px, 3vw, 40px);
+  }
+
+  .logo {
+    width: 800px;
+  }
+
+  .container-2 .typewriter {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+}
+
+/* Resolução 2048x1152 (2K) */
+@media (min-width: 2048px) {
+  .containers-wrapper {
+    width: 85vw;
+    height: 95vh;
+  }
+
+  .login-container {
+    width: 1000px;
+  }
+
+  .logo {
+    width: 900px;
+  }
+
+  .container-2 .typewriter {
+    font-size: clamp(3rem, 6vw, 5rem);
+  }
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
