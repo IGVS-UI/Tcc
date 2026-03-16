@@ -42,8 +42,8 @@ function drawGalaxyFog(time) {
     canvas.height * 0.28,
     canvas.width * 0.45
   );
-  grad1.addColorStop(0, "rgba(90, 80, 255, 0.22)");
-  grad1.addColorStop(0.35, "rgba(122, 63, 255, 0.14)");
+  grad1.addColorStop(0, "rgba(5, 3, 36, 0.56)");
+  grad1.addColorStop(0.35, "rgba(37, 0, 122, 0.44)");
   grad1.addColorStop(1, "rgba(0, 0, 0, 0)");
 
   const grad2 = ctx.createRadialGradient(
@@ -55,8 +55,8 @@ function drawGalaxyFog(time) {
     canvas.width * 0.42
   );
   grad2.addColorStop(0, "rgba(214, 66, 255, 0.22)");
-  grad2.addColorStop(0.38, "rgba(143, 49, 255, 0.12)");
-  grad2.addColorStop(1, "rgba(0, 0, 0, 0)");
+  grad2.addColorStop(0.38, "rgba(48, 19, 87, 0)");
+  grad2.addColorStop(1, "rgba(0, 0, 0, 0.9)");
 
   const grad3 = ctx.createRadialGradient(
     canvas.width * (0.55 + Math.sin(t * 0.8) * 0.02),
