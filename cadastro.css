@@ -48,6 +48,7 @@ body::before {
   width: 420px;
   height: 550px;
   padding: 30px;
+  padding-top: 50px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   border-radius: 15px;
