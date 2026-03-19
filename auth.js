@@ -158,20 +158,28 @@ if (btnGoogle) {
 
 
 // ====== LOGIN com GitHub ======
+// ====== LOGIN com GitHub ======
 if (btnGithub) {
   btnGithub.addEventListener("click", async () => {
     setStatus("Abrindo GitHub...");
+    console.log("Iniciando login com GitHub..."); // Log 1
+
     try {
-      await signInWithPopup(auth, new GithubAuthProvider());
+      const userCredential = await signInWithPopup(auth, new GithubAuthProvider());
+      console.log("Login com GitHub bem-sucedido!", userCredential.user); // Log 2: Se aparecer, o login no Firebase funcionou.
+
       showSuccessModal("Login Concluído ✅");
       setTimeout(() => {
+        console.log("Redirecionando para index.html..."); // Log 3
         window.location.href = "index.html";
       }, 2000);
     } catch (err) {
+      console.error("Erro no login com GitHub:", err); // Log 4: Se aparecer, algo deu errado.
       setStatus(friendlyError(err.code));
     }
   });
 }
+
 
 // ====== LOGIN com Microsoft ======
 if (btnMicrosoft) {
