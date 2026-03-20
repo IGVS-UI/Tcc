@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-
-     <a href="login.html"><button type="submit" class="login-btn">conta</button></a>
-    
-
+  <main class="login-container" style="max-width: 420px; height: auto; padding-top: 30px;">
+    <h2>Área da Conta</h2>
+    <p id="status" class="status-message" aria-live="polite"></p>
+    <a href="cadastro.html" style="display: block; text-decoration: none; margin-bottom: 12px;">
+      <button type="button" class="login-btn">conta</button>
+    </a>
+    <button type="button" id="btnLogout" class="login-btn">Sair da conta</button>
+  </main>
 
 <script type="module" src="auth.js"></script> 
 

@@ -27,36 +27,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// No topo do seu arquivo, ou onde você define suas funções auxiliares
-function setStatus(message) {
-    const statusEl = document.querySelector("#status"); // Garanta que #status existe no HTML
-    if (statusEl) {
-        statusEl.textContent = message;
-    } else {
-        console.warn("Elemento #status não encontrado para exibir mensagem:", message);
-    }
-}
-
-function showSuccessModal(message) {
-    console.log("Modal de Sucesso:", message);
-    // Implementação real da sua modal
-    alert(message); // Para teste, pode usar um alert simples
-}
-
-function friendlyError(errorCode) {
-    // Sua função para traduzir códigos de erro
-    switch (errorCode) {
-        case 'auth/account-exists-with-different-credential':
-            return 'Uma conta com este e-mail já existe com um provedor diferente.';
-        case 'auth/popup-closed-by-user':
-            return 'A janela de login foi fechada pelo usuário.';
-        // ... outros erros
-        default:
-            return `Ocorreu um erro: ${errorCode}`;
-    }
-}
-
-
 // ====== Elementos da Página de Login ======
 const emailEl = document.querySelector("#email");
 const passEl = document.querySelector("#password");
@@ -73,7 +43,7 @@ const statusEl = document.querySelector("#status");
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // Usuário está logado
-    console.log("Usuário logado detectado pelo onAuthStateChanged:", user);
+    console.log("Usuário logado detectado pelo onAuthStateChanged:");
     // Redireciona para a página principal se não estiver nela
     if (window.location.pathname !== '/index.html' && window.location.pathname !== '/') {
         window.location.href = "index.html";
@@ -229,32 +199,22 @@ if (btnGithub) {
   });
 }
 
-// ====== LOGIN com Microsoft ======
-if (btnMicrosoft) {
-  btnMicrosoft.addEventListener("click", async () => {
-    setStatus("Abrindo Microsoft...");
-    try {
-      await signInWithPopup(auth, new OAuthProvider("microsoft.com"));
-      showSuccessModal("Login Concluído ✅");
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 2000);
-    } catch (err) {
-      setStatus(friendlyError(err.code));
-    }
-  });
+
+
+// ====== LOGOUT ======
+async function handleLogout() {
+  setStatus("Saindo...");
+
+  try {
+    await signOut(auth);
+    window.location.href = "login.html";
+  } catch (err) {
+    setStatus(friendlyError(err.code));
+  }
 }
 
-// ====== LOGOUT (home.html) ======
 if (btnLogout) {
-  btnLogout.addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-      window.location.href = "login.html";
-    } catch (err) {
-      setStatus(friendlyError(err.code));
-    }
-  });
+  btnLogout.addEventListener("click", handleLogout);
 }
 
 // ====== Proteção da home.html - Redirecionar não autenticados ======
