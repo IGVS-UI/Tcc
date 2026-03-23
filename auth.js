@@ -75,7 +75,7 @@ onAuthStateChanged(auth, (user) => {
     if (isLoginPage && !authFlowInProgress && !redirectTimer) {
       redirectTo("index.html");
     }
-    return;
+  
   }
 
   console.log("Nenhum usuario logado detectado pelo onAuthStateChanged.");
