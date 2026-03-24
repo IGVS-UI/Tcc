@@ -32,10 +32,10 @@ body {
   overflow-x: hidden;
   position: relative;
   background:
-    radial-gradient(circle at 20% 20%, rgba(84, 78, 255, 0.18), transparent 30%),
-    radial-gradient(circle at 80% 20%, rgba(203, 76, 255, 0.16), transparent 30%),
-    radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.788), transparent 30%),
-    linear-gradient(135deg, #03030a 0%, #080124 35%, #15082f 65%, #090312 100%);
+    radial-gradient(circle at 20% 20%, rgba(84, 78, 255, 0.08), transparent 28%),
+    radial-gradient(circle at 80% 20%, rgba(18, 10, 34, 0.55), transparent 32%),
+    radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.92), transparent 34%),
+    linear-gradient(135deg, #010104 0%, #040012 35%, #0b031a 65%, #020106 100%);
 }
 
 #bg-animation {
@@ -52,34 +52,36 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1;
-  width:70vw;
+  margin: 0 auto;
+  width: min(90vw, 1400px);
   height: 80vh;
-  gap: -20px;
+  gap: clamp(24px, 4vw, 56px);
   animation: fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  background-color: #03030a4d;
-  border: solid 1px #ffffff1a;
+  background-color: #03030a00;
+  border: solid 1px #ffffff00;
   border-radius: 24px;
   padding: clamp(16px, 3vw, 32px);
 }
 
 .left-panel {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  gap: clamp(10px, 2vw, 16px);
+  justify-content: center;
+  width: 100%;
   height: 100%;
-  overflow: hidden;
   position: relative;
+  top: 50px;
+
 }
 
 .container-2 {
-  flex: 1;
+  flex: 1 1 560px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+  max-width: 640px;
   opacity: 0;
   animation: slide-in-left 900ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
 }
@@ -100,11 +102,11 @@ body {
 }
 
 .logo {
-  width: min(1800px, 120%);
-  height: clamp(520px, 66vh, 860px);
+  width: min(1900px, 135%);
+  height: clamp(620px, 74vh, 980px);
   display: block;
   position: relative;
-  top: -80px;
+  top: -95px;
   border: 0;
 }
 
@@ -113,14 +115,16 @@ body {
 }
 
 .login-container {
-  width: 600px;
-  height: auto;
-  margin: 10px;
+  flex: 1 1 520px;
+  width: min(100%, 600px);
+  max-height: auto;
+  margin: 0 auto;
+  z-index: 1; 
   padding: 30px;
   padding-top: 70px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 8, 18, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(14px);
   box-shadow: 0 20px 38px rgba(0, 0, 0, 0.35), 0 0 30px rgba(139, 92, 246, 0.12);
   opacity: 0;
@@ -300,6 +304,11 @@ input:focus {
   line-height: 1.4;
 }
 
+.status-message:empty {
+  min-height: 0;
+  margin-top: 0;
+}
+
 .home-shell {
   width: 100%;
   display: flex;
@@ -365,8 +374,8 @@ input:focus {
   }
 
   .logo {
-    width: min(760px, 48vw);
-    height: clamp(360px, 50vh, 620px);
+    width: min(900px, 58vw);
+    height: clamp(440px, 58vh, 760px);
   }
 
   .login-container {
@@ -527,8 +536,8 @@ input:focus {
   }
 
   .logo {
-    width: min(860px, 54vw);
-    height: clamp(420px, 58vh, 720px);
+    width: min(980px, 62vw);
+    height: clamp(500px, 64vh, 820px);
   }
 
   .login-container {
@@ -549,12 +558,13 @@ input:focus {
   }
 
   .logo {
-    width: min(920px, 115%);
-    height: clamp(480px, 62vh, 820px);
+    width: min(1080px, 130%);
+    height: clamp(560px, 70vh, 920px);
   }
 
   .login-container {
-    max-width: 750px;
+    width: 600px;
+    height: 300px;
   }
 }
 
@@ -572,8 +582,8 @@ input:focus {
   }
 
   .logo {
-    width: min(1040px, 120%);
-    height: clamp(560px, 70vh, 920px);
+    width: min(1180px, 135%);
+    height: clamp(640px, 76vh, 1020px);
   }
 
   .container-2 .typewriter {
@@ -594,8 +604,8 @@ input:focus {
   }
 
   .logo {
-    width: min(1180px, 125%);
-    height: clamp(640px, 76vh, 1040px);
+    width: min(1320px, 142%);
+    height: clamp(720px, 82vh, 1140px);
   }
 
   .container-2 .typewriter {
@@ -615,8 +625,8 @@ input:focus {
   }
 
   .logo {
-    width: min(1280px, 130%);
-    height: clamp(720px, 82vh, 1160px);
+    width: min(1440px, 145%);
+    height: clamp(780px, 86vh, 1240px);
   }
 }
 
