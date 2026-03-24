@@ -100,12 +100,16 @@ body {
 }
 
 .logo {
-  width:750px;
-  height: auto;
+  width: min(1800px, 120%);
+  height: clamp(520px, 66vh, 860px);
   display: block;
   position: relative;
-  object-fit: contain;
-  object-position: center;
+  top: -80px;
+  border: 0;
+}
+
+.spline-model {
+  background: transparent;
 }
 
 .login-container {
@@ -361,7 +365,8 @@ input:focus {
   }
 
   .logo {
-    max-width: min(600px, 40vw);
+    width: min(760px, 48vw);
+    height: clamp(360px, 50vh, 620px);
   }
 
   .login-container {
@@ -409,7 +414,8 @@ input:focus {
   }
 
   .logo {
-    max-width: min(400px, 70vw);
+    width: min(500px, 82vw);
+    height: clamp(320px, 46vh, 480px);
     margin: 0 auto 10px auto; /* Margem inferior para separar do formulário */
   }
 
@@ -432,7 +438,8 @@ input:focus {
   }
 
   .logo {
-    max-width: min(350px, 80vw);
+    width: min(420px, 88vw);
+    height: clamp(260px, 40vh, 380px);
     margin-bottom: 5px;
   }
 
@@ -489,7 +496,8 @@ input:focus {
   }
 
   .logo {
-    max-width: 85vw;
+    width: 90vw;
+    height: clamp(240px, 38vh, 340px);
   }
 
   .social-container-btn {
@@ -519,7 +527,8 @@ input:focus {
   }
 
   .logo {
-    max-width: min(650px, 42vw);
+    width: min(860px, 54vw);
+    height: clamp(420px, 58vh, 720px);
   }
 
   .login-container {
@@ -540,7 +549,8 @@ input:focus {
   }
 
   .logo {
-    max-width: 700px;
+    width: min(920px, 115%);
+    height: clamp(480px, 62vh, 820px);
   }
 
   .login-container {
@@ -562,7 +572,8 @@ input:focus {
   }
 
   .logo {
-    max-width: 800px;
+    width: min(1040px, 120%);
+    height: clamp(560px, 70vh, 920px);
   }
 
   .container-2 .typewriter {
@@ -583,7 +594,8 @@ input:focus {
   }
 
   .logo {
-    max-width: 900px;
+    width: min(1180px, 125%);
+    height: clamp(640px, 76vh, 1040px);
   }
 
   .container-2 .typewriter {
@@ -603,7 +615,8 @@ input:focus {
   }
 
   .logo {
-    max-width: 950px;
+    width: min(1280px, 130%);
+    height: clamp(720px, 82vh, 1160px);
   }
 }
 
