@@ -3,15 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TCC VR - Login</title>
- 
-  <link rel="stylesheet" href="login.css">
-
+  <title>Cadastro - TCC VR</title>
+  <link rel="stylesheet" href="/login_page/login_css/cadastro.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+  
 </head>
 <body>
   <canvas id="bg-animation"></canvas>
@@ -23,10 +19,10 @@
       </div>
     </section>
 
-    <section class="login-container" aria-label="Formulario de login">
-      <h2>VR Explore - Login</h2>
+    <section class="login-container" aria-label="Formulario de cadastro">
+      <h2>VR Explore - Cadastro</h2>
 
-      <form id="authForm">
+      <form id="signupForm">
         <div class="input-group">
           <label for="email">Email</label>
           <input type="email" id="email" autocomplete="email" placeholder="Digite seu email" required>
@@ -34,16 +30,14 @@
 
         <div class="input-group">
           <label for="password">Senha</label>
-          <input type="password" id="password" autocomplete="current-password" placeholder="Digite sua senha" required>
+          <input type="password" id="password" autocomplete="new-password" placeholder="Crie uma senha (mín. 6)" minlength="6" required>
         </div>
 
-        <button type="submit" class="login-btn">Entrar</button>
+        <button type="submit" class="login-btn">Criar conta</button>
       </form>
 
-      <p id="status" class="status-message" aria-live="polite"></p>
-
       <div class="divider">
-        <a class="a" href="cadastro.html">Clique aqui para se cadastrar</a>
+        <a class="a" href="/login_page/login_html/login.html">Clique aqui para fazer login</a>
       </div>
 
       <div class="separator">
@@ -52,17 +46,17 @@
       </div>
 
       <div class="social-container-btn">
-        <button type="button" id="btnGoogle" class="social-btn google" aria-label="Entrar com Google">
+        <button type="button" id="btnGoogle" class="social-btn google" aria-label="Cadastrar com Google">
           <img src="img/icons8-google.svg" alt="Google">
           <span></span>
         </button>
 
-        <button type="button" id="btnMicrosoft" class="social-btn microsoft" aria-label="Entrar com Microsoft">
+        <button type="button" id="btnMicrosoft" class="social-btn microsoft" aria-label="Cadastrar com Microsoft">
           <img src="img/microsoft_icon (1).svg" alt="Microsoft">
           <span></span>
         </button>
 
-        <button type="button" id="btnGithub" class="social-btn github" aria-label="Entrar com GitHub">
+        <button type="button" id="btnGithub" class="social-btn github" aria-label="Cadastrar com GitHub">
           <img src="img/github_icon.svg" alt="GitHub">
           <span></span>
         </button>
@@ -76,6 +70,6 @@
 
   <script src="typewriter.js"></script>
   <script src="background.js"></script>
-  <script type="module" src="auth.js"></script>
+  <script type="module" src="/login_page/auth.js"></script>
 </body>
 </html>
