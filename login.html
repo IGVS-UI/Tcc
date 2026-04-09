@@ -4,78 +4,145 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TCC VR - Login</title>
- 
   <link rel="stylesheet" href="login.css">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.78/build/spline-viewer.js"></script>
 </head>
 <body>
-  <canvas id="bg-animation"></canvas>
-  <main class="containers-wrapper">
-    <section class="container-2" aria-hidden="true">
-      <div class="left-panel">
-        <p class="typewriter" data-text="VR Explore"></p>
-        <spline-viewer class="logo spline-model" url="https://prod.spline.design/sxqejvIpv73m5lC3/scene.splinecode"></spline-viewer>
-      </div>
-    </section>
-
-    <section class="login-container" aria-label="Formulario de login">
-      <h2>VR Explore - Login</h2>
-
-      <form id="authForm">
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" autocomplete="email" placeholder="Digite seu email" required>
+  <main class="login-shell">
+    <section class="login-layout">
+      <section class="brand-panel" aria-label="Apresentacao institucional">
+        <div class="brand-content">
+          <div class="brand-visual" aria-hidden="true">
+            <spline-viewer
+              class="brand-spline"
+              url="https://prod.spline.design/sxqejvIpv73m5lC3/scene.splinecode"
+            ></spline-viewer>
+          </div>
+          <p class="brand-kicker">VR Explore</p>
+          <h1>Area do Aluno</h1>
+          <p class="brand-description">
+            Entre no portal para acessar experiencias imersivas, acompanhar conteudos
+            e continuar sua jornada no universo da realidade virtual.
+          </p>
         </div>
+      </section>
 
-        <div class="input-group">
-          <label for="password">Senha</label>
-          <input type="password" id="password" autocomplete="current-password" placeholder="Digite sua senha" required>
+      <section class="form-panel" aria-label="Formulario de login">
+        <div class="form-content">
+          <p class="form-eyebrow">Portal de acesso</p>
+          <h2>Bem-vindo(a)!</h2>
+          <p class="form-subtitle">
+            Faca login com seu email e senha para continuar no ambiente do aluno.
+          </p>
+
+          <form id="authForm">
+            <div class="input-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                autocomplete="email"
+                placeholder="Digite seu email"
+                required
+              >
+            </div>
+
+            <div class="input-group">
+              <label for="password">Senha</label>
+              <div class="password-field">
+                <input
+                  type="password"
+                  id="password"
+                  autocomplete="current-password"
+                  placeholder="Digite sua senha"
+                  required
+                >
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-toggle-password
+                  aria-label="Mostrar senha"
+                  aria-pressed="false"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 12s3.8-6 10-6 10 6 10 6-3.8 6-10 6S2 12 2 12Z"></path>
+                    <circle cx="12" cy="12" r="3.2"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-links">
+              <a href="#" class="forgot-password" id="forgotPasswordLink">Esqueci minha senha</a>
+            </div>
+
+            <button type="submit" class="login-btn">Entrar</button>
+          </form>
+
+          <p id="status" class="status-message" aria-live="polite"></p>
+
+          <div class="separator" aria-hidden="true">
+            <span class="sep-line"></span>
+            <span class="sep-text">ou continue com</span>
+            <span class="sep-line"></span>
+          </div>
+
+          <div class="social-container-btn">
+            <button type="button" id="btnGoogle" class="social-btn google" aria-label="Entrar com Google">
+              <img src="img/icons8-google.svg" alt="Google">
+            </button>
+
+            <button type="button" id="btnMicrosoft" class="social-btn microsoft" aria-label="Entrar com Microsoft">
+              <img src="img/microsoft_icon (1).svg" alt="Microsoft">
+            </button>
+
+            <button type="button" id="btnGithub" class="social-btn github" aria-label="Entrar com GitHub">
+              <img src="img/github_icon.svg" alt="GitHub">
+            </button>
+          </div>
+
+          <div class="form-footer">
+            <a href="index.html" class="back-link">&larr; Voltar ao site</a>
+            <p class="register-text">
+              Ainda nao tem cadastro?
+              <a href="cadastro.html">Criar conta</a>
+            </p>
+          </div>
         </div>
-
-        <button type="submit" class="login-btn">Entrar</button>
-      </form>
-
-      <p id="status" class="status-message" aria-live="polite"></p>
-
-      <div class="divider">
-        <a class="a" href="cadastro.html">Clique aqui para se cadastrar</a>
-      </div>
-
-      <div class="separator">
-        <hr class="sep-line">
-        <div class="sep-text">ou continue com</div>
-      </div>
-
-      <div class="social-container-btn">
-        <button type="button" id="btnGoogle" class="social-btn google" aria-label="Entrar com Google">
-          <img src="img/icons8-google.svg" alt="Google">
-          <span></span>
-        </button>
-
-        <button type="button" id="btnMicrosoft" class="social-btn microsoft" aria-label="Entrar com Microsoft">
-          <img src="img/microsoft_icon (1).svg" alt="Microsoft">
-          <span></span>
-        </button>
-
-        <button type="button" id="btnGithub" class="social-btn github" aria-label="Entrar com GitHub">
-          <img src="img/github_icon.svg" alt="GitHub">
-          <span></span>
-        </button>
-      </div>
-
-      <div class="footer-text">
-        TCC - Realidade Virtual
-      </div>
+      </section>
     </section>
   </main>
 
-  <script src="typewriter.js"></script>
-  <script src="background.js"></script>
+  <script>
+    const passwordInput = document.querySelector("#password");
+    const passwordToggle = document.querySelector("[data-toggle-password]");
+    const forgotPasswordLink = document.querySelector("#forgotPasswordLink");
+    const statusMessage = document.querySelector("#status");
+
+    if (passwordInput && passwordToggle) {
+      passwordToggle.addEventListener("click", () => {
+        const nextType = passwordInput.type === "password" ? "text" : "password";
+        const isVisible = nextType === "text";
+
+        passwordInput.type = nextType;
+        passwordToggle.setAttribute("aria-pressed", String(isVisible));
+        passwordToggle.setAttribute(
+          "aria-label",
+          isVisible ? "Ocultar senha" : "Mostrar senha"
+        );
+      });
+    }
+
+    if (forgotPasswordLink && statusMessage) {
+      forgotPasswordLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        statusMessage.textContent = "Recuperacao de senha em desenvolvimento.";
+      });
+    }
+  </script>
   <script type="module" src="auth.js"></script>
 </body>
 </html>

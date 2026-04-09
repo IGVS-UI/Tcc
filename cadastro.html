@@ -7,69 +7,191 @@
   <link rel="stylesheet" href="cadastro.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.78/build/spline-viewer.js"></script>
 </head>
 <body>
-  <canvas id="bg-animation"></canvas>
-  <main class="containers-wrapper">
-    <section class="container-2" aria-hidden="true">
-      <div class="left-panel">
-        <p class="typewriter" data-text="VR Explore"></p>
-        <spline-viewer class="logo spline-model" url="https://prod.spline.design/sxqejvIpv73m5lC3/scene.splinecode"></spline-viewer>
-      </div>
-    </section>
+  <main class="signup-shell">
+    <section class="signup-layout">
+      <section class="form-panel" aria-label="Formulario de cadastro">
+        <div class="form-content">
+          <p class="form-eyebrow">Criar sua conta</p>
+          <h1>Comece sua experiencia</h1>
+          <p class="form-subtitle">
+            Cadastre-se para acessar o portal, acompanhar conteudos e explorar os
+            ambientes imersivos do projeto.
+          </p>
 
-    <section class="login-container" aria-label="Formulario de cadastro">
-      <h2>VR Explore - Cadastro</h2>
+          <form id="signupForm">
+            <div class="input-group">
+              <label for="fullName">Nome completo</label>
+              <input
+                type="text"
+                id="fullName"
+                autocomplete="name"
+                placeholder="Digite seu nome"
+                required
+              >
+            </div>
 
-      <form id="signupForm">
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" autocomplete="email" placeholder="Digite seu email" required>
+            <div class="input-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                autocomplete="email"
+                placeholder="Digite seu email"
+                required
+              >
+            </div>
+
+            <div class="input-row">
+              <div class="input-group">
+                <label for="password">Senha</label>
+                <div class="password-field">
+                  <input
+                    type="password"
+                    id="password"
+                    autocomplete="new-password"
+                    placeholder="Crie uma senha"
+                    minlength="6"
+                    required
+                  >
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    data-toggle-password
+                    data-target="password"
+                    aria-label="Mostrar senha"
+                    aria-pressed="false"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M2 12s3.8-6 10-6 10 6 10 6-3.8 6-10 6S2 12 2 12Z"></path>
+                      <circle cx="12" cy="12" r="3.2"></circle>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="confirmPassword">Confirmar senha</label>
+                <div class="password-field">
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    autocomplete="new-password"
+                    placeholder="Repita sua senha"
+                    minlength="6"
+                    required
+                  >
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    data-toggle-password
+                    data-target="confirmPassword"
+                    aria-label="Mostrar senha"
+                    aria-pressed="false"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M2 12s3.8-6 10-6 10 6 10 6-3.8 6-10 6S2 12 2 12Z"></path>
+                      <circle cx="12" cy="12" r="3.2"></circle>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <label class="terms-check" for="acceptTerms">
+              <input type="checkbox" id="acceptTerms" required>
+              <span>Concordo com os termos de acesso e politica de privacidade.</span>
+            </label>
+
+            <button type="submit" class="primary-btn">Criar conta</button>
+          </form>
+
+          <p id="status" class="status-message" aria-live="polite"></p>
+
+          <div class="separator" aria-hidden="true">
+            <span class="sep-line"></span>
+            <span class="sep-text">ou continue com</span>
+            <span class="sep-line"></span>
+          </div>
+
+          <div class="social-container-btn">
+            <button type="button" id="btnGoogle" class="social-btn google" aria-label="Cadastrar com Google">
+              <img src="img/icons8-google.svg" alt="Google">
+            </button>
+
+            <button type="button" id="btnMicrosoft" class="social-btn microsoft" aria-label="Cadastrar com Microsoft">
+              <img src="img/microsoft_icon (1).svg" alt="Microsoft">
+            </button>
+
+            <button type="button" id="btnGithub" class="social-btn github" aria-label="Cadastrar com GitHub">
+              <img src="img/github_icon.svg" alt="GitHub">
+            </button>
+          </div>
+
+          <div class="form-footer">
+            <a href="login.html" class="back-link">&larr; Ja tenho uma conta</a>
+            <a href="index.html" class="secondary-link">Voltar ao site</a>
+          </div>
         </div>
+      </section>
 
-        <div class="input-group">
-          <label for="password">Senha</label>
-          <input type="password" id="password" autocomplete="new-password" placeholder="Crie uma senha (mín. 6)" minlength="6" required>
+      <section class="brand-panel" aria-label="Apresentacao institucional">
+        <div class="brand-content">
+          <p class="brand-kicker">Portal VR Explore</p>
+          <h2>Seu acesso ao ecossistema imersivo</h2>
+          <p class="brand-description">
+            Crie sua conta para entrar no ambiente do aluno, acompanhar atividades
+            e desbloquear experiencias em realidade virtual.
+          </p>
+
+          <div class="brand-visual" aria-hidden="true">
+            <spline-viewer
+              class="brand-spline"
+              url="https://prod.spline.design/sxqejvIpv73m5lC3/scene.splinecode"
+            ></spline-viewer>
+          </div>
+
+          <div class="feature-list">
+            <article class="feature-card">
+              <strong>Acesso centralizado</strong>
+              <span>Entre em um unico portal para aulas, experiencias e acompanhamento.</span>
+            </article>
+            <article class="feature-card">
+              <strong>Experiencia guiada</strong>
+              <span>Organize sua jornada com um ambiente pensado para estudo e exploracao.</span>
+            </article>
+            <article class="feature-card">
+              <strong>Conexao instantanea</strong>
+              <span>Use email ou provedores sociais para iniciar seu acesso com rapidez.</span>
+            </article>
+          </div>
         </div>
-
-        <button type="submit" class="login-btn">Criar conta</button>
-      </form>
-
-      <div class="divider">
-        <a class="a" href="login.html">Clique aqui para fazer login</a>
-      </div>
-
-      <div class="separator">
-        <hr class="sep-line">
-        <div class="sep-text">ou continue com</div>
-      </div>
-
-      <div class="social-container-btn">
-        <button type="button" id="btnGoogle" class="social-btn google" aria-label="Cadastrar com Google">
-          <img src="img/icons8-google.svg" alt="Google">
-          <span></span>
-        </button>
-
-        <button type="button" id="btnMicrosoft" class="social-btn microsoft" aria-label="Cadastrar com Microsoft">
-          <img src="img/microsoft_icon (1).svg" alt="Microsoft">
-          <span></span>
-        </button>
-
-        <button type="button" id="btnGithub" class="social-btn github" aria-label="Cadastrar com GitHub">
-          <img src="img/github_icon.svg" alt="GitHub">
-          <span></span>
-        </button>
-      </div>
-
-      <div class="footer-text">
-        TCC - Realidade Virtual
-      </div>
+      </section>
     </section>
   </main>
 
-  <script src="typewriter.js"></script>
-  <script src="background.js"></script>
+  <script>
+    const toggleButtons = document.querySelectorAll("[data-toggle-password]");
+
+    toggleButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-target");
+        const input = document.getElementById(targetId);
+
+        if (!input) return;
+
+        const nextType = input.type === "password" ? "text" : "password";
+        const isVisible = nextType === "text";
+
+        input.type = nextType;
+        button.setAttribute("aria-pressed", String(isVisible));
+        button.setAttribute("aria-label", isVisible ? "Ocultar senha" : "Mostrar senha");
+      });
+    });
+  </script>
   <script type="module" src="auth.js"></script>
 </body>
 </html>
