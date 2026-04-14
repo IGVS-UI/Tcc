@@ -1,22 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tcc Vr</title>
-    <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Area principal do TCC VR." />
+  <title>TCC VR - Inicio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-  <main class="login-container" style="max-width: 420px; height: auto; padding-top: 30px;">
-    <h2>Área da Conta</h2>
-    <p id="status" class="status-message" aria-live="polite"></p>
-    <a href="cadastro.html" style="display: block; text-decoration: none; margin-bottom: 12px;">
-      <button type="button" class="login-btn">conta</button>
-    </a>
-    <button type="button" id="btnLogout" class="login-btn">Sair da conta</button>
-  </main>
+  <header class="navbar" role="banner">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo" aria-label="TCC VR - Voltar ao inicio">
+        <div class="nav-logo-mark" aria-hidden="true">VR</div>
+        <span class="nav-wordmark">TCC<em>VR</em></span>
+      </a>
 
-<script type="module" src="auth.js"></script> 
+      <nav aria-label="Menu principal">
+        <ul class="nav-links" role="list">
+          <li><a href="index.html" class="nav-link is-active" aria-current="page">Home</a></li>
+          <li><a href="#" class="nav-link">Tecnologias</a></li>
+          <li><a href="#" class="nav-link">Explore</a></li>
+          <li><a href="#" class="nav-link">Portal Interativo</a></li>
+        </ul>
+      </nav>
 
+      <div class="nav-right">
+        <a href="login.html" class="nav-avatar" aria-label="Acessar conta">AC</a>
+        <button
+          class="nav-burger"
+          aria-controls="nav-mobile-menu"
+          aria-expanded="false"
+          aria-label="Abrir menu"
+          type="button"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav aria-label="Menu mobile">
+      <ul id="nav-mobile-menu" class="nav-mobile" role="list">
+        <li><a href="index.html" class="nav-link is-active" aria-current="page">Home</a></li>
+        <li><a href="#" class="nav-link">Tecnologias</a></li>
+        <li><a href="#" class="nav-link">Explore</a></li>
+        <li><a href="#" class="nav-link">Portal Interativo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <script>
+    const burgerButton = document.querySelector(".nav-burger");
+    const mobileMenu = document.querySelector("#nav-mobile-menu");
+    const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll(".nav-link") : [];
+
+    if (burgerButton && mobileMenu) {
+      burgerButton.addEventListener("click", () => {
+        const isOpen = burgerButton.classList.toggle("is-open");
+        mobileMenu.classList.toggle("is-open", isOpen);
+        burgerButton.setAttribute("aria-expanded", String(isOpen));
+        burgerButton.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          burgerButton.classList.remove("is-open");
+          mobileMenu.classList.remove("is-open");
+          burgerButton.setAttribute("aria-expanded", "false");
+          burgerButton.setAttribute("aria-label", "Abrir menu");
+        });
+      });
+    }
+  </script>
+  <script type="module" src="auth.js"></script>
 </body>
 </html>
