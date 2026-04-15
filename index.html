@@ -13,11 +13,15 @@
   <header class="navbar" role="banner">
     <div class="nav-wrap">
       <a href="index.html" class="nav-logo" aria-label="TCC VR - Voltar ao inicio">
-        <div class="nav-logo-mark" aria-hidden="true">VR</div>
-        <span class="nav-wordmark">TCC<em>VR</em></span>
+        <span class="nav-logo-image" aria-hidden="true">
+          <img src="img/Group 51.png" alt="">
+        </span>
+        <span class="nav-logo-copy">
+          <span class="nav-wordmark">TCC<em>VR</em></span>
+        </span>
       </a>
 
-      <nav aria-label="Menu principal">
+      <nav class="nav-center" aria-label="Menu principal">
         <ul class="nav-links" role="list">
           <li><a href="index.html" class="nav-link is-active" aria-current="page">Home</a></li>
           <li><a href="#" class="nav-link">Tecnologias</a></li>
@@ -27,7 +31,12 @@
       </nav>
 
       <div class="nav-right">
-        <a href="login.html" class="nav-avatar" aria-label="Acessar conta">AC</a>
+        <a href="login.html" class="nav-avatar" aria-label="Acessar conta">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path>
+            <path d="M4.5 19.5a8.2 8.2 0 0 1 15 0"></path>
+          </svg>
+        </a>
         <button
           class="nav-burger"
           aria-controls="nav-mobile-menu"
@@ -51,11 +60,24 @@
   </header>
 
   <script>
+    const navbar = document.querySelector(".navbar");
     const burgerButton = document.querySelector(".nav-burger");
     const mobileMenu = document.querySelector("#nav-mobile-menu");
     const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll(".nav-link") : [];
 
+    const syncNavbarScroll = () => {
+      if (!navbar) return;
+      navbar.classList.toggle("is-scrolled", window.scrollY > 12);
+    };
+
     if (burgerButton && mobileMenu) {
+      const closeMenu = () => {
+        burgerButton.classList.remove("is-open");
+        mobileMenu.classList.remove("is-open");
+        burgerButton.setAttribute("aria-expanded", "false");
+        burgerButton.setAttribute("aria-label", "Abrir menu");
+      };
+
       burgerButton.addEventListener("click", () => {
         const isOpen = burgerButton.classList.toggle("is-open");
         mobileMenu.classList.toggle("is-open", isOpen);
@@ -64,14 +86,16 @@
       });
 
       mobileLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          burgerButton.classList.remove("is-open");
-          mobileMenu.classList.remove("is-open");
-          burgerButton.setAttribute("aria-expanded", "false");
-          burgerButton.setAttribute("aria-label", "Abrir menu");
-        });
+        link.addEventListener("click", closeMenu);
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) closeMenu();
       });
     }
+
+    syncNavbarScroll();
+    window.addEventListener("scroll", syncNavbarScroll, { passive: true });
   </script>
   <script type="module" src="auth.js"></script>
 </body>
