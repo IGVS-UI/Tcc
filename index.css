@@ -47,26 +47,21 @@ img, svg { display: block; max-width: 100%; }
 ul { list-style: none; }
 
 body {
-  font-family: var(--font-display);
-  background-color: var(--c-bg);
-  color: var(--c-white);
-  overflow-x: hidden;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  background: radial-gradient(
+      circle at bottom right,
+      rgba(164, 80, 139, 0.4),
+      transparent 40%
+    ),
+    linear-gradient(
+      135deg,
+      #1a0033,
+      #3b0a6b,
+      #6a1b9a,
+      #a4508b
+    );
 }
-
 /* ─── ATMOSPHERIC BG ────────────────────────────────────── */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background:
-    radial-gradient(ellipse 90% 70% at 5%  10%, rgba(58,12,163,0.55) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 90% at 95% 95%, rgba(114,9,183,0.5)  0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 50% 55%, rgba(199,125,255,0.07) 0%, transparent 60%),
-    linear-gradient(155deg, #08001A 0%, #1A0033 40%, #3A0CA3 75%, #7209B7 100%);
-  z-index: -3;
-  pointer-events: none;
-}
+
 
 /* Grain texture */
 body::after {
@@ -503,7 +498,11 @@ body::after {
    HERO CATEGORIES
 ═══════════════════════════════════════════════════════════ */
 .hero-categories {
-  display:flex; flex-direction:column; gap:16px;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(32px, 4vw, 90px);
+  margin-left:clamp(24px, 5vw, 63px);
+  margin-bottom:clamp(24px, 4.3vw, 53px);
 }
 
 .cats-label {
@@ -511,9 +510,57 @@ body::after {
   letter-spacing:0.08em;
 }
 
-.cats-grid {
-  display:grid; grid-template-columns:1fr; gap:12px;
+.hero-categories .cats-grid {
+  display:flex;
+  flex-wrap:wrap;
+  gap:clamp(24px, 4vw, 90px);
+  justify-content:flex-start;
 }
+
+.hero-categories .card-cat {
+  flex:0 0 clamp(210px, 18vw, 230px);
+  min-width:220px;
+  min-height:220px;
+  padding:22px 18px;
+  background:linear-gradient(135deg, #5f0a87 0%, #a4508b 100%);
+  border:none;
+  border-radius:20px;
+  box-shadow:0 18px 40px rgba(0,0,0,0.18);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:16px;
+  position:relative;
+  overflow:hidden;
+  transition:transform var(--t-base) ease, box-shadow var(--t-base) ease, background var(--t-base) ease;
+}
+
+.hero-categories .card-cat::after {
+  display:none;
+}
+
+.hero-categories .card-cat:hover {
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 26px 54px rgba(0,0,0,0.24);
+}
+
+.hero-categories .cat-icon {
+  width:54px; height:54px;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto;
+  font-size:26px;
+  background:rgba(255,255,255,0.16);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:16px;
+}
+
+.hero-categories .cat-name,
+.hero-categories .cat-desc {
+  text-align:center;
+}
+
 
 .card-cat {
   display:flex; flex-direction:column; gap:10px;
