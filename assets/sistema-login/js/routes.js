@@ -29,23 +29,18 @@ export function redirectTo(targetPage) {
   const currentPath = getFullPath();
   let redirectPath;
 
-  // Se está em login.html ou cadastro.html (em assets/sistema-login/html/)
-  if (currentPath.includes("assets/sistema-login/html")) {
-    if (targetPage === "index.html") {
-      redirectPath = "../../index.html";
-    } else if (targetPage === "login.html") {
-      redirectPath = "login.html";
-    } else if (targetPage === "cadastro.html") {
-      redirectPath = "cadastro.html";
-    }
-  }
-  // Se está em index.html (raiz)
-  else if (targetPage === "login.html") {
-    redirectPath = "assets/sistema-login/html/login.html";
+  if (targetPage === "index.html") {
+    redirectPath = currentPath.includes("assets/sistema-login/html")
+      ? "../../../index.html"
+      : "index.html";
+  } else if (targetPage === "login.html") {
+    redirectPath = currentPath.includes("assets/sistema-login/html")
+      ? "login.html"
+      : "assets/sistema-login/html/login.html";
   } else if (targetPage === "cadastro.html") {
-    redirectPath = "assets/sistema-login/html/cadastro.html";
-  } else if (targetPage === "index.html") {
-    redirectPath = "index.html";
+    redirectPath = currentPath.includes("assets/sistema-login/html")
+      ? "cadastro.html"
+      : "assets/sistema-login/html/cadastro.html";
   } else {
     redirectPath = targetPage;
   }
