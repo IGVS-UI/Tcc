@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Portal interativo com visualizacao espacial inspirada na NASA para explorar o sistema solar em tempo real."
+  />
+  <title>TCC VR | Portal Interativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/portal_interativo.css" />
+</head>
+<body>
+  <header class="navbar" role="banner">
+    <div class="nav-wrap">
+      <a href="../../../index.html" class="nav-logo" aria-label="TCC VR - Voltar ao inicio">
+        <span class="nav-logo-image" aria-hidden="true">
+          <img src="../../../img/Group 51.png" alt="" />
+        </span>
+        <span class="nav-logo-copy">
+          <span class="nav-wordmark">TCC<em>VR</em></span>
+        </span>
+      </a>
+
+      <nav class="nav-center" aria-label="Menu principal">
+        <ul class="nav-links" role="list">
+          <li><a href="../../../index.html" class="nav-link">Home</a></li>
+          <li><a href="tecnologias.html" class="nav-link">Tecnologias</a></li>
+          <li><a href="explore.html" class="nav-link">Explore</a></li>
+          <li><a href="portal_interativo.html" class="nav-link is-active" aria-current="page">Portal Interativo</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right">
+        <a href="../../sistema-login/html/login.html" class="nav-avatar" aria-label="Acessar conta">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path>
+            <path d="M4.5 19.5a8.2 8.2 0 0 1 15 0"></path>
+          </svg>
+        </a>
+        <button
+          class="nav-burger"
+          aria-controls="nav-mobile-menu"
+          aria-expanded="false"
+          aria-label="Abrir menu"
+          type="button"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav aria-label="Menu mobile">
+      <ul id="nav-mobile-menu" class="nav-mobile" role="list">
+        <li><a href="../../../index.html" class="nav-link">Home</a></li>
+        <li><a href="tecnologias.html" class="nav-link">Tecnologias</a></li>
+        <li><a href="explore.html" class="nav-link">Explore</a></li>
+        <li><a href="portal_interativo.html" class="nav-link is-active" aria-current="page">Portal Interativo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="portal-page">
+    <section class="portal-hero" aria-labelledby="portal-title">
+      <div class="hero-copy">
+        <h1 id="portal-title">
+          Explore o espaco com tecnologias de
+          <span>Realidade Virtual e Aumentada!</span>
+        </h1>
+        <p>
+          O Portal Interativo utiliza dados reais para criar um ambiente 3D onde o usuario pode explorar planetas,
+          luas, asteroides e missoes espaciais.
+        </p>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <img src="../../../img/image 8 (1).png" alt="" />
+      </div>
+    </section>
+
+    <section class="portal-launch" aria-labelledby="launch-title">
+      <div class="launch-bar">
+        <h2 id="launch-title">Iniciar Exploracao</h2>
+        <a class="launch-button" href="#simulador">Ir para o simulador</a>
+      </div>
+    </section>
+
+    <section class="portal-simulator" id="simulador" aria-labelledby="simulator-title">
+      <div class="simulator-shell">
+        <div class="simulator-topline">
+          <p id="simulator-title">NASA Eyes on the Solar System</p>
+          <a
+            href="https://eyes.nasa.gov/apps/solar-system/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Abrir no site oficial
+          </a>
+        </div>
+
+        <div class="simulator-frame">
+          <iframe
+            title="NASA Eyes on the Solar System"
+            src="https://eyes.nasa.gov/apps/solar-system/#/home"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="simulator-footer">
+          <span>NASA Eyes on the Solar System</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="portal-about" aria-labelledby="about-title">
+      <div class="about-card">
+        <h2 id="about-title" class="sr-only">Sobre o simulador</h2>
+        <p>
+          O simulador utiliza dados reais da NASA para visualizar o sistema solar em tempo real
+          (planetas, luas, asteroides e espaconaves), permitindo tambem explorar eventos espaciais
+          passados e futuros.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/portal_interativo.js"></script>
+</body>
+</html>
