@@ -47,21 +47,30 @@ img, svg { display: block; max-width: 100%; }
 ul { list-style: none; }
 
 body {
-  background: radial-gradient(
-      circle at bottom right,
-      rgba(164, 80, 139, 0.4),
-      transparent 40%
-    ),
-    linear-gradient(
-      135deg,
-      #1a0033,
-      #3b0a6b,
-      #6a1b9a,
-      #a4508b
-    );
+  position:relative;
+  min-height:100vh;
+  color:var(--c-white);
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 16% 8%, rgba(172, 77, 255, 0.56) 0%, rgba(137, 34, 220, 0.42) 18%, transparent 42%),
+    radial-gradient(circle at 28% 72%, rgba(122, 19, 197, 0.34) 0%, transparent 34%),
+    radial-gradient(circle at 82% 66%, rgba(141, 58, 214, 0.30) 0%, transparent 28%),
+    linear-gradient(92deg, #6f14a8 0%, #52107e 22%, #31085f 48%, #1c0142 72%, #11002f 100%);
 }
 /* ─── ATMOSPHERIC BG ────────────────────────────────────── */
 
+
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(255,255,255,0.10), transparent 20%),
+    radial-gradient(circle at 70% 48%, rgba(192, 103, 255, 0.18), transparent 22%),
+    linear-gradient(180deg, rgba(255,255,255,0.04), transparent 30%);
+  z-index:-1;
+  pointer-events:none;
+}
 
 /* Grain texture */
 body::after {
@@ -471,9 +480,15 @@ body::after {
 .ring-2 { width:300px; height:300px; border-color:rgba(199,125,255,0.07); animation-duration:20s; animation-direction:reverse; }
 @keyframes ring-spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
 
-.hero-headset {
+.hero-visual > spline-viewer {
   position:relative; z-index:2;
-  width:100%; max-width:480px;
+  display:block;
+  width:min(100%, 560px);
+  height:420px;
+  min-height:420px;
+  max-width:560px;
+  background:transparent;
+  border:none;
   animation:hset-float 7s ease-in-out infinite;
   filter:
     drop-shadow(0 24px 60px rgba(114,9,183,0.65))
@@ -481,7 +496,7 @@ body::after {
   transition:filter var(--t-slow);
   cursor:grab;
 }
-.hero-headset:hover {
+.hero-visual > spline-viewer:hover {
   animation-play-state:paused;
   filter:
     drop-shadow(0 30px 80px rgba(114,9,183,0.85))
@@ -501,7 +516,7 @@ body::after {
   display:flex;
   flex-direction:column;
   gap:clamp(32px, 4vw, 90px);
-  margin-left:clamp(24px, 5vw, 63px);
+  margin-left:clamp(0px, 1.6vw, 18px);
   margin-bottom:clamp(24px, 4.3vw, 53px);
 }
 
@@ -512,16 +527,19 @@ body::after {
 
 .hero-categories .cats-grid {
   display:flex;
-  flex-wrap:wrap;
-  gap:clamp(24px, 4vw, 90px);
+  flex-wrap:nowrap;
+  gap:clamp(12px, 1.8vw, 18px);
   justify-content:flex-start;
+  align-items:stretch;
+  overflow-x:auto;
+  padding-bottom:8px;
 }
 
 .hero-categories .card-cat {
-  flex:0 0 clamp(210px, 18vw, 230px);
-  min-width:220px;
-  min-height:220px;
-  padding:22px 18px;
+  flex:0 0 clamp(150px, 15vw, 170px);
+  min-width:clamp(150px, 15vw, 170px);
+  min-height:190px;
+  padding:18px 14px;
   background:linear-gradient(135deg, #5f0a87 0%, #a4508b 100%);
   border:none;
   border-radius:20px;
@@ -531,7 +549,7 @@ body::after {
   align-items:center;
   justify-content:center;
   text-align:center;
-  gap:16px;
+  gap:12px;
   position:relative;
   overflow:hidden;
   transition:transform var(--t-base) ease, box-shadow var(--t-base) ease, background var(--t-base) ease;
@@ -547,13 +565,13 @@ body::after {
 }
 
 .hero-categories .cat-icon {
-  width:54px; height:54px;
+  width:48px; height:48px;
   display:flex; align-items:center; justify-content:center;
   margin:0 auto;
-  font-size:26px;
+  font-size:22px;
   background:rgba(255,255,255,0.16);
   border:1px solid rgba(255,255,255,0.18);
-  border-radius:16px;
+  border-radius:14px;
 }
 
 .hero-categories .cat-name,
