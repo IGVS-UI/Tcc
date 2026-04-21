@@ -56,6 +56,15 @@ const updateViewer = (card) => {
 
 const getColumnCards = (column) => Array.from(column.querySelectorAll(".destination-card"));
 
+const syncCardCopyVisibility = (card, isActive) => {
+  const copyElements = card.querySelectorAll(".destination-name, .destination-meta");
+
+  copyElements.forEach((element) => {
+    element.hidden = !isActive;
+    element.setAttribute("aria-hidden", String(!isActive));
+  });
+};
+
 const renderColumn = (column, nextIndex = 0) => {
   const cards = getColumnCards(column);
   if (!cards.length) return;
@@ -69,6 +78,7 @@ const renderColumn = (column, nextIndex = 0) => {
     card.classList.toggle("is-behind", !isActive);
     card.tabIndex = isActive ? 0 : -1;
     card.setAttribute("aria-hidden", String(!isActive));
+    syncCardCopyVisibility(card, isActive);
   });
 };
 
