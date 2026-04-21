@@ -28,7 +28,7 @@ body {
 
 body {
   min-height: 100dvh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Inter", sans-serif;
   color: var(--text-main);
   overflow-x: hidden;
   background:
@@ -105,7 +105,7 @@ body {
 }
 
 .brand-kicker {
-  font-family: "Orbitron", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.84rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -113,7 +113,7 @@ body {
 }
 
 .brand-content h1 {
-  font-family: "Orbitron", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: clamp(2.3rem, 4vw, 4.3rem);
   line-height: 1.04;
   letter-spacing: 0.03em;
