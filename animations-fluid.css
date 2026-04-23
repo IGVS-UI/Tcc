@@ -1,0 +1,190 @@
+/* ============================================
+   OTIMIZAÇÃO PARA FLUIDEZ - INDEX.HTML
+   ============================================ */
+
+/* Remove will-change padrão e adiciona GPU acceleration */
+.hero-content,
+.hero-visual-section,
+.hero-visual,
+.card-cat,
+spline-viewer {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* INDEX PAGE - SUPER OTIMIZADO PARA FLUIDEZ */
+
+/* Timeline ultra rápida - tudo começa no máximo 0.5s */
+.navbar {
+  animation-duration: 0.3s !important;
+  animation-delay: 0s !important;
+}
+
+.nav-logo,
+.nav-logo-image,
+.nav-logo-copy {
+  animation-duration: 0.3s !important;
+  animation-delay: 0s !important;
+}
+
+.nav-links,
+.nav-link {
+  animation-duration: 0.3s !important;
+  animation-delay: 0.02s !important;
+}
+
+.nav-avatar,
+.nav-burger {
+  animation-duration: 0.3s !important;
+  animation-delay: 0.04s !important;
+}
+
+/* Hero Section - Máxima fluidez */
+.hero-content {
+  animation-duration: 0.4s !important;
+  animation-delay: 0s !important;
+}
+
+.hero-eyebrow {
+  animation-duration: 0.3s !important;
+  animation-delay: 0.02s !important;
+}
+
+.hero-h1 {
+  animation-duration: 0.4s !important;
+  animation-delay: 0.05s !important;
+}
+
+.hero-sub {
+  animation-duration: 0.3s !important;
+  animation-delay: 0.08s !important;
+}
+
+.hero-btns > .btn:nth-child(1) {
+  animation-duration: 0.3s !important;
+  animation-delay: 0.12s !important;
+}
+
+.hero-btns > .btn:nth-child(2) {
+  animation-duration: 0.3s !important;
+  animation-delay: 0.15s !important;
+}
+
+/* KPIs - Rápido e simultâneo */
+.kpi {
+  animation-duration: 0.3s !important;
+}
+
+.kpi:nth-child(1) {
+  animation-delay: 0.15s !important;
+}
+
+.kpi:nth-child(2) {
+  animation-delay: 0.18s !important;
+}
+
+/* Cards - Cascata rápida */
+.card-cat {
+  animation-duration: 0.4s !important;
+}
+
+.card-cat:nth-child(1) {
+  animation-delay: 0.15s !important;
+}
+
+.card-cat:nth-child(2) {
+  animation-delay: 0.19s !important;
+}
+
+.card-cat:nth-child(3) {
+  animation-delay: 0.23s !important;
+}
+
+/* Spline - Sobe rápido e suave */
+.hero-visual-section {
+  animation-duration: 0.4s !important;
+  animation-delay: 0s !important;
+}
+
+.hero-visual {
+  animation-duration: 0.5s !important;
+  animation-delay: 0.05s !important;
+}
+
+.hero-ring {
+  animation-duration: 20s !important;
+}
+
+.ring-1,
+.ring-2 {
+  animation-duration: 20s, 20s !important;
+}
+
+spline-viewer {
+  animation-duration: 0.5s !important;
+  animation-delay: 0.05s !important;
+}
+
+/* Easing otimizado para suavidade */
+.hero-content,
+.hero-eyebrow,
+.hero-h1,
+.hero-sub,
+.hero-btns > .btn,
+.kpi,
+.card-cat,
+.hero-visual,
+spline-viewer {
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* ============================================
+   OTIMIZAÇÃO DE PERFORMANCE
+   ============================================ */
+
+/* Reduzir paint areas */
+.hero-eyebrow,
+.hero-h1,
+.hero-sub,
+.hero-btns > .btn,
+.kpi,
+.card-cat,
+spline-viewer {
+  contain: layout style paint;
+}
+
+/* Melhorar transições de hover */
+.card-cat {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================
+   REMOVER CONFLITOS
+   ============================================ */
+
+/* Não animar todos os parágrafos, apenas os específicos */
+.hero-sub {
+  animation: fadeInUp 0.3s ease-out 0.08s backwards !important;
+}
+
+/* Remover animação dupla do spline */
+.hero-visual spline-viewer {
+  animation: slideInFromBottom 0.5s ease-out 0.05s backwards !important;
+}
+
+/* ============================================
+   DEBUG MODE - Descomente para ver timings
+   ============================================ */
+
+/*
+.navbar { border: 1px dashed red; }
+.hero-eyebrow { border: 1px dashed blue; }
+.hero-h1 { border: 1px dashed green; }
+.card-cat { border: 1px dashed orange; }
+spline-viewer { border: 1px dashed purple; }
+*/

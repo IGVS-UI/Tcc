@@ -38,11 +38,10 @@ body {
   min-height: 100vh;
   font-family: var(--font-ui);
   color: var(--c-white);
+  position: relative;
+  isolation: isolate;
   background:
-    radial-gradient(circle at 16% 10%, rgba(187, 88, 255, 0.88), transparent 22%),
-    radial-gradient(circle at 34% 86%, rgba(117, 21, 186, 0.34), transparent 22%),
-    radial-gradient(circle at 84% 52%, rgba(85, 34, 162, 0.2), transparent 22%),
-    linear-gradient(105deg, #3f0b77 0%, #29065c 18%, #170137 42%, #0b001b 70%, #060010 100%);
+    linear-gradient(145deg, #250049 0%, #15002d 34%, #0b001c 70%, #04000d 100%);
   overflow-x: hidden;
 }
 
@@ -51,10 +50,54 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 16%),
-    radial-gradient(circle at 50% 50%, rgba(199, 125, 255, 0.08), transparent 28%);
+    radial-gradient(44% 48% at 14% 16%, rgba(214, 123, 255, 0.3), transparent 72%),
+    radial-gradient(38% 44% at 82% 24%, rgba(115, 127, 255, 0.2), transparent 74%),
+    radial-gradient(56% 58% at 66% 78%, rgba(122, 31, 213, 0.24), transparent 78%),
+    radial-gradient(32% 36% at 30% 84%, rgba(82, 220, 255, 0.1), transparent 78%);
+  background-size: 155% 155%;
   pointer-events: none;
   z-index: -1;
+  opacity: 0.94;
+  animation: wallpaper-wave 32s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(48% 54% at 18% 76%, rgba(255, 133, 201, 0.12), transparent 74%),
+    radial-gradient(40% 44% at 88% 62%, rgba(131, 86, 255, 0.16), transparent 72%),
+    radial-gradient(28% 34% at 48% 12%, rgba(255, 255, 255, 0.05), transparent 74%);
+  pointer-events: none;
+  z-index: -2;
+  mix-blend-mode: screen;
+  opacity: 0.68;
+  animation: wallpaper-wave-reverse 38s ease-in-out infinite alternate;
+}
+
+@keyframes wallpaper-wave {
+  0% {
+    transform: translate3d(-2%, -1%, 0) scale(1.04);
+  }
+  50% {
+    transform: translate3d(2%, 2%, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-1%, 3%, 0) scale(1.05);
+  }
+}
+
+@keyframes wallpaper-wave-reverse {
+  0% {
+    transform: translate3d(2%, 1%, 0) scale(1.02);
+  }
+  50% {
+    transform: translate3d(-3%, -2%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(1%, -3%, 0) scale(1.03);
+  }
 }
 
 img,
