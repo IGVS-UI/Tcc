@@ -47,15 +47,15 @@ img, svg { display: block; max-width: 100%; }
 ul { list-style: none; }
 
 body {
-  position:relative;
-  min-height:100vh;
-  color:var(--c-white);
-  isolation:isolate;
+  position: relative;
+  min-height: 100vh;
+  color: var(--c-white);
+  isolation: isolate;
   background:
-    radial-gradient(circle at 16% 8%, rgba(172, 77, 255, 0.56) 0%, rgba(137, 34, 220, 0.42) 18%, transparent 42%),
-    radial-gradient(circle at 28% 72%, rgba(122, 19, 197, 0.34) 0%, transparent 34%),
-    radial-gradient(circle at 82% 66%, rgba(141, 58, 214, 0.30) 0%, transparent 28%),
-    linear-gradient(92deg, #6f14a8 0%, #52107e 22%, #31085f 48%, #1c0142 72%, #11002f 100%);
+    radial-gradient(ellipse 60% 70% at 72% 44%, rgba(148, 30, 230, 0.88) 0%, rgba(110, 18, 195, 0.55) 40%, transparent 72%),
+    radial-gradient(ellipse 35% 45% at 18% 28%, rgba(100, 25, 170, 0.45) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(40, 5, 80, 0.6) 0%, transparent 70%),
+    linear-gradient(160deg, #1e0040 0%, #150030 25%, #0d001f 55%, #070015 100%);
 }
 /* ─── ATMOSPHERIC BG ────────────────────────────────────── */
 
@@ -342,7 +342,7 @@ body::after {
   min-height:100svh;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:60px;
+  gap:100px;
   align-items:center;
   padding:130px 24px 90px;
   margin:0 auto;
@@ -483,10 +483,10 @@ body::after {
 .hero-visual > spline-viewer {
   position:relative; z-index:2;
   display:block;
-  width:min(100%, 560px);
-  height:420px;
-  min-height:420px;
-  max-width:560px;
+  width:min(100%, 700px);
+  height:525px;
+  min-height:525px;
+  max-width:700px;
   background:transparent;
   border:none;
   animation:hset-float 7s ease-in-out infinite;
@@ -864,8 +864,8 @@ body::after {
 /* Guide card */
 .card-guide {
   position:relative;
-  background:rgba(255,255,255,0.07);
-  backdrop-filter:blur(20px) saturate(200%);
+  background:rgba(255, 255, 255, 0);
+  
   -webkit-backdrop-filter:blur(20px) saturate(200%);
   border:1px solid rgba(199,125,255,0.24);
   border-radius:var(--r-md);
