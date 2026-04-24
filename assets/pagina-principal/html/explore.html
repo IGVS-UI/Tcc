@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta
     name="description"
-    content="Explore destinos em visualizacao imersiva com foco na Torre Eiffel e outros lugares famosos."
+    content="Explore destinos em visualização imersiva com foco na Torre Eiffel e outros lugares famosos."
   />
   <title>TCC VR | Explore</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -66,7 +66,10 @@
 
   <main class="explore-page">
     <section class="stage" aria-labelledby="explore-title">
-     
+      <div class="sr-only">
+        <h1 id="explore-title">Explore Paris e outros destinos em visualização imersiva.</h1>
+        <p>A pagina apresenta a Torre Eiffel em destaque e uma selecao de outros lugares para visitar.</p>
+      </div>
 
       <div class="viewer-card">
         <div class="viewer-toolbar">
@@ -82,7 +85,7 @@
             </a>
           </div>
 
-          <button class="viewer-expand" id="viewerExpand" type="button" aria-label="Expandir visualizacao">
+          <button class="viewer-expand" id="viewerExpand" type="button" aria-label="Expandir visualização">
             <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
               <path d="M4 9V4h5"></path>
               <path d="M20 9V4h-5"></path>
@@ -95,7 +98,7 @@
         <div class="viewer-shell" id="viewerShell">
           <iframe
             id="mapsViewer"
-            title="Visualizacao do Castelo de Neuschwanstein"
+            title="Visualização do Castelo de Neuschwanstein"
             src="https://www.google.com/maps/embed?pb=!4v1776801284192!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJRDRyWmJUV3c.!2m2!1d47.55757401053055!2d10.74980043189093!3f255.81135543391278!4f-2.692583872497238!5f0.4000000000000002"
             loading="lazy"
             allowfullscreen
@@ -106,7 +109,7 @@
         <div class="viewer-footer">
           <p class="viewer-caption" id="viewerCaption">Castelo de Neuschwanstein - Alemanha</p>
           <p class="viewer-note" id="viewerNote">
-            Explore o Coliseu em Roma e observe de perto a arquitetura do anfiteatro que marcou a historia do Imperio Romano.
+            Explore o Coliseu em Roma e observe de perto a arquitetura do anfiteatro que marcou a história do Império Romano.
           </p>
         </div>
       </div>
@@ -115,8 +118,8 @@
     <section class="destinations" aria-labelledby="destinations-title">
       <div class="destinations-heading">
         <p class="destinations-copy" id="destinations-title">
-          Descubra alguns dos lugares mais famosos do mundo atraves da visualizacao em
-          <span>360&deg;</span> no Google Maps. Cada coluna tem dois destinos e o icone de troca revela a segunda
+          Descubra alguns dos lugares mais famosos do mundo através da visualização em
+          <span>360&deg;</span> no Google Maps. Cada coluna tem dois destinos e o ícone de troca revela a segunda
           paisagem da mesma coluna.
         </p>
       </div>
@@ -130,7 +133,7 @@
               data-name="Coliseu"
               data-place="Coliseu - Roma, IT"
               data-badge="Colosseo"
-              data-note="Explore o Coliseu em Roma e observe de perto a arquitetura do anfiteatro que marcou a historia do Imperio Romano."
+              data-note="Explore o Coliseu em Roma e observe de perto a arquitetura do anfiteatro que marcou a história do Império Romano."
               data-open="https://www.google.com/maps/search/?api=1&query=Colosseum+Rome+Italy"
               data-fallback="https://www.google.com/maps/embed?pb=!4v1776799049750!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQ0VqYzdTRWc.!2m2!1d41.8902101706461!2d12.49223093463763!3f318.7032!4f0!5f0.7820865974627469"
               data-location="41.89021,12.49223"
@@ -150,7 +153,7 @@
               data-name="Torre de Pisa"
               data-place="Torre de Pisa - Pisa, IT"
               data-badge="Piazza del Duomo"
-              data-note="Veja a Torre de Pisa em detalhes e perceba como a inclinacao famosa transforma a experiencia visual do local."
+              data-note="Veja a Torre de Pisa em detalhes e perceba como a inclinação famosa transforma a experiência visual do local."
               data-open="https://www.google.com/maps/search/?api=1&query=Leaning+Tower+of+Pisa"
               data-fallback="https://www.google.com/maps/embed?pb=!4v1776799229588!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQzQ0dkdCVEE.!2m2!1d43.72295201904959!2d10.39659703985523!3f20.001837293279273!4f-9.75047186276555!5f0.7820865974627469"
               data-location="43.72295,10.3966"
@@ -208,7 +211,7 @@
               data-name="Mont Fuji"
               data-place="Mont Fuji - Fujinomiya, JP"
               data-badge="Vista do Monte Fuji"
-              data-note="Contemple o Monte Fuji e aproveite a vista panoramica de um dos simbolos naturais mais famosos do Japao."
+              data-note="Contemple o Monte Fuji e aproveite a vista panorâmica de um dos símbolos naturais mais famosos do Japão."
               data-open="https://www.google.com/maps/search/?api=1&query=Mount+Fuji+Japan"
               data-fallback="https://www.google.com/maps/embed?pb=!4v1776799817065!6m8!1m7!1sqCuHEF_Pa6mBh2lO8TnAhQ!2m2!1d35.35966629101768!2d138.7311853983154!3f359.21304624483406!4f29.770696283749146!5f0.5401899006765363"
               data-location="35.35966,138.73118"
@@ -265,7 +268,7 @@
               type="button"
               data-name="Machu Picchu"
               data-place="Machu Picchu - Cusco, PE"
-              data-badge="Santuario Historico"
+              data-badge="Santuário Histórico"
               data-note="Explore Machu Picchu e observe como as ruinas incas se integram ao relevo montanhoso em uma paisagem impressionante."
               data-open="https://www.google.com/maps/search/?api=1&query=Machu+Picchu+Peru"
               data-fallback="https://maps.google.com/maps?q=Machu%20Picchu%20Peru&t=k&z=17&ie=UTF8&iwloc=&output=embed"
@@ -302,8 +305,8 @@
       <div class="how-heading">
         <h2 id="how-title">Como funciona o Google Maps 360&deg;?</h2>
         <p>
-          O visual imersivo combina captura panoramica, costura de imagens e navegacao interativa para aproximar o
-          usuario de cada lugar.
+          O visual imersivo combina captura panorâmica, costura de imagens e navegação interativa para aproximar o
+          usuário de cada lugar.
         </p>
       </div>
 
@@ -321,7 +324,7 @@
               </div>
             </div>
             <div class="process-face process-back">
-              <p>O Google usa cameras especiais de 360° para registrar fotos panoramicas dos locais.</p>
+              <p>O Google usa câmeras especiais de 360° para registrar fotos panorâmicas dos locais.</p>
             </div>
           </div>
         </article>
@@ -338,7 +341,7 @@
               </div>
             </div>
             <div class="process-face process-back">
-              <p>As imagens sao conectadas em pontos de navegacao para criar uma experiencia fluida e interativa.</p>
+              <p>As imagens são conectadas em pontos de navegação para criar uma experiência fluida e interativa.</p>
             </div>
           </div>
         </article>
@@ -346,7 +349,7 @@
         <article class="process-card" tabindex="0">
           <div class="process-card-inner">
             <div class="process-face process-front">
-              <h3>Exploracao pelo usuario</h3>
+              <h3>Exploração pelo usuário</h3>
               <div class="process-icon" aria-hidden="true">
                 <svg viewBox="0 0 64 64" focusable="false">
                   <path d="M47 18a20 20 0 0 1 0 28"></path>
