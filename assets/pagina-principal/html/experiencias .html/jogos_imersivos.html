@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Carrossel interativo com os conteudos visuais de educacao imersiva em Realidade Virtual."
+  />
+  <title>TCC VR | Educacao Interativa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/jogos_imersivos.css" />
+  <link rel="stylesheet" href="../../../../animations.css" />
+</head>
+<body>
+  <header class="navbar" role="banner">
+    <div class="nav-wrap">
+      <a href="../../../../index.html" class="nav-logo" aria-label="TCC VR - Voltar ao inicio">
+        <span class="nav-logo-image" aria-hidden="true">
+          <img src="../../../../img/Group 51.png" alt="" />
+        </span>
+        <span class="nav-logo-copy">
+          <span class="nav-wordmark">TCC<em>VR</em></span>
+        </span>
+      </a>
+
+      <nav class="nav-center" aria-label="Menu principal">
+        <ul class="nav-links" role="list">
+          <li><a href="../../../../index.html" class="nav-link">Home</a></li>
+          <li><a href="../tecnologias.html" class="nav-link">Tecnologias</a></li>
+          <li><a href="../explore.html" class="nav-link">Explore</a></li>
+          <li><a href="../portal_interativo.html" class="nav-link">Portal Interativo</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right">
+        <a href="../../../sistema-login/html/login.html" class="nav-avatar" aria-label="Acessar conta">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path>
+            <path d="M4.5 19.5a8.2 8.2 0 0 1 15 0"></path>
+          </svg>
+        </a>
+        <button
+          class="nav-burger"
+          aria-controls="nav-mobile-menu"
+          aria-expanded="false"
+          aria-label="Abrir menu"
+          type="button"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav aria-label="Menu mobile">
+      <ul id="nav-mobile-menu" class="nav-mobile" role="list">
+        <li><a href="../../../../index.html" class="nav-link">Home</a></li>
+        <li><a href="../tecnologias.html" class="nav-link">Tecnologias</a></li>
+        <li><a href="../explore.html" class="nav-link">Explore</a></li>
+        <li><a href="../portal_interativo.html" class="nav-link">Portal Interativo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="experience-page">
+    <section class="experience-hero reveal" aria-labelledby="experience-title">
+      <p class="hero-kicker">Experiencia em destaque</p>
+      <h1 id="experience-title">Educacao Interativa com carrossel imersivo</h1>
+      <p class="hero-copy">
+        Os slides agora foram recriados com layout proprio, usando as personas que voce adicionou ao projeto para
+        contar a historia da Realidade Virtual na educacao de forma mais editavel e profissional.
+      </p>
+    </section>
+
+    <section class="carousel-shell reveal d1" aria-label="Carrossel com os conteudos visuais">
+      <div class="carousel-frame" id="educationCarousel">
+        <button class="carousel-arrow prev" type="button" data-direction="prev" aria-label="Slide anterior">
+          <span aria-hidden="true">&#8249;</span>
+        </button>
+
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <article class="carousel-slide is-active" data-slide="0" aria-label="Slide 1 de 4">
+              <div class="slide-card media-left tone-01">
+                <div class="slide-topline">
+                  <p class="slide-section">Educacao Interativa:</p>
+                  <h2>Aprendizado com Realidade Virtual</h2>
+                </div>
+
+                <div class="slide-body">
+                  <div class="slide-media persona-laugh">
+                    <img src="../../img/experiencias/persona4.png" alt="" />
+                  </div>
+
+                  <div class="slide-copy align-right">
+                    <p class="slide-highlight">Mais engajamento e resultados</p>
+                    <p class="slide-description">
+                      As aulas se tornam mais dinamicas, seguras e envolventes, ajudando na compreensao de temas
+                      complexos e aumentando o interesse dos alunos.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="carousel-slide" data-slide="1" aria-label="Slide 2 de 4">
+              <div class="slide-card media-right tone-02">
+                <div class="slide-topline">
+                  <p class="slide-section">Educacao Interativa:</p>
+                  <h2>Aprendizado com Realidade Virtual</h2>
+                </div>
+
+                <div class="slide-body">
+                  <div class="slide-copy align-left">
+                    <p class="slide-highlight">Aprendizado na pratica</p>
+                    <p class="slide-description">
+                      Com a VR, e possivel explorar o sistema solar, visitar monumentos historicos, realizar
+                      experimentos cientificos e ate estudar o corpo humano de forma imersiva.
+                    </p>
+                  </div>
+
+                  <div class="slide-media persona-hand">
+                    <img src="../../img/experiencias/persona3.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="carousel-slide" data-slide="2" aria-label="Slide 3 de 4">
+              <div class="slide-card media-left tone-03">
+                <div class="slide-topline">
+                  <p class="slide-section">Educacao Interativa:</p>
+                  <h2>Aprendizado com Realidade Virtual</h2>
+                </div>
+
+                <div class="slide-body">
+                  <div class="slide-media persona-smile">
+                    <img src="../../img/experiencias/persona2.png" alt="" />
+                  </div>
+
+                  <div class="slide-copy align-right">
+                    <p class="slide-highlight">Do conteudo a experiencia</p>
+                    <p class="slide-description">
+                      Em vez de apenas ler, o aluno pode vivenciar o aprendizado em um ambiente 3D, facilitando a
+                      compreensao e tornando o estudo muito mais interessante.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="carousel-slide" data-slide="3" aria-label="Slide 4 de 4">
+              <div class="slide-card media-right tone-04">
+                <div class="slide-topline">
+                  <p class="slide-section">Educacao Interativa:</p>
+                  <h2>Aprendizado com Realidade Virtual</h2>
+                </div>
+
+                <div class="slide-body">
+                  <div class="slide-copy align-left">
+                    <p class="slide-highlight">Aprender nunca foi tao imersivo</p>
+                    <p class="slide-description">
+                      A Realidade Virtual esta transformando a educacao, permitindo que os alunos explorem ambientes
+                      virtuais que simulam situacoes reais de forma visual e interativa.
+                    </p>
+                  </div>
+
+                  <div class="slide-media persona-duo">
+                    <img src="../../img/experiencias/persona1.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <button class="carousel-arrow next" type="button" data-direction="next" aria-label="Proximo slide">
+          <span aria-hidden="true">&#8250;</span>
+        </button>
+      </div>
+
+      <div class="carousel-meta">
+        <div class="carousel-progress" aria-hidden="true">
+          <span class="carousel-progress-bar" id="carouselProgress"></span>
+        </div>
+
+        <div class="carousel-controls">
+          <div class="carousel-dots" role="tablist" aria-label="Selecionar slide">
+            <button class="carousel-dot is-active" type="button" role="tab" aria-selected="true" aria-label="Ir para o slide 1" data-slide-to="0"></button>
+            <button class="carousel-dot" type="button" role="tab" aria-selected="false" aria-label="Ir para o slide 2" data-slide-to="1"></button>
+            <button class="carousel-dot" type="button" role="tab" aria-selected="false" aria-label="Ir para o slide 3" data-slide-to="2"></button>
+            <button class="carousel-dot" type="button" role="tab" aria-selected="false" aria-label="Ir para o slide 4" data-slide-to="3"></button>
+          </div>
+
+          <p class="carousel-counter">
+            <span id="carouselCurrent">01</span>
+            <span>/</span>
+            <span>04</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience-notes reveal d2" aria-labelledby="notes-title">
+      <h2 id="notes-title">Mensagens do carrossel</h2>
+      <div class="notes-grid">
+        <article class="note-card">
+          <strong>Slide 1</strong>
+          <p>Mais engajamento e resultados com aulas mais dinamicas, seguras e envolventes.</p>
+        </article>
+        <article class="note-card">
+          <strong>Slide 2</strong>
+          <p>Aprendizado na pratica com exploracao de temas complexos em experiencias imersivas.</p>
+        </article>
+        <article class="note-card">
+          <strong>Slide 3</strong>
+          <p>Transformacao do conteudo tradicional em experiencia 3D memoravel e interessante.</p>
+        </article>
+        <article class="note-card">
+          <strong>Slide 4</strong>
+          <p>Ambientes virtuais que simulam situacoes reais de forma visual e interativa.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="../../js/jogos_imersivos.js"></script>
+  <script type="module" src="../../../../animations.js"></script>
+</body>
+</html>

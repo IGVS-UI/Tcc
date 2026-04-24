@@ -8,6 +8,7 @@ const viewer = document.querySelector("#mapsViewer");
 const viewerCaption = document.querySelector("#viewerCaption");
 const viewerBadgeTitle = document.querySelector("#viewerBadgeTitle");
 const viewerOpenLink = document.querySelector("#viewerOpenLink");
+const viewerNote = document.querySelector("#viewerNote");
 const viewerExpand = document.querySelector("#viewerExpand");
 const viewerShell = document.querySelector("#viewerShell");
 const destinationColumns = Array.from(document.querySelectorAll(".destination-column"));
@@ -52,6 +53,7 @@ const updateViewer = (card) => {
   if (viewerCaption) viewerCaption.textContent = card.dataset.place;
   if (viewerBadgeTitle) viewerBadgeTitle.textContent = card.dataset.badge;
   if (viewerOpenLink) viewerOpenLink.href = card.dataset.open;
+  if (viewerNote) viewerNote.textContent = card.dataset.note || "";
 };
 
 const getColumnCards = (column) => Array.from(column.querySelectorAll(".destination-card"));
@@ -60,8 +62,8 @@ const syncCardCopyVisibility = (card, isActive) => {
   const copyElements = card.querySelectorAll(".destination-name, .destination-meta");
 
   copyElements.forEach((element) => {
-    element.hidden = !isActive;
-    element.setAttribute("aria-hidden", String(!isActive));
+    element.hidden = true;
+    element.setAttribute("aria-hidden", "true");
   });
 };
 
@@ -90,6 +92,15 @@ const swapColumn = (column) => {
 const openDestinationInViewer = (card) => {
   updateViewer(card);
   viewerShell?.scrollIntoView({ behavior: "smooth", block: "center" });
+};
+
+const getInitialViewerCard = () => {
+  for (const column of destinationColumns) {
+    const activeCard = column.querySelector(".destination-card.is-active");
+    if (activeCard) return activeCard;
+  }
+
+  return document.querySelector(".destination-card");
 };
 
 if (burgerButton && mobileMenu) {
@@ -126,6 +137,11 @@ destinationColumns.forEach((column) => {
     swapColumn(column);
   });
 });
+
+const initialViewerCard = getInitialViewerCard();
+if (initialViewerCard) {
+  updateViewer(initialViewerCard);
+}
 
 if (viewerExpand && viewerShell) {
   viewerExpand.addEventListener("click", async () => {
