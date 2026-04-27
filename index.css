@@ -428,8 +428,10 @@ body::after {
 }
 
 .hero-sub {
-  font-size:1.05rem; font-weight:300;
   color:var(--c-muted); max-width:460px; line-height:1.8;
+  font-family:var(--font-ui);
+  font-size:1rem;
+  font-weight:600;
 }
 .hero-sub strong { color:var(--c-white); font-weight:500; }
 
@@ -440,8 +442,20 @@ body::after {
   border-top:1px solid rgba(255,255,255,0.08);
 }
 .kpi { display:flex; flex-direction:column; gap:2px; }
-.kpi-val { font-weight:800; font-size:1.5rem; color:var(--c-white); line-height:1; }
-.kpi-label { font-size:0.68rem; font-weight:500; color:var(--c-muted); text-transform:uppercase; letter-spacing:0.08em; }
+.kpi-val { 
+  font-weight:800; font-size:1.5rem; 
+  color:var(--c-white);
+  line-height:1; 
+  font-family:var(--font-ui);
+
+}
+.kpi-label { font-size:0.6rem; 
+  font-weight:600; 
+  text-transform:uppercase; 
+  letter-spacing:0.08em; 
+  font-family:var(--font-ui);
+  
+}
 
 /* Visual */
 .hero-visual {
@@ -520,7 +534,10 @@ body::after {
 }
 
 .cats-label {
-  font-size:0.85rem; font-weight:600; color:var(--c-muted); text-transform:uppercase;
+  text-transform: uppercase;
+
+  font-size:1rem; 
+  font-weight:600;  
   letter-spacing:0.08em;
 }
 
@@ -551,6 +568,7 @@ body::after {
    background var(--t-base) var(--ease-out);
    transform:translateY(0);
    transition: all 0.5s ease-in-out;
+   
 }
 
 .hero-categories .card-cat::after {
@@ -601,13 +619,17 @@ body::after {
 }
 
 .cat-name {
-  font-family:var(--font-display); font-weight:700; font-size:0.9rem;
+  font-family:var(--font-ui);
+  font-size:1rem;
+  font-weight:600;
   color:var(--c-white); line-height:1.2;
   position:relative; z-index:1;
 }
 
 .cat-desc {
-  font-size:0.75rem; color:var(--c-muted); line-height:1.4;
+  font-family:var(--font-ui);
+  font-size:0.5rem;
+  font-weight:600;
   position:relative; z-index:1;
 }
 
@@ -617,7 +639,9 @@ body::after {
   background:rgba(199,125,255,0.15);
   border:1px solid rgba(199,125,255,0.3);
   border-radius:var(--r-sm);
-  font-size:0.7rem; font-weight:600; color:var(--c-lilac);
+  font-family:var(--font-ui);
+  font-size:1rem;
+  font-weight:600;
   position:relative; z-index:1;
   transition:all var(--t-base);
   width:fit-content;
