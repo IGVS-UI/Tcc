@@ -602,7 +602,7 @@ body::after {
   display:flex; flex-direction:column; gap:10px;
   padding:16px 20px;
   background:rgba(255,255,255,0.04);
-  border:1px solid rgba(199,125,255,0.18);
+  border:1px solid rgb(70, 41, 92);
   border-radius:var(--r-md);
   cursor:pointer;
   position:relative;
@@ -649,6 +649,9 @@ body::after {
   position:relative; z-index:1;
   transition:all var(--t-base);
   width:fit-content;
+    text-decoration: none; /* Remove o sublinhado */
+    color: inherit;        /* Usa a cor do texto pai (herda a cor) */
+    cursor: auto;          /* Muda o cursor de "mãozinha" para "seta" */
 }
 .card-cat:hover .cat-pill {
   background:rgba(199,125,255,0.35);
@@ -736,7 +739,7 @@ body::after {
 .card-cat {
   position:relative;
   background:rgba(58,12,163,0.18);
-  border:1px solid rgba(199,125,255,0.1);
+  border:1px solid rgba(19, 3, 31, 0.774);
   border-radius:var(--r-md);
   padding:30px 22px;
   display:flex; flex-direction:column; gap:14px;
@@ -746,7 +749,7 @@ body::after {
 
 .card-cat:hover {
   transform:translateY(-8px) scale(1.02);
-  border-color:rgba(199,125,255,0.32);
+  border-color:rgba(20, 13, 26, 0.32);
   background:rgba(58,12,163,0.33);
   box-shadow:
     0 20px 50px rgba(114,9,183,0.3),
@@ -757,12 +760,11 @@ body::after {
 
 .cat-icon {
   width:54px; height:54px;
-  border-radius:14px;
+  
   display:flex; align-items:center; justify-content:center; font-size:26px;
-  transition:transform var(--t-base) var(--ease-out), background var(--t-base);
+ 
   flex-shrink:0;
 }
-.card-cat:hover .cat-icon { background:rgba(114,9,183,0.5); ;transform: translateY(-5px); }
 
 .cat-name {
   font-family:var(--font-display); font-weight:700; font-size:1rem;
@@ -774,6 +776,9 @@ body::after {
 }
 .cat-pill {
   display:inline-flex; align-items:center; gap:4px;
+   text-decoration: none; /* Remove o sublinhado */
+    color: inherit;        /* Usa a cor do texto pai (herda a cor) */
+    cursor: auto;          /* Muda o cursor de "mãozinha" para "seta" */
   padding:4px 10px;
   background:rgba(199,125,255,0.1); border-radius:var(--r-pill);
   font-size:0.68rem; font-weight:700; color:var(--c-lilac);
