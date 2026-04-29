@@ -91,17 +91,7 @@ body::after {
   animation:wallpaper-wave-reverse 38s ease-in-out infinite alternate;
 }
 
-@keyframes wallpaper-wave {
-  0%   { transform:translate3d(-2%, -1%, 0) scale(1.04); }
-  50%  { transform:translate3d(2%, 2%, 0) scale(1.08); }
-  100% { transform:translate3d(-1%, 3%, 0) scale(1.05); }
-}
 
-@keyframes wallpaper-wave-reverse {
-  0%   { transform:translate3d(2%, 1%, 0) scale(1.02); }
-  50%  { transform:translate3d(-3%, -2%, 0) scale(1.06); }
-  100% { transform:translate3d(1%, -3%, 0) scale(1.03); }
-}
 
 /* Ambient orbs */
 .bg-orb {
