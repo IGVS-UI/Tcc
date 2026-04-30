@@ -538,13 +538,16 @@ button {
 }
 
 .slide-media {
-  align-self: end;
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
 .slide-media img {
   width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
+  display: inline-block;
   filter: drop-shadow(0 26px 44px rgba(15, 0, 30, 0.24));
 }
 
@@ -557,8 +560,20 @@ button {
 
 .persona-hand {
   justify-self: end;
-  max-width: 400px;
-  transform: translateY(10px);
+  max-width: 100vw;
+  transform: none;
+}
+
+.carousel-slide[data-slide="1"] .slide-body {
+  align-items: end;
+}
+
+.carousel-slide[data-slide="1"] .persona-hand {
+  align-self: end;
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  transform: translateY(0);
 }
 
 .persona-smile {
@@ -570,7 +585,7 @@ button {
 .persona-duo {
   justify-self: end;
   max-width: 520px;
-  transform: translate(14px, 22px);
+  transform: none  ;
 }
 
 .tone-01 .slide-highlight,
