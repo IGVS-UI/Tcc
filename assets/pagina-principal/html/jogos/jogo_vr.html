@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VR Space Collector</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      overflow: hidden;
+      background: #0a0018;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #fff;
+      user-select: none;
+    }
+
+    #game-canvas {
+      display: block;
+      cursor: grab;
+    }
+    #game-canvas:active { cursor: grabbing; }
+
+    /* HUD: elementos que ficam por cima do canvas 3D */
+    #hud {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+    }
+
+    /* Crosshair: mira no centro da tela */
+    #crosshair {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px; height: 18px;
+    }
+    #crosshair::before, #crosshair::after {
+      content: '';
+      position: absolute;
+      background: rgba(255, 255, 255, 0.85);
+    }
+    #crosshair::before { width: 2px; height: 18px; left: 8px; top: 0; }
+    #crosshair::after  { width: 18px; height: 2px; left: 0; top: 8px; }
+
+    /* Anel que aparece ao mirar numa orbe */
+    #aim-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px; height: 44px;
+      border: 2px solid rgba(199, 125, 255, 0);
+      border-radius: 50%;
+      transition: border-color 0.12s, transform 0.12s;
+    }
+    #aim-ring.locked {
+      border-color: rgba(199, 125, 255, 0.9);
+      transform: translate(-50%, -50%) scale(0.75);
+    }
+
+    /* Painel de pontuação (canto superior esquerdo) */
+    #score-panel {
+      position: absolute;
+      top: 18px; left: 20px;
+      background: rgba(10, 0, 30, 0.72);
+      border: 1px solid rgba(199, 125, 255, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 10px 18px;
+      border-radius: 18px;
+    }
+    #score-panel .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.5);
+    }
+    #score-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #c77dff;
+      line-height: 1.1;
+    }
+
+    /* Painel de tempo (canto superior direito) */
+    #timer-panel {
+      position: absolute;
+      top: 18px; right: 20px;
+      background: rgba(10, 0, 30, 0.72);
+      border: 1px solid rgba(199, 125, 255, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 10px 18px;
+      border-radius: 18px;
+      text-align: center;
+    }
+    #timer-panel .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.5);
+    }
+    #timer-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #f0b7ff;
+      line-height: 1.1;
+    }
+    #timer-val.urgent {
+      color: #ff6b6b;
+      animation: blink 0.5s infinite alternate;
+    }
+    @keyframes blink { from { opacity: 1; } to { opacity: 0.4; } }
+
+    /* +1 flutuando ao coletar */
+    #plus-one {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -70px);
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #c77dff;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #plus-one.pop {
+      animation: rise 0.6s ease-out forwards;
+    }
+    @keyframes rise {
+      0%   { opacity: 1; transform: translate(-50%, -70px); }
+      100% { opacity: 0; transform: translate(-50%, -130px); }
+    }
+
+    /* Dica de controles no rodapé */
+    #hint {
+      position: absolute;
+      bottom: 20px; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10, 0, 30, 0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 7px 18px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      white-space: nowrap;
+    }
+
+    /* Telas de início e fim */
+    .screen {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      background: rgba(5, 0, 20, 0.92);
+      backdrop-filter: blur(14px);
+      z-index: 100;
+      pointer-events: auto;
+      padding: 24px;
+    }
+
+    .screen-icon { font-size: 3.5rem; }
+
+    .screen-title {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: #c77dff;
+      text-align: center;
+    }
+
+    .screen-sub {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.95rem;
+      text-align: center;
+      max-width: 36ch;
+      line-height: 1.65;
+    }
+
+    .instructions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .instr-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .instr-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(199, 125, 255, 0.18);
+      border: 1px solid rgba(199, 125, 255, 0.5);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .play-btn {
+      margin-top: 8px;
+      padding: 14px 40px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #7209b7, #c77dff);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .play-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 28px rgba(199, 125, 255, 0.5);
+    }
+
+    #final-score-big {
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: #c77dff;
+      line-height: 1;
+    }
+    #end-msg {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="game-canvas"></canvas>
+
+  <!-- HUD (placar + mira, visível durante o jogo) -->
+  <div id="hud">
+    <div id="score-panel">
+      <div class="label">Orbes</div>
+      <div id="score-val">0</div>
+    </div>
+
+    <div id="timer-panel">
+      <div class="label">Tempo</div>
+      <div id="timer-val">60</div>
+    </div>
+
+    <div id="crosshair" aria-hidden="true"></div>
+    <div id="aim-ring"  aria-hidden="true"></div>
+    <div id="plus-one"  aria-hidden="true">+1</div>
+
+    <div id="hint">&#x1F5B1;&#xFE0F; Arraste para olhar &nbsp;·&nbsp; Clique nas orbes para coletar</div>
+  </div>
+
+  <!-- Tela de início -->
+  <div class="screen" id="start-screen">
+    <div class="screen-icon">&#x1F52E;</div>
+    <div class="screen-title">VR Space Collector</div>
+    <div class="screen-sub">Você está dentro de um mundo virtual. Olhe ao redor e colete o máximo de orbes em 60 segundos!</div>
+    <div class="instructions">
+      <div class="instr-row"><div class="instr-icon">&#x1F5B1;&#xFE0F;</div><span>Arraste a tela para mover a câmera — como um headset VR</span></div>
+      <div class="instr-row"><div class="instr-icon">&#x1F3AF;</div><span>Mire o crosshair (+) em uma orbe brilhante</span></div>
+      <div class="instr-row"><div class="instr-icon">&#x1F44B;</div><span>Clique (ou toque) para coletar e ganhar pontos</span></div>
+    </div>
+    <button class="play-btn" id="start-btn">&#x1F680; Entrar no Mundo VR</button>
+  </div>
+
+  <!-- Tela de fim -->
+  <div class="screen" id="end-screen" style="display:none">
+    <div class="screen-icon">&#x1F3C6;</div>
+    <div class="screen-title">Fim de Jogo!</div>
+    <div style="font-size:0.9rem; color:rgba(255,255,255,0.5)">Você coletou</div>
+    <div id="final-score-big">0</div>
+    <div style="font-size:0.9rem; color:rgba(255,255,255,0.5)">orbes</div>
+    <div id="end-msg"></div>
+    <button class="play-btn" id="restart-btn">&#x1F504; Jogar Novamente</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // ============================================================
+    // ESTADO GLOBAL DO JOGO
+    // Todas as variáveis que mudam durante o jogo ficam aqui,
+    // declaradas antes de qualquer função que as use.
+    // ============================================================
+    var score       = 0;
+    var timeLeft    = 60;
+    var gameRunning = false;
+    var timerInt    = null;
+
+    // Rotação da câmera (simulando headset VR)
+    // yaw   = rotação em Y (esquerda/direita)
+    // pitch = rotação em X (cima/baixo)
+    var yaw   = 0;
+    var pitch = 0;
+
+    // Controle do mouse/toque
+    var isDragging  = false;
+    var wasDragging = false;
+    var lastX = 0, lastY = 0;
+    var SENS = 0.004; // sensibilidade: pixels arrastados -> radianos
+
+    // Cores possíveis das orbes (hex)
+    var ORB_COLORS = [0xc77dff, 0xf0b7ff, 0x7b2fff, 0x60d4ff, 0xff85c9, 0x7bffea];
+
+    // ============================================================
+    // SETUP DO THREE.JS
+    // Three.js tem 3 objetos centrais:
+    //   Renderer → o "pintor" que desenha no <canvas>
+    //   Scene    → o "mundo 3D" (contém tudo)
+    //   Camera   → os "olhos" do jogador
+    // ============================================================
+    var canvas   = document.getElementById('game-canvas');
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    var scene  = new THREE.Scene();
+    scene.background = new THREE.Color(0x08001a);
+    // FogExp2: objetos distantes desaparecem na névoa — cria profundidade
+    scene.fog = new THREE.FogExp2(0x08001a, 0.038);
+
+    // PerspectiveCamera(fov, aspecto, near, far)
+    // fov = campo de visão em graus (75 é parecido com headsets VR)
+    var camera = new THREE.PerspectiveCamera(75, 1, 0.1, 100);
+    camera.position.set(0, 0, 0);
+    // 'YXZ' evita gimbal lock: primeiro gira em Y (yaw), depois em X (pitch)
+    camera.rotation.order = 'YXZ';
+
+    function onResize() {
+      var w = window.innerWidth, h = window.innerHeight;
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix(); // obrigatório após mudar aspect
+    }
+    window.addEventListener('resize', onResize);
+    onResize();
+
+    // ============================================================
+    // ILUMINAÇÃO
+    // AmbientLight ilumina tudo igualmente (sem sombra direcional)
+    // PointLight emite luz a partir de um ponto, como uma lâmpada
+    // ============================================================
+    scene.add(new THREE.AmbientLight(0x6633aa, 0.9));
+
+    var mainLight = new THREE.PointLight(0xc77dff, 2.2, 28);
+    mainLight.position.set(0, 6, 0);
+    scene.add(mainLight);
+
+    var blueLight = new THREE.PointLight(0x3366ff, 1.4, 22);
+    blueLight.position.set(6, -3, -6);
+    scene.add(blueLight);
+
+    // ============================================================
+    // ESTRELAS (sistema de partículas)
+    // BufferGeometry + Points é muito eficiente para muitos pontos.
+    // Guardamos todas as posições num Float32Array e passamos de uma vez.
+    // ============================================================
+    (function createStars() {
+      var count = 2800;
+      var pos   = new Float32Array(count * 3); // 3 valores por estrela: x, y, z
+
+      for (var i = 0; i < count; i++) {
+        // Coordenadas esféricas -> cartesianas
+        // Distribui estrelas uniformemente numa esfera grande
+        var theta = Math.random() * Math.PI * 2;
+        var phi   = Math.acos(2 * Math.random() - 1);
+        var r     = 30 + Math.random() * 45;
+
+        pos[i * 3]     = r * Math.sin(phi) * Math.cos(theta); // x
+        pos[i * 3 + 1] = r * Math.cos(phi);                    // y
+        pos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta); // z
+      }
+
+      var geom = new THREE.BufferGeometry();
+      geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+
+      var mat = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.13,
+        sizeAttenuation: true, // estrelas mais distantes parecem menores
+        transparent: true,
+        opacity: 0.85
+      });
+
+      scene.add(new THREE.Points(geom, mat));
+    })();
+
+    // ============================================================
+    // ANÉIS DE NEBULOSA (decorativos)
+    // TorusGeometry = rosca/donut em 3D
+    // ============================================================
+    var nebulaRings = [];
+    var ringDefs = [
+      { r: 11, tube: 1.4, color: 0xc77dff },
+      { r: 16, tube: 0.9, color: 0x4455ff },
+      { r: 20, tube: 0.7, color: 0xff66cc }
+    ];
+
+    ringDefs.forEach(function(d) {
+      var mesh = new THREE.Mesh(
+        new THREE.TorusGeometry(d.r, d.tube, 8, 64),
+        new THREE.MeshBasicMaterial({ color: d.color, transparent: true, opacity: 0.07 })
+      );
+      mesh.rotation.x = Math.random() * Math.PI;
+      mesh.rotation.z = Math.random() * Math.PI;
+      scene.add(mesh);
+      nebulaRings.push(mesh);
+    });
+
+    // ============================================================
+    // ORBES (objetos coletáveis)
+    // Cada orbe é um Mesh (geometria + material).
+    // userData guarda dados de animação individuais (offset, velocidade).
+    // ============================================================
+    var orbs = []; // array com todas as orbes presentes na cena
+
+    function spawnOrb() {
+      var color = ORB_COLORS[Math.floor(Math.random() * ORB_COLORS.length)];
+
+      var orb = new THREE.Mesh(
+        new THREE.SphereGeometry(0.21, 16, 16),
+        new THREE.MeshStandardMaterial({
+          color: color,
+          emissive: color,        // emissive = a orbe "brilha" por conta própria
+          emissiveIntensity: 0.65,
+          roughness: 0.1,
+          metalness: 0.85
+        })
+      );
+
+      // Posição aleatória ao redor do jogador (entre 5 e 10 unidades)
+      var theta = Math.random() * Math.PI * 2;
+      var phi   = Math.acos(2 * Math.random() - 1);
+      var r     = 5 + Math.random() * 5;
+      orb.position.set(
+        r * Math.sin(phi) * Math.cos(theta),
+        r * Math.cos(phi),
+        r * Math.sin(phi) * Math.sin(theta)
+      );
+
+      // Halo brilhante ao redor da orbe (esfera maior, só a face interior visível)
+      var glow = new THREE.Mesh(
+        new THREE.SphereGeometry(0.36, 8, 8),
+        new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.14, side: THREE.BackSide })
+      );
+      orb.add(glow); // glow é filho da orbe — move junto
+
+      // Dados de animação: cada orbe flutua num ritmo diferente
+      orb.userData.baseY       = orb.position.y;
+      orb.userData.floatOffset = Math.random() * Math.PI * 2;
+      orb.userData.floatSpeed  = 0.4 + Math.random() * 0.6;
+      orb.userData.spinSpeed   = (Math.random() - 0.5) * 0.05;
+
+      scene.add(orb);
+      orbs.push(orb);
+    }
+
+    // Cria as orbes iniciais
+    for (var i = 0; i < 18; i++) spawnOrb();
+
+    // ============================================================
+    // RAYCASTER (detecção de mira)
+    // O Raycaster lança um raio invisível a partir de um ponto
+    // na tela e retorna todos os objetos 3D que ele atravessa.
+    // intersectObjects() faz toda a matemática de interseção.
+    // ============================================================
+    var raycaster   = new THREE.Raycaster();
+    var centerPoint = new THREE.Vector2(0, 0); // coordenadas normalizadas do centro da tela
+    var aimRingEl   = document.getElementById('aim-ring');
+
+    function getAimedOrb() {
+      // Lança o raio a partir do centro da câmera (crosshair)
+      raycaster.setFromCamera(centerPoint, camera);
+      var hits = raycaster.intersectObjects(orbs);
+      // Retorna a primeira orbe atingida dentro de 12 unidades (ou null)
+      return (hits.length > 0 && hits[0].distance < 12) ? hits[0].object : null;
+    }
+
+    // ============================================================
+    // COLETAR ORBE
+    // ============================================================
+    var scoreValEl  = document.getElementById('score-val');
+    var plusOneEl   = document.getElementById('plus-one');
+
+    function collectOrb(orb) {
+      score++;
+      scoreValEl.textContent = score;
+
+      // Remove a orbe da cena e do array
+      scene.remove(orb);
+      orbs.splice(orbs.indexOf(orb), 1);
+
+      // Libera memória da geometria e material (boas práticas Three.js)
+      orb.children.forEach(function(c) { c.geometry.dispose(); c.material.dispose(); });
+      orb.geometry.dispose();
+      orb.material.dispose();
+
+      // Gera uma nova orbe substituta com pequeno delay (efeito visual)
+      setTimeout(spawnOrb, 350);
+
+      // Animação "+1" flutuando
+      plusOneEl.classList.remove('pop');
+      void plusOneEl.offsetWidth; // força o browser a reiniciar a animação
+      plusOneEl.classList.add('pop');
+    }
+
+    // ============================================================
+    // CONTROLE DE CÂMERA (mouse + toque)
+    // Arrastar muda yaw (horizontal) e pitch (vertical).
+    // Isso é exatamente o que um headset VR faz ao girar a cabeça.
+    // ============================================================
+    canvas.addEventListener('mousedown', function(e) {
+      if (!gameRunning) return;
+      isDragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+
+    window.addEventListener('mousemove', function(e) {
+      if (!isDragging || !gameRunning) return;
+      yaw   -= (e.clientX - lastX) * SENS;
+      pitch -= (e.clientY - lastY) * SENS;
+      // Limita pitch: não deixa virar de cabeça para baixo
+      pitch = Math.max(-1.45, Math.min(1.45, pitch));
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+
+    window.addEventListener('mouseup', function() { isDragging = false; });
+
+    // Clique coleta a orbe mireada
+    canvas.addEventListener('click', function() {
+      if (!gameRunning) return;
+      var aimed = getAimedOrb();
+      if (aimed) collectOrb(aimed);
+    });
+
+    // Suporte a toque (mobile)
+    canvas.addEventListener('touchstart', function(e) {
+      if (!gameRunning) return;
+      isDragging = true;
+      wasDragging = false;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+    }, { passive: true });
+
+    canvas.addEventListener('touchmove', function(e) {
+      if (!isDragging || !gameRunning) return;
+      var dx = e.touches[0].clientX - lastX;
+      var dy = e.touches[0].clientY - lastY;
+      if (Math.abs(dx) > 4 || Math.abs(dy) > 4) wasDragging = true;
+      yaw   -= dx * SENS;
+      pitch -= dy * SENS;
+      pitch = Math.max(-1.45, Math.min(1.45, pitch));
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+    }, { passive: true });
+
+    canvas.addEventListener('touchend', function() {
+      isDragging = false;
+      if (!gameRunning || wasDragging) { wasDragging = false; return; }
+      var aimed = getAimedOrb();
+      if (aimed) collectOrb(aimed);
+      wasDragging = false;
+    });
+
+    // ============================================================
+    // LÓGICA DO JOGO (estados: início, rodando, fim)
+    // ============================================================
+    var timerEl     = document.getElementById('timer-val');
+    var startScreen = document.getElementById('start-screen');
+    var endScreen   = document.getElementById('end-screen');
+
+    function startGame() {
+      score       = 0;
+      timeLeft    = 60;
+      gameRunning = true;
+
+      scoreValEl.textContent    = '0';
+      timerEl.textContent       = '60';
+      timerEl.classList.remove('urgent');
+      startScreen.style.display = 'none';
+      endScreen.style.display   = 'none';
+
+      clearInterval(timerInt);
+      timerInt = setInterval(function() {
+        timeLeft--;
+        timerEl.textContent = timeLeft;
+        if (timeLeft <= 10) timerEl.classList.add('urgent');
+        if (timeLeft <= 0) {
+          clearInterval(timerInt);
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function endGame() {
+      gameRunning = false;
+      aimRingEl.classList.remove('locked');
+
+      document.getElementById('final-score-big').textContent = score;
+      document.getElementById('end-msg').textContent =
+        score < 5  ? '&#x1F319; Continue tentando! Dica: mire bem devagar.' :
+        score < 12 ? '&#x2B50; Bom começo! Você está pegando o jeito.' :
+        score < 22 ? '&#x1F31F; Ótimo! Você domina o espaço virtual!' :
+                     '&#x1F525; Lendário! Você é um mestre do VR!';
+
+      endScreen.style.display = 'flex';
+    }
+
+    document.getElementById('start-btn').addEventListener('click', startGame);
+    document.getElementById('restart-btn').addEventListener('click', startGame);
+
+    // ============================================================
+    // LOOP DE ANIMAÇÃO
+    // requestAnimationFrame agenda a próxima execução antes do
+    // próximo quadro do monitor (~60x por segundo).
+    // É mais eficiente que setInterval para animações visuais.
+    // ============================================================
+    function animate() {
+      requestAnimationFrame(animate); // agenda o próximo frame
+
+      var t = performance.now() * 0.001; // tempo em segundos (float)
+
+      // Aplica a rotação acumulada de yaw/pitch à câmera
+      // Isso simula o movimento do headset VR
+      camera.rotation.y = yaw;
+      camera.rotation.x = pitch;
+
+      // Anima cada orbe: flutuação senoidal + rotação contínua
+      for (var i = 0; i < orbs.length; i++) {
+        var orb = orbs[i];
+        // sin() oscila entre -1 e 1 -> orbe sobe e desce suavemente
+        orb.position.y = orb.userData.baseY +
+          Math.sin(t * orb.userData.floatSpeed + orb.userData.floatOffset) * 0.33;
+        orb.rotation.y += orb.userData.spinSpeed;
+      }
+
+      // Gira anéis de nebulosa bem lentamente
+      for (var j = 0; j < nebulaRings.length; j++) {
+        nebulaRings[j].rotation.y += 0.0003;
+        nebulaRings[j].rotation.x += 0.0002;
+      }
+
+      // Pulsa a luz principal (efeito de vida no ambiente)
+      mainLight.intensity = 2.0 + Math.sin(t * 0.8) * 0.4;
+
+      // Atualiza o anel de mira (feedback visual em tempo real)
+      if (gameRunning) {
+        var aimed = getAimedOrb();
+        if (aimed) {
+          aimRingEl.classList.add('locked');
+        } else {
+          aimRingEl.classList.remove('locked');
+        }
+      }
+
+      // Renderiza o frame: percorre a Scene e desenha tudo no canvas
+      renderer.render(scene, camera);
+    }
+
+    animate(); // dispara o loop pela primeira vez
+  </script>
+</body>
+</html>
