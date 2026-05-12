@@ -766,13 +766,16 @@ body::after {
 }
 .cat-pill {
   display:inline-flex; align-items:center; gap:4px;
-   text-decoration: none; /* Remove o sublinhado */
-    color: inherit;        /* Usa a cor do texto pai (herda a cor) */
-    cursor: auto;          /* Muda o cursor de "mãozinha" para "seta" */
+  cursor: auto;          /* Muda o cursor de "mãozinha" para "seta" */
   padding:4px 10px;
   background:rgba(199,125,255,0.1); border-radius:var(--r-pill);
   font-size:0.68rem; font-weight:700; color:var(--c-lilac);
   text-transform:uppercase; letter-spacing:0.08em; width:fit-content;
+}
+.cat-pill a {
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
 }
 
 
