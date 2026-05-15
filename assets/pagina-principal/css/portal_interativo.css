@@ -36,13 +36,12 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: var(--font-ui);
-  color: var(--c-white);
   position: relative;
   isolation: isolate;
-  background:
-    linear-gradient(145deg, #250049 0%, #15002d 34%, #0b001c 70%, #04000d 100%);
   overflow-x: hidden;
+  color: var(--c-white);
+  font-family: var(--font-ui);
+  background: linear-gradient(150deg, #25004C 0%, #120051 25%, #07013F 55%, #0C0237 100%);
 }
 
 body::before {
@@ -50,14 +49,12 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(44% 48% at 14% 16%, rgba(214, 123, 255, 0.3), transparent 72%),
-    radial-gradient(38% 44% at 82% 24%, rgba(115, 127, 255, 0.2), transparent 74%),
-    radial-gradient(56% 58% at 66% 78%, rgba(122, 31, 213, 0.24), transparent 78%),
-    radial-gradient(32% 36% at 30% 84%, rgba(82, 220, 255, 0.1), transparent 78%);
-  background-size: 155% 155%;
+    radial-gradient(ellipse 65% 60% at 8% 18%,  rgba(126, 25, 183, 0.52), transparent 68%),
+    radial-gradient(ellipse 40% 45% at 82% 12%,  rgba(76,  0, 135, 0.30), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 68% 82%,  rgba(219, 71, 175, 0.13), transparent 72%),
+    radial-gradient(ellipse 30% 35% at 18% 80%,  rgba(58,  0,  91, 0.40), transparent 68%);
   pointer-events: none;
-  z-index: -1;
-  opacity: 0.94;
+  z-index: -2;
   animation: wallpaper-wave 32s ease-in-out infinite alternate;
 }
 
@@ -66,13 +63,13 @@ body::after {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(48% 54% at 18% 76%, rgba(255, 133, 201, 0.12), transparent 74%),
-    radial-gradient(40% 44% at 88% 62%, rgba(131, 86, 255, 0.16), transparent 72%),
-    radial-gradient(28% 34% at 48% 12%, rgba(255, 255, 255, 0.05), transparent 74%);
+    radial-gradient(ellipse 35% 30% at 88% 72%,  rgba(219, 71, 175, 0.10), transparent 70%),
+    radial-gradient(ellipse 25% 28% at 44% 10%,  rgba(232, 254, 128, 0.04), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 30% 45%,  rgba(76,  0, 135, 0.18), transparent 72%);
   pointer-events: none;
-  z-index: -2;
+  z-index: -1;
   mix-blend-mode: screen;
-  opacity: 0.68;
+  opacity: 0.85;
   animation: wallpaper-wave-reverse 38s ease-in-out infinite alternate;
 }
 
