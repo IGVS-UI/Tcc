@@ -71,8 +71,7 @@
 
         <!-- Título -->
         <h1 class="hero-h1">
-          <span class="h1-plain">Explore o universo da</span>
-          <span class="h1-gradient">Realidade Virtual e Aumentada.</span>
+          Explore o universo da <span class="h1-gradient">Realidade Virtual e Aumentada.</span>
         </h1>
 
         <!-- Descrição -->
@@ -104,24 +103,24 @@
         <p class="cats-label">Descubra novas experiências:</p>
         <div class="cats-grid">
           <div class="card-cat">
-            <div class="cat-icon"><img src="img/controle-de-video-game.png" alt="Ícone de jogos imersivos"></div>
+            <div class="cat-icon"><img src="/img/arcade_1985771.png" alt="Ícone de jogos imersivos"></div>
             <h3 class="cat-name">Jogos Imersivos</h3>
             <p class="cat-desc">Interatividade total</p>
-            <span class="cat-pill"><a href="/assets/pagina-principal/html/experiencias.html/jogos_imersivos.html">Explorar →</a></span>
+            <span class="cat-pill"><a href="assets/pagina-principal/html/experiencias%20.html/jogos_imersivos.html">Explorar →</a></span>
           </div>
 
           <div class="card-cat">
             <div class="cat-icon"><img src="img/escola.png" alt="Ícone de educação interativa"></div>
             <h3 class="cat-name">Educação Interativa</h3>
             <p class="cat-desc">Aprender fazendo</p>
-            <span class="cat-pill"><a href="/assets/pagina-principal/html/experiencias .html/educação_interativa.html">Explorar →</a></span>
+            <span class="cat-pill"><a href="assets/pagina-principal/html/experiencias%20.html/educação_interativa.html">Explorar →</a></span>
           </div>
 
           <div class="card-cat">
             <div class="cat-icon"><img src="img/midia-social.png" alt="Ícone de comércio e marketing"></div>
             <h3 class="cat-name">Comércio e Marketing</h3>
             <p class="cat-desc">Vendas imersivas</p>
-            <span class="cat-pill"> <a href="/assets/pagina-principal/html/experiencias .html/marketing.html">Explorar →</a></span>
+            <span class="cat-pill"> <a href="assets/pagina-principal/html/experiencias%20.html/marketing.html">Explorar →</a></span>
           </div>
         </div>
       </div>
@@ -180,6 +179,44 @@
 
     syncNavbarScroll();
     window.addEventListener("scroll", syncNavbarScroll, { passive: true });
+
+    // Efeito de digitação no hero-h1
+    const heroH1 = document.querySelector(".hero-h1");
+    if (heroH1) {
+      const typingSpeed = 50; // velocidade em ms
+
+      // Texto completo a ser digitado
+      const fullText = "Explore o universo da Realidade Virtual e Aumentada.";
+      const parteRoxa = "Realidade Virtual e Aumentada."; // Parte que deve estar em roxo
+      let currentIndex = 0;
+
+      const typeCharacters = () => {
+        if (currentIndex < fullText.length) {
+          const currentText = fullText.substring(0, currentIndex + 1);
+          
+          // Verifica se a parte roxa já começou
+          if (currentText.includes(parteRoxa.substring(0, 5))) {
+            // Encontra onde começa a parte roxa
+            const inicioRoxa = currentText.indexOf("Realidade");
+            if (inicioRoxa !== -1) {
+              const parteNormal = currentText.substring(0, inicioRoxa);
+              const parteComRoxa = currentText.substring(inicioRoxa);
+              heroH1.innerHTML = parteNormal + '<span class="h1-gradient">' + parteComRoxa + '</span>';
+            } else {
+              heroH1.textContent = currentText;
+            }
+          } else {
+            heroH1.textContent = currentText;
+          }
+          
+          currentIndex++;
+          setTimeout(typeCharacters, typingSpeed);
+        }
+      };
+
+      // Inicia o efeito quando a página carrega
+      typeCharacters();
+    }
   </script>
   <script type="module" src="assets/sistema-login/js/auth.js"></script>
   <script type="module" src="animations-fluid.js"></script>
