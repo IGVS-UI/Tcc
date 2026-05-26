@@ -163,6 +163,15 @@ spline-viewer {
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* Respeitar preferência de reduzir movimento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .spline-load-btn { display: inline-block; }
+}
+
 /* ============================================
    REMOVER CONFLITOS
    ============================================ */

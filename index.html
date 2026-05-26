@@ -262,6 +262,15 @@
     }
   </script>
   <script type="module" src="assets/sistema-login/js/auth.js"></script>
-  <script type="module" src="animations-fluid.js"></script>
+  <script type="module">
+    // Carrega o script de animações quando o navegador estiver ocioso
+    const loadAnimations = () => import('./animations-fluid.js').catch(() => {});
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadAnimations, { timeout: 2000 });
+    } else {
+      window.addEventListener('load', loadAnimations);
+    }
+  </script>
 </body>
 </html>
