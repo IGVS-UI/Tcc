@@ -313,8 +313,8 @@ body::after {
    HERO
 ═══════════════════════════════════════════════════════════ */
 .hero {
-  position:relative;
   min-height:200svh;
+  min-width:200svh;
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:clamp(110px, 12vw, 180px);
@@ -336,9 +336,11 @@ body::after {
 .hero-content-section {
   display:flex;
   flex-direction:column;
-  gap:48px;
+  width:50vw;
+  gap:32px;
   position:relative;
-  left: 3vw;
+  top: -20%;
+  left: 5vw;
   z-index:1;
   max-width:560px;
   padding-right:12px;
@@ -346,13 +348,13 @@ body::after {
 
 .hero-visual-section {
   display:flex;
-  flex-direction:column;
+  width:50vw;
   gap:32px;
   position:relative;
-  top: -20%;
-  right: 3vw;
+  top: -30%;
+  right:5vw;
   z-index:1;
-  align-items:flex-end;
+  
   padding-left:20px;
 }
 
