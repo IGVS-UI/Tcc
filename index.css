@@ -9,7 +9,7 @@
 :root {
   --c-bg:           #08001A;
   --c-deep:         #1A0033;
-  --c-mid:          #3A0CA3;
+  --c-mid:          #493772;
   --c-vivid:        #7209B7;
   --c-lilac:        #C77DFF;
   --c-lilac-soft:   #E0AAFF;
@@ -70,7 +70,7 @@ body::before {
     radial-gradient(ellipse 30% 35% at 18% 80%,  rgba(58,  0,  91, 0.40), transparent 68%);
   pointer-events: none;
   z-index: -2;
-  animation: wallpaper-wave 32s ease-in-out infinite alternate;
+
 }
 
 body::after {
@@ -78,15 +78,16 @@ body::after {
   position: fixed;
   inset: 0;
   background:
-  radial-gradient(ellipse 35% 30% at 88% 72%,  rgba(219, 71, 175, 0.10), transparent 70%),
-  radial-gradient(ellipse 25% 28% at 44% 10%,  rgba(232, 254, 128, 0.04), transparent 70%),
-  radial-gradient(ellipse 45% 40% at 30% 45%,  rgba(76,  0, 135, 0.18), transparent 72%);
+    radial-gradient(ellipse 35% 30% at 88% 72%,  rgba(219, 71, 175, 0.10), transparent 70%),
+    radial-gradient(ellipse 25% 28% at 44% 10%,  rgba(232, 254, 128, 0.04), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 30% 45%,  rgba(76,  0, 135, 0.18), transparent 72%);
   pointer-events: none;
   z-index: -1;
   mix-blend-mode: screen;
   opacity: 0.85;
-  animation: wallpaper-wave-reverse 38s ease-in-out infinite alternate;
+  
 }
+
 
 /* ─── SCROLLBAR ─────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
@@ -313,7 +314,7 @@ body::after {
 ═══════════════════════════════════════════════════════════ */
 .hero {
   position:relative;
-  min-height:100svh;
+  min-height:200svh;
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:clamp(110px, 12vw, 180px);
@@ -327,13 +328,17 @@ body::after {
 .hero::before {
   content:none;
 }
-.hero .container { position:relative; z-index:1; }
+.hero .container { 
+  position:relative; 
+
+  z-index:1; }
 
 .hero-content-section {
   display:flex;
   flex-direction:column;
   gap:48px;
   position:relative;
+  left: 3vw;
   z-index:1;
   max-width:560px;
   padding-right:12px;
@@ -344,6 +349,8 @@ body::after {
   flex-direction:column;
   gap:32px;
   position:relative;
+  top: -20%;
+  right: 3vw;
   z-index:1;
   align-items:flex-end;
   padding-left:20px;
@@ -394,16 +401,8 @@ body::after {
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
   animation:txt-shimmer 5s linear infinite;
 }
-@keyframes txt-shimmer {
-  from { background-position:0% center; }
-  to   { background-position:200% center; }
-}
 
-@keyframes wallpaper-wave {
-  0% { transform: translate3d(-2%, -1%, 0) scale(1.04); }
-  50% { transform: translate3d(2%, 2%, 0) scale(1.08); }
-  100% { transform: translate3d(-1%, 3%, 0) scale(1.05); }
-}
+
 
 @keyframes wallpaper-wave-reverse {
   0% { transform: translate3d(2%, 1%, 0) scale(1.02); }
@@ -419,7 +418,11 @@ body::after {
 }
 .hero-sub strong { color:var(--c-white); font-weight:500; }
 
-.hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+.hero-btns { 
+  display:flex;
+   gap: 20px; 
+   flex-wrap:wrap;
+ }
 
 .hero-kpis {
   display:flex; gap:28px; padding-top:8px;
@@ -457,10 +460,7 @@ body::after {
   animation:orb-breathe 5s ease-in-out infinite;
   pointer-events:none;
 }
-@keyframes orb-breathe {
-  0%,100% { transform:scale(1);    opacity:0.75; }
-  50%      { transform:scale(1.15); opacity:1; }
-}
+
 
 .hero-ring {
   position:absolute; border-radius:50%;
@@ -664,9 +664,17 @@ body::after {
 .btn-primary {
   background:linear-gradient(135deg, var(--c-mid), var(--c-vivid));
   color:var(--c-white);
-  box-shadow:0 4px 20px rgba(114,9,183,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+  box-shadow:0 4px 20px rgba(123, 44, 176, 0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+  transition: all 0.3s ease;
 }
-.btn-primary:hover { box-shadow:0 8px 36px rgba(114,9,183,0.75); }
+.btn-primary:hover { box-shadow:0 8px 36px rgba(114,9,183,0.75);
+  background-color: #493772;
+  transform: translateY(-10px);
+
+ }
+ .btn-primary:active{
+    transform: translateY(0);
+ }
 
 .btn-outline {
   background:transparent; color:var(--c-lilac);
