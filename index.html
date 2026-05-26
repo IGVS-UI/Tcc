@@ -103,21 +103,21 @@
         <p class="cats-label">Descubra novas experiências:</p>
         <div class="cats-grid">
           <div class="card-cat">
-            <div class="cat-icon"><img src="/img/arcade_1985771.png" alt="Ícone de jogos imersivos"></div>
+            <div class="cat-icon"><img src="img/arcade_1985771.png" loading="lazy" alt="Ícone de jogos imersivos"></div>
             <h3 class="cat-name">Jogos Imersivos</h3>
             <p class="cat-desc">Interatividade total</p>
             <span class="cat-pill"><a href="assets/pagina-principal/html/experiencias%20.html/jogos_imersivos.html">Explorar →</a></span>
           </div>
 
           <div class="card-cat">
-            <div class="cat-icon"><img src="img/livro.png" alt="Ícone de educação interativa"></div>
+            <div class="cat-icon"><img src="img/livro.png" loading="lazy" alt="Ícone de educação interativa"></div>
             <h3 class="cat-name">Educação Interativa</h3>
             <p class="cat-desc">Aprender fazendo</p>
             <span class="cat-pill"><a href="assets/pagina-principal/html/experiencias%20.html/educação_interativa.html">Explorar →</a></span>
           </div>
 
           <div class="card-cat">
-            <div class="cat-icon"><img src="img/midia-social (1).png" alt="Ícone de comércio e marketing"></div>
+            <div class="cat-icon"><img src="img/midia-social (1).png" loading="lazy" alt="Ícone de comércio e marketing"></div>
             <h3 class="cat-name">Comércio e Marketing</h3>
             <p class="cat-desc">Vendas imersivas</p>
             <span class="cat-pill"> <a href="assets/pagina-principal/html/experiencias%20.html/marketing.html">Explorar →</a></span>
@@ -133,7 +133,10 @@
         <div class="hero-glow-orb"></div>
         <div class="hero-ring ring-1"></div>
         <div class="hero-ring ring-2"></div>
-        <spline-viewer url="https://prod.spline.design/UImkzhdX4RETt1Ag/scene.splinecode"></spline-viewer>
+        <div id="spline-placeholder" class="spline-placeholder" data-url="https://prod.spline.design/UImkzhdX4RETt1Ag/scene.splinecode" role="img" aria-label="Visual 3D interativo">
+          <img src="img/rotation.png" loading="lazy" alt="Visual interativo" class="spline-poster">
+          <button class="spline-load-btn" aria-label="Carregar visual interativo">Carregar visual</button>
+        </div>
       </div>
 
   
@@ -141,7 +144,47 @@
       
     </section>
   </main>
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.87/build/spline-viewer.js"></script>
+  <script>
+    (function() {
+      const placeholder = document.getElementById('spline-placeholder');
+      if (!placeholder) return;
+      const url = placeholder.dataset.url;
+      let loaded = false;
+
+      function loadSpline() {
+        if (loaded) return;
+        loaded = true;
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = 'https://unpkg.com/@splinetool/viewer@1.12.87/build/spline-viewer.js';
+        script.onload = () => {
+          const viewer = document.createElement('spline-viewer');
+          viewer.setAttribute('url', url);
+          viewer.style.width = '100%';
+          viewer.style.height = '100%';
+          // Clear placeholder content and append viewer
+          placeholder.innerHTML = '';
+          placeholder.appendChild(viewer);
+        };
+        document.body.appendChild(script);
+      }
+
+      // Load when visible (and also allow manual click)
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            loadSpline();
+            io.disconnect();
+          }
+        });
+      }, { rootMargin: '200px' });
+
+      io.observe(placeholder);
+
+      const btn = placeholder.querySelector('.spline-load-btn');
+      if (btn) btn.addEventListener('click', loadSpline);
+    })();
+  </script>
   <script>
     const navbar = document.querySelector(".navbar");
     const burgerButton = document.querySelector(".nav-burger");
