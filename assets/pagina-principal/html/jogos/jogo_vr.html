@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VR Space Collector</title>
+  <link rel="stylesheet" href="jogo_vr_responsive.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -253,6 +254,9 @@
 
     <div id="hint">&#x1F5B1;&#xFE0F; Arraste para olhar &nbsp;·&nbsp; Clique nas orbes para coletar</div>
   </div>
+
+  <!-- Botão de Fullscreen (Mobile) -->
+  <button id="fullscreen-btn" type="button" aria-label="Tela cheia" title="Tela cheia">⛶</button>
 
   <!-- Tela de início -->
   <div class="screen" id="start-screen">
@@ -660,6 +664,57 @@
       // Renderiza o frame: percorre a Scene e desenha tudo no canvas
       renderer.render(scene, camera);
     }
+
+    // ============================================================
+    // FULLSCREEN MODE (Mobile)
+    // ============================================================
+    var fullscreenBtn = document.getElementById('fullscreen-btn');
+    var isFullscreen = false;
+
+    function toggleFullscreen() {
+      isFullscreen = !isFullscreen;
+
+      if (isFullscreen) {
+        // Entrar em fullscreen
+        document.body.classList.add('fullscreen-mode');
+        fullscreenBtn.innerHTML = '✕';
+        fullscreenBtn.title = 'Sair da tela cheia';
+
+        // Tentar API fullscreen se disponível
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(function(e) {
+            console.log('Fullscreen não permitido:', e);
+          });
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen();
+        }
+      } else {
+        // Sair de fullscreen
+        document.body.classList.remove('fullscreen-mode');
+        fullscreenBtn.innerHTML = '⛶';
+        fullscreenBtn.title = 'Tela cheia';
+
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
+        }
+      }
+    }
+
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+    // Detectar quando fullscreen é fechado (ex: pressionando ESC)
+    document.addEventListener('fullscreenchange', function() {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        isFullscreen = false;
+        document.body.classList.remove('fullscreen-mode');
+        fullscreenBtn.innerHTML = '⛶';
+        fullscreenBtn.title = 'Tela cheia';
+      }
+    });
 
     animate(); // dispara o loop pela primeira vez
   </script>
