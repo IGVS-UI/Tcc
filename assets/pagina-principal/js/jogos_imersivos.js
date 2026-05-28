@@ -39,7 +39,7 @@ const carousel = document.querySelector('#educationCarousel');
 
 if (carousel) {
   const track = carousel.querySelector('.carousel-track');
-  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+  const slides = Array.from(track.querySelectorAll('.carousel-slide, .carousel-slide_is-active'));
   const arrowButtons = Array.from(carousel.querySelectorAll('.carousel-arrow'));
   const dots = Array.from(document.querySelectorAll('.carousel-dot'));
   const progressBar = document.querySelector('#carouselProgress');
@@ -50,9 +50,11 @@ if (carousel) {
 
   const updateCarousel = (index) => {
     currentIndex = (index + slides.length) % slides.length;
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    const slideWidth = slides[0]?.getBoundingClientRect().width || carousel.offsetWidth;
+    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 
     slides.forEach((slide, slideIndex) => {
+      slide.classList.remove('carousel-slide_is-active');
       slide.classList.toggle('is-active', slideIndex === currentIndex);
       slide.setAttribute('aria-hidden', String(slideIndex !== currentIndex));
     });

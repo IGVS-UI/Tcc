@@ -1,0 +1,116 @@
+/* Responsividade específica para a página jogos_imersivos.html
+   Foco inicial: tornar a página legível e navegável em telas <= 768px (celular grande / tablets pequenos)
+*/
+
+@media (max-width: 768px) {
+  :root { --page-padding: 18px; }
+
+  body { font-size: 15px; }
+  .container { padding: 0 var(--page-padding); }
+
+  .nav-links { display: none !important; }
+  .nav-burger { display: flex !important; }
+  .nav-wrap { padding: 10px var(--page-padding); margin: 8px; min-height: 64px; }
+  .nav-mobile { margin: 8px; border-radius: 18px; }
+
+  .experience-page {
+    padding: 100px 0 28px;
+    width: calc(100% - 2*var(--page-padding));
+  }
+
+  .hero-kicker {
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
+  }
+
+  .experience-hero { padding: 12px 0 6px; text-align: center; }
+  .experience-hero h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); line-height: 1.06; }
+  .hero-copy { margin-top: 12px; max-width: 100%; font-size: 0.95rem; }
+
+  .carousel-shell { margin-left: 0; margin-right: 0; padding: 0 var(--page-padding) 20px; }
+  .carousel-frame { width: 100%; margin: 0 auto; padding: 0; }
+  .carousel-viewport { overflow: hidden; }
+  .carousel-track { display: flex; width: 100%; transition: transform var(--t-slow) var(--ease-out); }
+  .carousel-slide { flex: 0 0 100%; width: auto; min-width: 100%; }
+
+  .slide-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 22px !important;
+    border-radius: 28px;
+    width: 100%;
+  }
+
+  .slide-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .slide-media {
+    width: 100%;
+    height: auto;
+  }
+
+  .slide-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 22px;
+  }
+
+  .slide-copy {
+    width: 100%;
+    text-align: left;
+    padding: 24px 20px !important;
+  }
+
+  .slide-copy.align-right,
+  .slide-copy.align-left {
+    text-align: left;
+    justify-self: stretch;
+    max-width: 100%;
+    grid-column: auto;
+  }
+
+  .slide-copy,
+  .slide-media {
+    grid-column: auto;
+  }
+
+  .slide-topline { margin-bottom: 16px; }
+  .slide-topline h2 { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+  .slide-section { font-size: clamp(0.95rem, 4.2vw, 1.2rem); }
+
+  .slide-highlight { font-size: clamp(1.8rem, 6vw, 2.7rem); }
+  .slide-description { font-size: 1rem; margin-top: 18px; }
+
+  .persona-laugh, .persona-hand, .persona-smile, .persona-duo { transform: none; max-width: 100%; }
+
+  .carousel-arrow { display: none !important; }
+
+  .carousel-meta {
+    width: calc(100% - 2*var(--page-padding));
+    margin: 16px auto 0;
+    padding: 0 var(--page-padding);
+  }
+
+  .carousel-progress { height: 6px; }
+  .carousel-controls { flex-direction: column; align-items: stretch; gap: 12px; }
+
+  .carousel-dots { justify-content: center; }
+  .carousel-counter { text-align: center; }
+
+  .notes-grid { grid-template-columns: 1fr; }
+  .experience-notes { padding: 16px; margin-top: 16px; }
+  .carousel-dot { width: 14px; height: 14px; }
+}
+
+@media (max-width: 480px) {
+  :root { --page-padding: 14px; }
+  .slide-card { padding: 16px !important; }
+  .hero-copy { font-size: 0.92rem; }
+}
+
+
