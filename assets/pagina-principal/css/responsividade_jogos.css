@@ -1,183 +1,37 @@
-/* ============================================================
-   RESPONSIVIDADE JOGOS IMERSIVOS
-   Foco: Telas desde mobile até desktop com breakpoints específicos
-   Organização: Mobile-first, após cada breakpoint
-   ============================================================ */
+/* Responsividade específica para a página jogos_imersivos.html
+   Foco inicial: tornar a página legível e navegável em telas <= 768px (celular grande / tablets pequenos)
+*/
 
-/* ============================================================
-   BREAKPOINT: Celulares Pequenos (até 480px)
-   ============================================================ */
-@media (max-width: 480px) {
-  :root {
-    --page-padding: 12px;
-    --slide-padding: 14px;
-  }
+@media (max-width: 768px) {
+  :root { --page-padding: 18px; }
 
-  /* --- GERAL --- */
-  body {
-    font-size: 14px;
-  }
+  body { font-size: 15px; }
+  .container { padding: 0 var(--page-padding); }
 
-  /* --- HEADER/NAVBAR --- */
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-  }
+  .nav-links { display: none !important; }
+  .nav-burger { display: flex !important; }
+  .nav-wrap { padding: 10px var(--page-padding); margin: 8px; min-height: 64px; }
+  .nav-mobile { margin: 8px; border-radius: 18px; }
 
-  .nav-wrap {
-    padding: 8px var(--page-padding);
-    margin: 6px;
-    min-height: 56px;
-    height: auto;
-  }
-
-  .nav-logo {
-    width: auto;
-    flex-shrink: 0;
-  }
-
-  .nav-logo-image {
-    display: block;
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-  }
-
-  .nav-logo-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .nav-logo-copy {
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-wordmark {
-    font-size: 0.95rem;
-    font-weight: 900;
-  }
-
-  .nav-links {
-    display: none !important;
-  }
-
-  .nav-burger {
-    display: flex !important;
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-  }
-
-  .nav-right {
-    gap: 8px;
-  }
-
-  .nav-avatar {
-    width: 40px;
-    height: 40px;
-  }
-
-  .nav-avatar svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .nav-mobile {
-    margin: 6px;
-    padding: 8px 0;
-    border-radius: 16px;
-    max-height: 300px;
-    overflow-y: auto;
-  }
-
-  .nav-mobile li {
-    padding: 0;
-  }
-
-  .nav-mobile .nav-link {
-    display: block;
-    padding: 12px 16px;
-    border-radius: 0;
-    font-size: 0.85rem;
-  }
-
-  /* --- HERO SECTION --- */
   .experience-page {
-    padding: 70px 0 20px;
-    width: 100%;
-    margin: 0;
-    overflow: hidden;
+    padding: 100px 0 28px;
+    width: calc(100% - 2*var(--page-padding));
   }
-
-  .experience-hero {
-    padding: 8px 0 4px;
-    text-align: center;
-    margin: 0 auto;
-    padding-left: var(--page-padding);
-    padding-right: var(--page-padding);
-  }
-
+  
   .hero-kicker {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    margin-bottom: 6px;
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
   }
 
-  .experience-hero h1 {
-    font-size: 1.3rem;
-    line-height: 1.2;
-    font-weight: 900;
-    word-break: break-word;
-  }
+  .experience-hero { padding: 12px 0 6px; text-align: center; }
+  .experience-hero h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); line-height: 1.06; }
+  .hero-copy { margin-top: 12px; max-width: 100%; font-size: 0.95rem; }
 
-  .hero-copy {
-    display: none;
-  }
+  .carousel-shell { margin-left: 0; margin-right: 0; padding: 0 var(--page-padding) 20px; }
+  .carousel-frame { width: 100%; margin: 0 auto; padding: 0; }
+  .carousel-viewport { overflow: hidden; }
+  .carousel-track { display: flex; width: 100%; transition: transform var(--t-slow) var(--ease-out); }
+  .carousel-slide { flex: 0 0 100%; width: auto; min-width: 100%; }
 
-  /* --- CAROUSEL --- */
-  .carousel-shell {
-    position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    padding: 0;
-    margin-top: 12px;
-  }
-
-  .carousel-shell::before {
-    display: none;
-  }
-
-  .carousel-frame {
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-  }
-
-  .carousel-viewport {
-    width: 100vw;
-    overflow: hidden;
-  }
-
-  .carousel-track {
-    display: flex;
-    width: 100%;
-    transition: transform var(--t-slow) var(--ease-out);
-  }
-
-  .carousel-slide {
-    flex: 0 0 100%;
-    width: 100vw;
-    min-width: 100vw;
-    padding: 0;
-    margin: 0;
-  }
-
-  /* --- SLIDE CARD --- */
   .slide-card {
     position: relative;
     display: flex;
@@ -228,107 +82,10 @@
   .slide-body {
     display: flex;
     flex-direction: column;
-    grid-template-columns: none;
-    gap: 12px;
-    width: 100%;
-    min-height: auto;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* --- SLIDE COPY --- */
-  .slide-copy {
-    width: 100%;
-    max-width: 100% !important;
-    padding: 14px 12px !important;
-    text-align: left;
-    align-self: auto;
-    justify-self: auto;
-    grid-column: auto;
-    order: 2;
-    background: rgba(18, 6, 44, 0.85);
-    border-radius: 14px;
-  }
-
-  .slide-copy.align-left,
-  .slide-copy.align-right {
-    text-align: left;
-    justify-self: auto;
-    max-width: 100%;
-    grid-column: auto;
-  }
-
-  .slide-copy::before,
-  .slide-copy::after {
-    display: none;
-  }
-
-  .slide-copy-featured {
-    max-width: 100% !important;
-    justify-self: auto;
-  }
-
-  /* --- SLIDE HIGHLIGHT --- */
-  .slide-highlight {
-    font-size: 1rem;
-    line-height: 1.1;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    text-shadow: none;
-    margin: 0;
-  }
-
-  .slide-highlight-combo {
-    display: block;
-    font-size: 1rem;
-    line-height: 1.1;
-    text-align: left;
-    gap: 0;
-    justify-content: flex-start;
-  }
-
-  .slide-highlight-base {
-    display: inline;
-  }
-
-  .slide-highlight-accent {
-    display: inline;
-  }
-
-  /* --- SLIDE DESCRIPTION --- */
-  .slide-description {
-    font-size: 0.8rem;
-    line-height: 1.5;
-    margin-top: 8px;
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  /* --- SLIDE MEDIA --- */
-  .slide-media {
-    width: 100%;
-    height: auto;
-    min-height: auto;
-    max-width: 100%;
-    align-self: auto;
-    justify-self: auto;
-    grid-column: auto;
-    order: 1;
-    position: relative;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .slide-media::before {
-    display: none;
-  }
-
-  .slide-media img {
+    align-items: stretch;
+    padding: 22px !important;
+    border-radius: 28px;
     width: 100%;
     height: auto;
     max-width: 100%;
@@ -339,705 +96,77 @@
     transition: none;
   }
 
-  .slide-media img:hover {
-    transform: none;
-  }
-
-  /* --- PERSONA ADJUSTMENTS --- */
-  .persona-laugh,
-  .persona-hand,
-  .persona-smile,
-  .persona-duo {
-    max-width: 100% !important;
-    width: 100% !important;
-    height: auto;
-    transform: none !important;
-    align-self: auto;
-    justify-self: auto;
-  }
-
-  /* --- CAROUSEL ARROWS --- */
-  .carousel-arrow {
-    display: flex !important;
-    width: 48px;
-    height: 48px;
-  }
-
-  /* --- CAROUSEL META --- */
-  .carousel-meta {
-    width: calc(100% - 2 * var(--page-padding));
-    margin: 12px auto 0;
-    padding: 0 var(--page-padding);
-  }
-
-  .carousel-progress {
-    height: 4px;
-    margin-bottom: 12px;
-  }
-
-  .carousel-progress-bar {
-    height: 100%;
-  }
-
-  .carousel-controls {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    flex: 1;
-  }
-
-  .carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  .carousel-dot.is-active {
-    background: var(--c-accent);
-    width: 14px;
-    height: 14px;
-  }
-
-  .carousel-counter {
-    display: none;
-  }
-
-  /* --- NOTES SECTION --- */
-  .experience-notes {
-    margin: 16px var(--page-padding);
-    padding: 12px;
-    border-radius: 14px;
-  }
-
-  .experience-notes h2 {
-    font-size: 1rem;
-    margin-bottom: 8px;
-  }
-
-  .notes-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .note-card {
-    padding: 12px;
-    border-radius: 10px;
-  }
-
-  .note-card strong {
-    font-size: 0.65rem;
-    margin-bottom: 6px;
-  }
-
-  .note-card p {
-    font-size: 0.8rem;
-    line-height: 1.4;
-  }
-}
-
-/* ============================================================
-   BREAKPOINT: Celulares Médios/Grandes (481px - 768px)
-   ============================================================ */
-@media (min-width: 481px) and (max-width: 768px) {
-  :root {
-    --page-padding: 16px;
-    --slide-padding: 16px;
-  }
-
-  /* --- GERAL --- */
-  body {
-    font-size: 15px;
-  }
-
-  /* --- HEADER/NAVBAR --- */
-  .nav-wrap {
-    padding: 10px var(--page-padding);
-    margin: 8px;
-    min-height: 60px;
-  }
-
-  .nav-burger {
-    display: flex !important;
-  }
-
-  .nav-links {
-    display: none !important;
-  }
-
-  .nav-avatar {
-    width: 44px;
-    height: 44px;
-  }
-
-  .nav-mobile {
-    margin: 8px;
-    border-radius: 18px;
-  }
-
-  /* --- HERO SECTION --- */
-  .experience-page {
-    padding: 90px 0 24px;
-    width: 100%;
-  }
-
-  .experience-hero {
-    padding: 10px 0 8px;
-    text-align: center;
-  }
-
-  .hero-kicker {
-    font-size: 0.8rem;
-    margin-bottom: 8px;
-  }
-
-  .experience-hero h1 {
-    font-size: 1.5rem;
-    line-height: 1.15;
-  }
-
-  .hero-copy {
-    display: none;
-  }
-
-  /* --- CAROUSEL --- */
-  .carousel-shell {
-    margin-top: 16px;
-  }
-
-  .carousel-slide {
-    flex: 0 0 100%;
-    width: 100vw;
-    min-width: 100vw;
-  }
-
-  /* --- SLIDE CARD --- */
-  .slide-card {
-    display: flex;
-    flex-direction: column;
-    min-height: auto;
-    padding: 18px !important;
-    margin: 10px var(--page-padding);
-    border-radius: 24px;
-    width: calc(100vw - 2 * var(--page-padding) - 20px);
-  }
-
-  /* --- SLIDE TOPLINE --- */
-  .slide-topline {
-    gap: 0.6rem;
-    margin: 0 0 14px 0;
-    padding: 0 12px;
-    max-width: 100%;
-  }
-
-  .slide-topline h2 {
-    font-size: 1.4rem;
-    line-height: 1.2;
-  }
-
-  .slide-section {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-  }
-
-  /* --- SLIDE BODY --- */
-  .slide-body {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    width: 100%;
-    min-height: auto;
-  }
-
-  /* --- SLIDE COPY --- */
-  .slide-copy {
-    width: 100%;
-    max-width: 100% !important;
-    padding: 16px 14px !important;
-    order: 2;
-  }
-
-  .slide-copy::before,
-  .slide-copy::after {
-    display: none;
-  }
-
-  /* --- SLIDE HIGHLIGHT --- */
-  .slide-highlight {
-    font-size: 1.1rem;
-    line-height: 1.1;
-  }
-
-  .slide-highlight-combo {
-    display: block;
-    font-size: 1.1rem;
-  }
-
-  /* --- SLIDE DESCRIPTION --- */
-  .slide-description {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    margin-top: 10px;
-  }
-
-  /* --- SLIDE MEDIA --- */
-  .slide-media {
-    width: 100%;
-    height: auto;
-    min-height: auto;
-    order: 1;
-  }
-
-  .slide-media img {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    max-height: 320px;
-    border-radius: 14px;
-  }
-
-  /* --- PERSONA ADJUSTMENTS --- */
-  .persona-laugh,
-  .persona-hand,
-  .persona-smile,
-  .persona-duo {
-    max-width: 100% !important;
-    transform: none !important;
-  }
-
-  /* --- CAROUSEL ARROWS --- */
-  .carousel-arrow {
-    display: flex !important;
-    width: 52px;
-    height: 52px;
-  }
-
-  /* --- CAROUSEL META --- */
-  .carousel-meta {
-    width: calc(100% - 2 * var(--page-padding));
-    margin: 14px auto 0;
-    padding: 0 var(--page-padding);
-  }
-
-  .carousel-progress {
-    height: 5px;
-    margin-bottom: 14px;
-  }
-
-  .carousel-controls {
-    flex-direction: row;
-    gap: 14px;
-  }
-
-  .carousel-dots {
-    gap: 7px;
-    flex: 1;
-  }
-
-  .carousel-dot {
-    width: 13px;
-    height: 13px;
-  }
-
-  .carousel-dot.is-active {
-    width: 15px;
-    height: 15px;
-  }
-
-  .carousel-counter {
-    display: none;
-  }
-
-  /* --- NOTES SECTION --- */
-  .experience-notes {
-    margin: 18px var(--page-padding);
-    padding: 14px;
-    border-radius: 16px;
-  }
-
-  .experience-notes h2 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-  }
-
-  .notes-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .note-card {
-    padding: 14px;
-    border-radius: 12px;
-  }
-
-  .note-card strong {
-    font-size: 0.7rem;
-    margin-bottom: 8px;
-  }
-
-  .note-card p {
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-}
-
-/* ============================================================
-   BREAKPOINT: Tablets (769px - 1024px)
-   ============================================================ */
-@media (min-width: 769px) and (max-width: 1024px) {
-  :root {
-    --page-padding: 20px;
-  }
-
-  /* --- GERAL --- */
-  body {
-    font-size: 16px;
-  }
-
-  /* --- HEADER/NAVBAR --- */
-  .nav-wrap {
-    padding: 12px var(--page-padding);
-    margin: 10px;
-    min-height: 68px;
-  }
-
-  .nav-links {
-    gap: 12px;
-  }
-
-  .nav-link {
-    padding: 9px 14px;
-    font-size: 0.8rem;
-  }
-
-  .nav-avatar {
-    width: 44px;
-    height: 44px;
-  }
-
-  /* --- HERO SECTION --- */
-  .experience-page {
-    padding: 110px 0 30px;
-  }
-
-  .experience-hero {
-    padding: 12px 0 8px;
-  }
-
-  .hero-kicker {
-    font-size: 0.85rem;
-  }
-
-  .experience-hero h1 {
-    font-size: 2rem;
-    line-height: 1.1;
-  }
-
-  .hero-copy {
-    margin-top: 12px;
-    font-size: 0.95rem;
-  }
-
-  /* --- CAROUSEL --- */
-  .carousel-shell {
-    margin-top: 20px;
-  }
-
-  /* --- SLIDE CARD --- */
-  .slide-card {
-    min-height: auto;
-    padding: 32px 24px !important;
-    border-radius: 32px;
-  }
-
-  .slide-card::after {
-    width: 280px;
-    height: 280px;
-    top: 15%;
-  }
-
-  /* --- SLIDE TOPLINE --- */
-  .slide-topline {
-    gap: 0.8rem;
-    margin: 0 0 20px 0;
-    max-width: 100%;
-  }
-
-  .slide-topline h2 {
-    font-size: 2.2rem;
-    line-height: 1.05;
-  }
-
-  .slide-section {
-    font-size: 0.75rem;
-  }
-
-  /* --- SLIDE BODY --- */
   .slide-body {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
-    align-items: center;
-    min-height: auto;
-    max-width: 100%;
+    width: 100%;
   }
 
-  .slide-card .slide-body {
-    grid-template-columns: 1fr 1fr;
+  .slide-media {
+    order: 2;
+    width: 100%;
+    height: auto;
+  }
+  
+  .slide-media img {
+    width: 85%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 22px;
   }
 
-  /* --- SLIDE COPY --- */
   .slide-copy {
-    grid-column: 1;
-    align-self: center;
-    justify-self: start;
-    max-width: 100%;
+    width: 100%;
+    text-align: left;
     padding: 24px 20px !important;
   }
 
-  .slide-copy::before {
-    display: block;
+  .slide-copy.align-right,
+  .slide-copy.align-left {
+    text-align: left;
+    justify-self: stretch;
+    max-width: 100%;
+    grid-column: auto;
   }
 
-  .slide-copy::after {
-    display: block;
-  }
-
-  /* --- SLIDE HIGHLIGHT --- */
-  .slide-highlight {
-    font-size: 1.6rem;
-    line-height: 1.05;
-  }
-
-  .slide-highlight-combo {
-    display: flex;
-    justify-content: flex-start;
-    font-size: 1.6rem;
-    gap: 8px;
-  }
-
-  /* --- SLIDE DESCRIPTION --- */
-  .slide-description {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin-top: 14px;
-  }
-
-  /* --- SLIDE MEDIA --- */
+  .slide-copy,
   .slide-media {
-    grid-column: 2;
-    min-height: auto;
-    height: auto;
-    order: auto;
+    grid-column: auto;
   }
 
-  .slide-media img {
-    max-height: 380px;
-    max-width: 380px;
-  }
+  .slide-topline { margin-bottom: 16px; }
+  .slide-topline h2 { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+  .slide-section { font-size: clamp(0.95rem, 4.2vw, 1.2rem); }
 
-  /* --- PERSONA ADJUSTMENTS --- */
-  .persona-laugh {
-    transform: translateY(6px) !important;
-    max-width: 380px;
-  }
+  .slide-highlight { font-size: clamp(1.8rem, 6vw, 2.7rem); }
+  .slide-description { font-size: 1rem; margin-top: 18px; }
 
-  .persona-hand {
-    transform: translateY(8px) !important;
-    max-width: 350px;
-  }
+  .persona-laugh, .persona-hand, .persona-smile, .persona-duo { transform: none; max-width: 100%; }
 
-  .persona-smile {
-    transform: translate(-4px, 8px) !important;
-    max-width: 360px;
-  }
+  .carousel-arrow { display: none !important; }
 
-  .persona-duo {
-    transform: translate(4px, 12px) !important;
-    max-width: 380px;
-  }
-
-  /* --- CAROUSEL ARROWS --- */
-  .carousel-arrow {
-    display: flex !important;
-    width: 60px;
-    height: 60px;
-  }
-
-  /* --- CAROUSEL META --- */
   .carousel-meta {
-    width: calc(100% - 2 * var(--page-padding));
+    width: calc(100% - 2*var(--page-padding));
     margin: 16px auto 0;
     padding: 0 var(--page-padding);
   }
 
-  .carousel-progress {
-    height: 5px;
-    margin-bottom: 14px;
-  }
+  .carousel-progress { height: 6px; }
+  .carousel-controls { flex-direction: column; align-items: stretch; gap: 12px; }
 
-  .carousel-controls {
-    gap: 16px;
-  }
+  .carousel-dots { justify-content: center; }
+  .carousel-counter { text-align: center; }
 
-  .carousel-dots {
-    gap: 8px;
-  }
-
-  .carousel-counter {
-    font-size: 0.8rem;
-  }
-
-  /* --- NOTES SECTION --- */
-  .experience-notes {
-    margin: 22px var(--page-padding);
-    padding: 16px;
-    border-radius: 18px;
-  }
-
-  .experience-notes h2 {
-    font-size: 1.3rem;
-  }
-
-  .notes-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
+  .notes-grid { grid-template-columns: 1fr; }
+  .experience-notes { padding: 16px; margin-top: 16px; }
+  .carousel-dot { width: 14px; height: 14px; }
 }
 
-/* ============================================================
-   BREAKPOINT: Notebooks/Desktops Pequenos (1025px - 1366px)
-   ============================================================ */
-@media (min-width: 1025px) and (max-width: 1366px) {
-  :root {
-    --page-padding: 24px;
-  }
-
-  /* --- GERAL --- */
-  body {
-    font-size: 16px;
-  }
-
-  /* --- HEADER/NAVBAR --- */
-  .nav-wrap {
-    padding: 14px var(--page-padding);
-    min-height: 72px;
-  }
-
-  /* --- HERO SECTION --- */
-  .experience-page {
-    padding: 120px 0 34px;
-  }
-
-  .experience-hero h1 {
-    font-size: 2.8rem;
-  }
-
-  /* --- CAROUSEL --- */
-  .carousel-shell {
-    margin-top: 24px;
-  }
-
-  /* --- SLIDE CARD --- */
-  .slide-card {
-    min-height: 68vh;
-    padding: 40px 48px 34px !important;
-  }
-
-  /* --- SLIDE TOPLINE --- */
-  .slide-topline {
-    max-width: min(900px, calc(100vw - 140px));
-    margin: 0 auto 28px;
-  }
-
-  .slide-topline h2 {
-    font-size: 3.2rem;
-  }
-
-  /* --- SLIDE BODY --- */
-  .slide-body {
-    grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1fr);
-    gap: 40px;
-    min-height: 60vh;
-    max-width: min(1280px, calc(100vw - 180px));
-  }
-
-  /* --- SLIDE COPY --- */
-  .slide-copy {
-    max-width: 680px;
-    padding: 28px 32px !important;
-  }
-
-  /* --- SLIDE HIGHLIGHT --- */
-  .slide-highlight {
-    font-size: 2rem;
-  }
-
-  .slide-highlight-combo {
-    font-size: 2rem;
-  }
-
-  /* --- SLIDE DESCRIPTION --- */
-  .slide-description {
-    font-size: 1rem;
-    margin-top: 16px;
-  }
-
-  /* --- SLIDE MEDIA --- */
-  .slide-media img {
-    max-width: 480px;
-    max-height: 480px;
-  }
-
-  /* --- PERSONA ADJUSTMENTS --- */
-  .persona-laugh {
-    max-width: 460px;
-    transform: translateY(6px) !important;
-  }
-
-  .persona-hand {
-    max-width: 420px;
-    transform: translateY(10px) !important;
-  }
-
-  .persona-smile {
-    max-width: 440px;
-    transform: translate(-4px, 10px) !important;
-  }
-
-  .persona-duo {
-    max-width: 500px;
-    transform: translate(6px, 14px) !important;
-  }
-
-  /* --- CAROUSEL ARROWS --- */
-  .carousel-arrow {
-    width: 68px;
-    height: 68px;
-  }
-
-  /* --- NOTES SECTION --- */
-  .notes-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ============================================================
-   BREAKPOINT: Desktops Médios/Grandes (acima de 1366px)
-   ============================================================ */
-@media (min-width: 1367px) {
-  /* Usa as configurações do CSS principal, sem override */
+@media (max-width: 480px) {
+  :root { --page-padding: 14px; }
+  .slide-card { padding: 16px !important; }
+  .hero-copy { font-size: 0.92rem; }
 }
 
 

@@ -338,8 +338,8 @@ body::after {
   width:50vw;
   gap:32px;
   position:relative;
-  top: -20%;
-  left: 5vw;
+  top: 0%;
+  left: -0vw;
   z-index:1;
   max-width:560px;
   padding-right:12px;
@@ -350,8 +350,9 @@ body::after {
   width:50vw;
   gap:32px;
   position:relative;
-  top: -30%;
-  right:5vw;
+  top: 0%;
+  right:10vw;
+  bottom:0;
   z-index:1;
   
   padding-left:20px;
@@ -776,21 +777,291 @@ body::after {
   color: inherit;
   cursor: default;
 }
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════ */
+.footer {
+  margin-top:120px;
+  padding:80px 0 40px;
+  background:linear-gradient(180deg, rgba(19, 3, 48, 0.4) 0%, rgba(10, 2, 28, 0.6) 100%);
+  border-top:1px solid rgba(199, 125, 255, 0.1);
+  position:relative;
+  overflow:hidden;
+}
+
+.footer::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(199,125,255,0.3), transparent);
+  pointer-events:none;
+}
+
+.footer .container {
+  position:relative;
+  z-index:1;
+}
+
+.footer-content {
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;
+  margin-bottom:48px;
+}
+
+/* Footer Brand Column */
+.footer-brand {
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.footer-logo {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:8px;
+}
+
+.footer-logo img {
+  width:48px;
+  height:48px;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 16px rgba(114,9,183,0.35));
+  transition:transform var(--t-base);
+}
+
+.footer-logo h3 {
+  font-family:var(--font-display);
+  font-size:1.2rem;
+  font-weight:800;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--c-white);
+}
+
+.footer-desc {
+  font-size:0.88rem;
+  line-height:1.6;
+  color:rgba(224,170,255,0.65);
+  margin:8px 0 16px;
+}
+
+.footer-socials {
+  display:flex;
+  gap:12px;
+}
+
+.social-link {
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:rgba(199,125,255,0.08);
+  border:1px solid rgba(199,125,255,0.2);
+  color:var(--c-lilac);
+  transition:all var(--t-base);
+  text-decoration:none;
+}
+
+.social-link svg {
+  width:20px;
+  height:20px;
+}
+
+.social-link:hover {
+  background:rgba(199,125,255,0.25);
+  border-color:var(--c-lilac);
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(199,125,255,0.3);
+}
+
+/* Footer Column */
+.footer-col {
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.footer-col-title {
+  font-family:var(--font-display);
+  font-size:0.95rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--c-white);
+  margin-bottom:6px;
+}
+
+.footer-links {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.footer-link {
+  font-size:0.85rem;
+  color:rgba(224,170,255,0.7);
+  text-decoration:none;
+  position:relative;
+  transition:color var(--t-base), transform var(--t-base);
+  display:inline-block;
+  width:fit-content;
+}
+
+.footer-link::after {
+  content:'';
+  position:absolute;
+  bottom:-3px;
+  left:0;
+  width:0;
+  height:2px;
+  background:linear-gradient(90deg, var(--c-lilac), transparent);
+  transition:width var(--t-base);
+}
+
+.footer-link:hover {
+  color:var(--c-lilac);
+  transform:translateX(4px);
+}
+
+.footer-link:hover::after {
+  width:100%;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:24px;
+  padding-top:24px;
+  border-top:1px solid rgba(199,125,255,0.1);
+}
+
+.footer-copyright,
+.footer-made {
+  font-size:0.8rem;
+  color:rgba(224,170,255,0.55);
+  text-align:center;
+  margin:0;
+}
+
+.footer-divider {
+  width:1px;
+  height:24px;
+  background:linear-gradient(180deg, transparent, rgba(199,125,255,0.3), transparent);
+}
+
+.heart {
+  display:inline-block;
+  animation:heart-beat 1.5s ease-in-out infinite;
+  margin:0 4px;
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform:scale(1); }
+  25% { transform:scale(1.2); }
+  50% { transform:scale(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media (max-width:1080px) {
+  .footer-content {
+    grid-template-columns:1fr 1fr 1fr;
+    gap:36px;
+  }
+}
+
+@media (max-width:768px) {
+  .footer {
+    margin-top:80px;
+    padding:60px 0 30px;
+  }
+
+  .footer-content {
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+  }
+
+  .footer-col-title {
+    font-size:0.9rem;
+  }
+
+  .footer-bottom {
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .footer-divider {
+    width:0;
+    height:0;
+  }
+
+  .footer-desc {
+    font-size:0.82rem;
+  }
+}
+
+@media (max-width:480px) {
+  .footer {
+    margin-top:60px;
+    padding:40px 0 20px;
+  }
+
+  .footer-content {
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .footer-logo {
+    gap:8px;
+  }
+
+  .footer-logo img {
+    width:40px;
+    height:40px;
+  }
+
+  .footer-logo h3 {
+    font-size:1rem;
+    letter-spacing:0.12em;
+  }
+
+  .footer-socials {
+    gap:10px;
+  }
+
+  .social-link {
+    width:38px;
+    height:38px;
+  }
+
+  .footer-link {
+    font-size:0.8rem;
+  }
+}
 
 
 /* ═══════════════════════════════════════════════════════════
-   SCROLL REVEAL
+   SCROLL REVEAL - Animate.css Integration
 ═══════════════════════════════════════════════════════════ */
-.reveal {
-  opacity:0; transform:translate3d(0, 40px, 0);
-  transition: opacity .72s var(--ease-out), transform .72s var(--ease-out);
+[data-animate] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
-.reveal.is-visible { opacity:1; transform:translate3d(0, 0, 0); }
-.d1 { transition-delay:.08s; }
-.d2 { transition-delay:.17s; }
-.d3 { transition-delay:.26s; }
-.d4 { transition-delay:.38s; }
-.d5 { transition-delay:.5s;  }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 
 /* ═══════════════════════════════════════════════════════════
    TABLET (≤ 1080px)
