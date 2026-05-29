@@ -652,19 +652,6 @@ button {
   pointer-events: none;
 }
 
-.slide-copy::after {
-  content: '';
-  position: absolute;
-  bottom: 18px;
-  left: 18px;
-  width: 68px;
-  height: 4px;
-  background: linear-gradient(90deg, rgba(199, 125, 255, 0.95), rgba(243, 211, 255, 0.95));
-  border-radius: 999px;
-  opacity: 0.8;
-  pointer-events: none;
-}
-
 .carousel-slide {
   transition: opacity var(--t-base) ease, transform var(--t-base) ease;
   opacity: 0.95;
