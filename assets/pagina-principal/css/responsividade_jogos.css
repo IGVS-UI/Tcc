@@ -4,7 +4,7 @@
    ================================================== */
 
 /* ========== TELAS GRANDES (ate 1366px) ========== */
-@media (max-width: 1366px) {
+@media (max-width: 136sssssssssssssssssssss6px) {
   .slide-card {
     padding: 40px clamp(40px, 4vw, 60px) 30px;
   }
@@ -660,3 +660,37 @@ iframe[title="VR Space Collector"] {
   height: 100%;
   object-fit: cover;
 }
+.vr-fullscreen-btn {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 5;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 12px;
+  background: rgba(12, 4, 28, 0.82);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+
+@media (min-width: 769px) {
+  .vr-fullscreen-btn {
+    display: none;
+  }
+}
+
+.vr-game-frame:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  border-radius: 0;
+  border: 0;
+}
+
+.vr-game-frame:fullscreen iframe {
+  width: 100%;
+  height: 100%;
+} 
