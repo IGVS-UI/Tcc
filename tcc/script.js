@@ -1,232 +1,189 @@
-import * as THREE from "three";
 import {
-vertexShader,
-fluidFragmentShader,
-displayFragmentShader,
+    vertexShader,
+    fluidFragmentShader,
+    displayFragmentShader,
 } from "./shaders.js";
 
-window.addEventListener("load", init);
-
-function init(){
-const canvas = document.querySelector("canvas");
-const renderer = new THREE.WebGLRenderer({
-canvas,
-antialias: true,
-precision: "highp",
-})
-
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-const scene = new THREE.Scene();
-const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
-const mouse = new THREE.Vector2(0.5,0.5);
-const prevMouse = new THREE.Vector2(0.5, 0.5);
-let isMoving = false;
-let lastMoveTime = 0;
-let mouseInCanvas = false;
-
-
-const size = 500;
-const pingPongTargets = [
-new THREE.WebGLRenderTarget(size, size, {
-minFilter: THREE.LinearFilter,
-magFilter: THREE.LinearFilter,
-format: THREE.RGBAFormat,
-type: THREE.FloatType,
-}),
-
-new THREE.WebGLRenderTarget(size, size, {
-minFilter: THREE.LinearFilter,
-magFilter: THREE.LinearFilter,
-format: THREE.RGBAFormat,
-type: THREE.FloatType,
-}),
-];
-
+let renderer, scene, camera, mouse, prevMouse;
+let trailsTexture;
+let pingPongTargets = [];
 let currentTarget = 0;
 
-const topTexture = createPlaceholderTexture("#0000ff");
-const bottomTexture = createPlaceholderTexture("#ff0000");
+window.addEventListener("load", init);
+window.addEventListener("mousemove", onMouseMove);
+window.addEventListener("mouseenter", onMouseEnter);
+window.addEventListener("mouseleave", onMouseLeave);
+window.addEventListener("resize", onWindowResize);
 
-const topTextureSize = new THREE.Vector2(1, 1);
-const bottomTextureSize = new THREE.Vector2(1, 1);
-
-
-const trailsMaterial = new THREE.ShaderMaterial({
-    uniforms: {
-        uPrevTrails : {value:nue},
-        uMouse : { value:mouse },
-        uPrevmouse : {value: prevMouse},
-        uResolution: {value: new THREE.Vector2(size,size)},
-        uDecay:{ value:0.97},
-        uIsMoving : {value:false},
-
-    },
-    vertexShader,
-    fragmentShader:fluidFragmentShader,
-})
-const displayMaterial = new THREE.ShaderMaterial({
-    uniforms: {
-        uFluid: {value:null},
-        uTopTexture:{value:topTexture },
-        uBottomTexture:{value:bottom},
-        uResolution: {
-            value: new THREE.Vector2(window.innerWidth, window.innerHeight),
-
+function init() {
+    const canvas = document.querySelector("canvas");
+    
+    renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        precision: "highp",
+        alpha: true,
+    });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 1);
+    
+    scene = new THREE.Scene();
+    camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    
+    mouse = new THREE.Vector2(0.5, 0.5);
+    prevMouse = new THREE.Vector2(0.5, 0.5);
+    
+    const size = 500;
+    
+    // Criar ping-pong targets para simular trails
+    pingPongTargets = [
+        new THREE.WebGLRenderTarget(size, size, {
+            minFilter: THREE.LinearFilter,
+            magFilter: THREE.LinearFilter,
+            format: THREE.RGBAFormat,
+            type: THREE.FloatType,
+        }),
+        new THREE.WebGLRenderTarget(size, size, {
+            minFilter: THREE.LinearFilter,
+            magFilter: THREE.LinearFilter,
+            format: THREE.RGBAFormat,
+            type: THREE.FloatType,
+        }),
+    ];
+    
+    // Carregar texturas das imagens
+    const textureLoader = new THREE.TextureLoader();
+    
+    let topTexture = null;
+    let bottomTexture = null;
+    let topTextureSize = new THREE.Vector2(1, 1);
+    let bottomTextureSize = new THREE.Vector2(1, 1);
+    
+    // Carregar imagens
+    textureLoader.load("portrait_top.png", (texture) => {
+        topTexture = texture;
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        topTextureSize.set(texture.image.width, texture.image.height);
+    });
+    
+    textureLoader.load("portrait_bottom.png", (texture) => {
+        bottomTexture = texture;
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        bottomTextureSize.set(texture.image.width, texture.image.height);
+    });
+    
+    // Material para simular trails (fluid simulation)
+    const trailsMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            uPrevTrails: { value: null },
+            uMouse: { value: mouse },
+            uPrevMouse: { value: prevMouse },
+            uResolution: { value: new THREE.Vector2(size, size) },
+            uDecay: { value: 0.97 },
+            uIsMoving: { value: false },
         },
-        uDpr: {value:window.devicePixelRatio},
-        uTopTextureSize: {value:topTextureSize},
-        uBottomTextureSize: {value:bottomTextureSize},
-
-
-    },
-    vertexShader,
-    fragmentShader: displayFragmentShader,
-
-})
-
-Loadimage("/portrait_top.jpg", topTexture,topTextureSize);
-Loadimage("/portrait_bottom.jpg", topTexture,topTextureSize);
-
-
-const PlaneGeometry = new THREE.Mesh(THREE.PlaneGeometry(2,2));
-const displayMesh = new THREE.Mesh(PlaneGeometry,displayMaterial);
-scene.add(displayMesh);
-
-
-
-
-const simMesh = new THREE.Mesh(THREE.PlaneGeometry,trailsMaterial);
-const simScene = new THREE.Scene();
-simScene.add(simMesh);
-
-renderer.setRenderTarget(pingPongTargets[0]);
-renderer.clear();
-renderer.setRenderTarget(pingPongTargets[1]);
-renderer.clear();
-renderer.setRenderTarget(nul1);
-
-window. addEventListener("mousemove", onMouseMove);
-window. addEventListener("touchmove". onTouchMove, { passive: false });
-window. addEventListener("resize", onWindowResize);
-
-animate ();
-function createPlaceholderTexture(color){
-const canvas = document.createElement ("canvas");
-canvas.width = 512;
-canvas.height = 512;
-const ctx = canvas.getContext("2d");
-ctx.fillStyle = color;
-ctx.fillRect(0, 0, 512, 512);
-
-const texture = new THREE.CanvasTexture(canvas);
-texture.minFilter = THREE.LinearFilter;
-return texture;
-}
-
-
-function loadImage(url, torgetTexture, textureSizeVector) {
-const img = new Image();
-img.crossOrigin = "Anonymous";
-
-img. onload = function () {
-const originalWidth = img.width;
-const originalHeight = img.height;
-textureStzeVector.set(originalWidth,originalHeight);
-
-console.log(
- `Loaded texture: ${url},size: ${originalWidth}x${originalHeight}`
-);
-
-const maxSize = 4096;
-let newWidth = originalWidth;
-let newHeight = originalHeight;
-
-if (originalWidth > maxSize || originalHeight>maxSize){
-    console.log(`Image exceeds max texture size, resizing....`);
-    if(originalWidth>originalHeight){
-        newWidth=maxSize;
-        newHeight= Math.floor(originalHeight*(maxSize/originalWidth));
-    } else{
-        newHeight= maxSize;
-        newWidth = Math.floor(originalWidth*(maxSize/originalHeight)); 
-       }
-}
-
-const canvas = document.createElement("canvas");
-canvas.width = newWidth;
-canvas.height = newHeight;
-const ctx = canvas.getContext("2d");
-ctx.drawImage(img,0,0,newHeight,newWidth);
-
-
-const newTexture = new THREE.CanvasTexture(canvas);
-newTexture.minFilter =THREE.LinearFilter;
-newTexture.magFilter =THREE.LinearFilter;
-if(url.includes("top")){
-    displayMaterial.uniforms.uTopTexture.value =  newTexture;
-} else{
-    displayMaterial.uniforms.uBottomTexture.value = newTexture;
-}
-}
-img.onerror= function(err){
-    console.error(`Error loading image ${url}:`,err);
-
-}
-img.src=url;
-
-function onMouseMove(event){
-    const canvasRect = canvas.getBoundingClientRect();
-    if(
-        event.clientX>=canvasRect.left &&
-        event.clientX<= canvasRect.right &&
-        event.clientY>= canvasRect.top &&
-        event.clientY<= canvasRect.bottom
-    ){
+        vertexShader,
+        fragmentShader: fluidFragmentShader,
+    });
+    
+    // Material para exibir resultado final
+    const displayMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            uFluid: { value: null },
+            uTopTexture: { value: topTexture },
+            uBottomTexture: { value: bottomTexture },
+            uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+            uDpr: { value: renderer.getPixelRatio() },
+            uTopTextureSize: { value: topTextureSize },
+            uBottomTextureSize: { value: bottomTextureSize },
+        },
+        vertexShader,
+        fragmentShader: displayFragmentShader,
+    });
+    
+    // Geometria de tela cheia
+    const geometry = new THREE.PlaneGeometry(2, 2);
+    
+    const trailsMesh = new THREE.Mesh(geometry, trailsMaterial);
+    const displayMesh = new THREE.Mesh(geometry, displayMaterial);
+    
+    scene.add(displayMesh);
+    
+    let mouseMoving = false;
+    let mouseTimeout;
+    
+    function onMouseMove(event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = (event.clientX - rect.left) / rect.width;
+        mouse.y = 1 - (event.clientY - rect.top) / rect.height;
+        
+        mouseMoving = true;
+        clearTimeout(mouseTimeout);
+        mouseTimeout = setTimeout(() => {
+            mouseMoving = false;
+        }, 100);
+        
         prevMouse.copy(mouse);
-        mouse.x = (event.clientX - canvasRect.left)/canvasRect.width;
-        mouse.y = 1-(event.clientY - canvasRect.top)/canvasRect.height;
-
-        isMoving = true;
-        lastMoveTime = performance.now();
-    }else{
-        isMoving = false;
     }
-}
-}
-
-function onWindowResize(){
-    renderer.setSize(window.innerWidth,window.innerHeight);
-    displayMaterial.uniforms.uDpr.value.set(
-        window.innerWidth,
-        window.innerHeight,
-    );
-    displayMaterial.uniforms.uDpr.value = window.devicePixelRatio;
-}
-
-function animate(){
-    requestAnimationFrame(animate);
-
-    if(isMoving && performance.now()-lastMoveTime>50){
-        isMoving = false;
+    
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        // Atualizar uniforms
+        trailsMaterial.uniforms.uIsMoving.value = mouseMoving;
+        trailsMaterial.uniforms.uPrevTrails.value = pingPongTargets[1 - currentTarget].texture;
+        
+        // Renderizar trails para o target atual
+        renderer.setRenderTarget(pingPongTargets[currentTarget]);
+        renderer.render(scene, camera, pingPongTargets[currentTarget]);
+        
+        // Atualizar material de exibição com o resultado dos trails
+        displayMaterial.uniforms.uFluid.value = pingPongTargets[currentTarget].texture;
+        displayMaterial.uniforms.uTopTexture.value = topTexture;
+        displayMaterial.uniforms.uBottomTexture.value = bottomTexture;
+        
+        // Renderizar para tela
+        renderer.setRenderTarget(null);
+        renderer.render(scene, camera);
+        
+        // Alternar entre targets (ping-pong)
+        currentTarget = 1 - currentTarget;
     }
-    const prevTarget = pingPongTargets[currentTarget];
-    currentTarget = (currentTarget+1)%2;
-    const currentRanderTarget = pingPongTargets[currentTarget];
-
-    trailsMaterial.uniforms.uPrevTrails.value = prevTarget.texture;
-    trailsMaterial.uniforms.uMouse.value.copy(mouse);
-    trailsMaterial.uniforms.uPrevmouse.value.copy(prevMouse);
-    trailsMaterial.uniforms.uIsMoving.value = isMoving;
-
-    renderer.setRenderTarget(currentRanderTarget);
-    renderer.render(simScene,camera);
-
-    displayMaterial.uniforms.uFluid.value = currentRanderTarget.texture;
-
-    renderer.setRenderTarget(currentRanderTarget);
-    renderer.render(scene,camera)
+    
+    animate();
 }
+
+function onMouseMove(event) {
+    const canvas = document.querySelector("canvas");
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = (event.clientX - rect.left) / rect.width;
+    mouse.y = 1 - (event.clientY - rect.top) / rect.height;
+}
+
+function onMouseEnter() {
+    // Opcional: resetar quando mouse entra
+}
+
+function onMouseLeave() {
+    // Opcional: resetar quando mouse sai
+}
+
+function onWindowResize() {
+    if (!renderer) return;
+    
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    
+    renderer.setSize(width, height);
+    
+    if (scene.children.length > 0) {
+        const mesh = scene.children[0];
+        if (mesh.material && mesh.material.uniforms.uResolution) {
+            mesh.material.uniforms.uResolution.value.set(width, height);
+        }
+    }
 }
