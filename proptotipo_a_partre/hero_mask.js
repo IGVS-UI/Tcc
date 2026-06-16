@@ -131,9 +131,9 @@ function init() {
     var mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), displayMaterial);
     scene.add(mesh);
 
-    // ajuste o caminho das imagens conforme sua estrutura de pastas
-    loadImage('./portrait_top.png',    'top',    topSize);
-    loadImage('./portrait_bottom.png', 'bottom', bottomSize);
+    // imagens estao em ../img/ (um nivel acima de proptotipo_a_partre)
+    loadImage('../img/portrait_top.png',    'top',    topSize);
+    loadImage('../img/portrait_bottom.png', 'bottom', bottomSize);
 
     window.addEventListener('mousemove', function(e) {
         var rect = renderer.domElement.getBoundingClientRect();
