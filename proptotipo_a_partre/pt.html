@@ -1,48 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vr explore</title>
+    <title>Vr Explore</title>
     <link rel="stylesheet" href="pt.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <!-- HEADER -->
     <header>
         <nav-bar>
             <div class="nav-left">
                 <ul>
-                    <li><a href="#"><h1>Vr<p class="sub-title">Explore</p></h1></a></li>
+                    <li>
+                        <a href="#">
+                            <h1>Vr<p class="sub-title">Explore</p></h1>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="nav-center">
-                <img src="/img/Group 51 (1).png" alt="logo" class="logo">
+                <img src="/img/Group 51(1).png" alt="logo" class="logo">
             </div>
             <div class="nav-right">
                 <button class="nav-btn">Login</button>
                 <button class="menu-btn" onclick="toggleMenu()">☰</button>
             </div>
-        </nav-bar>     
+        </nav-bar>
     </header>
 
-    <!-- Menu Overlay Fullscreen -->
+    <!-- MENU OVERLAY -->
     <div id="menu-overlay" class="menu-overlay">
         <canvas id="wc" class="menu-canvas"></canvas>
         <div class="menu-overlay-content">
-            <!-- Logo no canto superior esquerdo -->
             <div class="menu-header">
                 <a href="#"><h1>Vr<p class="sub-title">Explore</p></h1></a>
-                <button class="close-btn" onclick="toggleMenu()">✕</button>
+                <button class="close-btn" onclick="toggleMenu()">&#x2715;</button>
             </div>
-
-            <!-- Container principal do menu -->
             <div class="menu-body">
-                <!-- Seção esquerda e centro: Cards ilustrativos -->
                 <div class="menu-cards-section">
                     <div class="menu-card">
                         <h3>Explorar</h3>
@@ -56,67 +53,60 @@
                         <h3>Jogos</h3>
                         <p>Divirta-se em VR</p>
                     </div>
-
-                     <div class="menu-card">
-                        <h3>Jogos</h3>
-                        <p>Divirta-se em VR</p>
+                    <div class="menu-card">
+                        <h3>Comunidade</h3>
+                        <p>Conecte-se com outros</p>
                     </div>
                 </div>
 
-                <!-- Seção direita: Navegação principal -->
-               <nav class="menu-nav">
-    
-    <a href="#" class="menu-nav-item">
-        <span class="text-wrapper">
-            <span class="text top">HOME</span>
-            <span class="text bottom">HOME</span>
-        </span>
-    </a>
-
-    <a href="#" class="menu-nav-item">
-        <span class="text-wrapper">
-            <span class="text top">TECNOLOGIAS</span>
-            <span class="text bottom">TECNOLOGIAS</span>
-        </span>
-    </a>
-
-    <a href="#" class="menu-nav-item">
-        <span class="text-wrapper">
-            <span class="text top">EXPLORE</span>
-            <span class="text bottom">EXPLORE</span>
-        </span>
-    </a>
-
-    <a href="#" class="menu-nav-item">
-        <span class="text-wrapper">
-            <span class="text top">INTERAÇÕES</span>
-            <span class="text bottom">INTERAÇÕES</span>
-        </span>
-    </a>
-
-        <img src="/img/Group 51.png" alt="logo" class="section-logo">
-   
-
-</nav>
+                <nav class="menu-nav">
+                    <a href="#" class="menu-nav-item">
+                        <span class="text-wrapper">
+                            <span class="text top">HOME</span>
+                            <span class="text bottom">HOME</span>
+                        </span>
+                    </a>
+                    <a href="#" class="menu-nav-item">
+                        <span class="text-wrapper">
+                            <span class="text top">TECNOLOGIAS</span>
+                            <span class="text bottom">TECNOLOGIAS</span>
+                        </span>
+                    </a>
+                    <a href="#" class="menu-nav-item">
+                        <span class="text-wrapper">
+                            <span class="text top">EXPLORE</span>
+                            <span class="text bottom">EXPLORE</span>
+                        </span>
+                    </a>
+                    <a href="#" class="menu-nav-item">
+                        <span class="text-wrapper">
+                            <span class="text top">INTERAÇÕES</span>
+                            <span class="text bottom">INTERAÇÕES</span>
+                        </span>
+                    </a>
+                    <img src="./img/Group 51.png" alt="logo" class="section-logo">
+                </nav>
             </div>
         </div>
     </div>
 
-
+    <!-- HERO - efeito máscara -->
     <main class="main-content">
-
-        <section class="img">
-            <img src="/img/maurigay.pngs" alt="logo" class="section-logo">
-            
+        <section class="hero-section">
+            <canvas id="hero-canvas"></canvas>
+            <div class="hero-footer">
+                <p>Human form / Machine Logic</p>
+                <p>Tcc vr</p>
+            </div>
         </section>
-
-
-        
-      
-
     </main>
-    
+
+    <!-- Three.js CDN (global) ANTES do hero_mask.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Scripts do projeto -->
     <script src="pt.js"></script>
     <script src="back_menu.js"></script>
+    <script src="hero_mask.js"></script>
 </body>
 </html>
