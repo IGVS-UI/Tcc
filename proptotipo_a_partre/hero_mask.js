@@ -49,26 +49,35 @@ var displayFragmentShader = [
     'uniform vec2 uResolution;',
     'uniform vec2 uTopTextureSize;',
     'uniform vec2 uBottomTextureSize;',
+    'uniform vec2 uRefSize;',
     'uniform float uTime;',
     'uniform float uVelocity;',
     'varying vec2 vUv;',
 
-    'vec2 coverUV(vec2 uv, vec2 ts) {',
-    '    vec2 s = uResolution / ts;',
-    '    float sc = max(s.x, s.y);',
-    '    return (uv * uResolution - (uResolution - ts * sc) * 0.5) / (ts * sc);',
+    // Converte uv usando tamanho de referencia comum para alinhar as duas imagens
+    'vec2 alignedUV(vec2 uv, vec2 texSize, vec2 refSize, vec2 resolution) {',
+    '    vec2 sRef = resolution / refSize;',
+    '    float scRef = max(sRef.x, sRef.y);',
+    '    vec2 refScaled = refSize * scRef;',
+    '    vec2 offset = (resolution - refScaled) * 0.5;',
+    '    vec2 pixRef = uv * resolution - offset;',
+    '    vec2 sTex = resolution / texSize;',
+    '    float scTex = max(sTex.x, sTex.y);',
+    '    return pixRef / (texSize * scTex);',
     '}',
 
     'void main() {',
     '    float fluid = texture2D(uFluid, vUv).r;',
 
-    // onda suave na borda da mascara
     '    float angle = atan(vUv.y - 0.5, vUv.x - 0.5);',
     '    float wave  = sin(angle * 5.0 - uTime * 2.5) * 0.015 * uVelocity;',
     '    fluid = fluid + wave * fluid * (1.0 - fluid) * 3.0;',
 
-    '    vec4 top    = texture2D(uTopTexture,    coverUV(vUv, uTopTextureSize));',
-    '    vec4 bottom = texture2D(uBottomTexture, coverUV(vUv, uBottomTextureSize));',
+    '    vec2 topUV    = alignedUV(vUv, uTopTextureSize,    uRefSize, uResolution);',
+    '    vec2 bottomUV = alignedUV(vUv, uBottomTextureSize, uRefSize, uResolution);',
+
+    '    vec4 top    = texture2D(uTopTexture,    topUV);',
+    '    vec4 bottom = texture2D(uBottomTexture, bottomUV);',
 
     '    float t = smoothstep(0.01, 0.07, fluid);',
     '    gl_FragColor = mix(top, bottom, t);',
@@ -76,7 +85,7 @@ var displayFragmentShader = [
 ].join('\n');
 
 // ── ESTADO ────────────────────────────────────────────────────────────────────
-var targetMouse = { x: 1, y: 1 };
+var targetMouse = { x: 0.5, y: 0.5 };
 var smoothMouse = { x: 0.5, y: 0.5 };
 var prevMouse   = { x: 0.5, y: 0.5 };
 var prevSmooth  = { x: 0.5, y: 0.5 };
@@ -98,7 +107,9 @@ function placeholder() {
     return t;
 }
 
-function loadImg(url, slot, sv) {
+var loadedCount = 0;
+
+function loadImg(url, slot, sv, refSz) {
     var img = new Image();
     img.crossOrigin = 'Anonymous';
     img.onload = function() {
@@ -109,6 +120,17 @@ function loadImg(url, slot, sv) {
         t.needsUpdate = true;
         displayMaterial.uniforms[slot === 'top' ? 'uTopTexture' : 'uBottomTexture'].value = t;
         console.log('Carregou:', url, img.width + 'x' + img.height);
+
+        loadedCount++;
+        if (loadedCount === 2) {
+            // usa o maior tamanho como referencia para alinhar as duas
+            var topSz = displayMaterial.uniforms.uTopTextureSize.value;
+            var botSz = displayMaterial.uniforms.uBottomTextureSize.value;
+            var rw = Math.max(topSz.x, botSz.x);
+            var rh = Math.max(topSz.y, botSz.y);
+            refSz.set(rw, rh);
+            console.log('RefSize calculado:', rw + 'x' + rh);
+        }
     };
     img.onerror = function() { console.error('Erro:', url); };
     img.src = url;
@@ -119,7 +141,7 @@ function init() {
     var canvas = document.getElementById('hero-canvas');
     if (!canvas) { console.error('hero-canvas nao encontrado'); return; }
 
-    var HEADER_H = 120; // mesma altura do top no CSS
+    var HEADER_H = 80; // mesma altura do top no CSS
 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -181,6 +203,8 @@ function init() {
         fragmentShader: fluidFragmentShader,
     });
 
+    var refSz = new THREE.Vector2(1, 1); // calculado quando as duas imagens carregarem
+
     displayMaterial = new THREE.ShaderMaterial({
         uniforms: {
             uFluid:             { value: placeholder() },
@@ -189,6 +213,7 @@ function init() {
             uResolution:        { value: new THREE.Vector2(window.innerWidth, window.innerHeight - HEADER_H) },
             uTopTextureSize:    { value: topSz },
             uBottomTextureSize: { value: botSz },
+            uRefSize:           { value: refSz },
             uTime:              { value: 0.0 },
             uVelocity:          { value: 0.0 },
         },
@@ -200,8 +225,8 @@ function init() {
     simScene.add(new THREE.Mesh(geo, trailsMaterial));
     scene.add(new THREE.Mesh(geo, displayMaterial));
 
-    loadImg('../img/portrait_top.png',    'top', topSz);
-    loadImg('../img/portrait_bottom.png', 'bottom', botSz);
+    loadImg('../img/portrait_top.png',    'top',    topSz, refSz);
+    loadImg('../img/portrait_bottom.png', 'bottom', botSz, refSz);
 
     window.addEventListener('mousemove', onMove);
     window.addEventListener('resize',    onResize);
@@ -221,7 +246,7 @@ function onMove(e) {
 }
 
 function onResize() {
-    var HEADER_H = 120;
+    var HEADER_H = 80;
     renderer.setSize(window.innerWidth, window.innerHeight - HEADER_H);
     displayMaterial.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight - HEADER_H);
 }
